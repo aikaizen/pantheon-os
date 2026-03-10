@@ -1,0 +1,22 @@
+
+approvals:
+  - id: ap-branding
+    title: Adopt Pantheon OS as the canonical internal system name
+    risk: medium
+    approver: A.I.
+    status: approved
+  - id: ap-public-deploy
+    title: Approve any hosted or public-facing Pantheon OS deployment
+    risk: high
+    approver: A.I.
+    status: pending
+  - id: ap-agent-wake-cycles
+    title: Approve budgeted recurring wake cycles for operators and maintenance agents
+    risk: medium
+    approver: A.I.
+    status: in_review
+  - id: ap-budget-caps
+    title: Approve initial monthly runtime caps per agent and venture
+    risk: medium
+    approver: A.I.
+    status: pending
