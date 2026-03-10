@@ -4,29 +4,55 @@ Company operating system for PromptEngines.
 
 Local-first, constitution-first, pantheon-aware, manifest-driven, connector-flexible.
 
+This repo now includes a working dashboard mockup intended to evolve toward:
+- dashboard.promptengines.com
+
+## Open the mockup
+
+- `index.html` — static Pantheon OS dashboard mockup
+- `assets/` — styling and UI behavior
+- `data/pantheon-os.json` — canonical mockup dataset
+- `data/company-os.json` — compatibility alias
+
+The mockup works as a plain static site.
+
 ## Structure
 
 ```
 pantheon-os/
+├── index.html                      # Pantheon OS dashboard mockup
+├── assets/                         # Mockup CSS/JS
+├── data/                           # Dashboard payloads
 ├── docs/
-│   ├── phase-scope-brief.html      # Phase 1 & 2 outcomes and scope
-│   ├── skill-system-guidelines.md  # Company-wide skill design standard
-│   ├── skill-template.md           # Reusable skill template
-│   ├── paperclip-evaluation.md     # Paperclip platform assessment
-│   └── dual-harness-orchestration.md  # Controller ↔ Operator protocol
-├── constitution/                   # Constitutional grounding (TBD)
-├── registry/                       # Company registry manifests (TBD)
-├── skills/                         # Company skill library (TBD)
-├── data/                           # Operating data / dashboards (TBD)
-└── db/                             # Schema definitions (TBD)
+│   ├── phase-scope-brief.html
+│   ├── skill-system-guidelines.md
+│   ├── skill-template.md
+│   ├── paperclip-evaluation.md
+│   ├── dual-harness-orchestration.md
+│   ├── pantheon-os-guidance.md
+│   └── pantheon-os-upgrade-summary.md
+├── constitution/                   # Constitutional grounding
+├── registry/                       # Registry manifests
+├── skills/                         # Company skill library
+└── db/                             # Schema definitions
 ```
 
 ## Operating Model
 
-- **Human principal**: Andy Stable (founder/operator, final approver)
-- **Named agent**: Hermetic_Demiurge (autonomous engineering agent)
-- **Standing collaborator**: A.I. (general agent surface)
-- **Executive pantheon**: Unbounded — agents hold archetypal identity, not department roles
+- **Human principal**: A.I. (direction and final approval)
+- **Named operator**: Hermetic_Demiurge (build, hardening, shipping)
+- **Supporting operators**: Thoth, Prometheus, Golem
+- **Executive pantheon**: unbounded — agents hold archetypal identity, not narrow department roles
+
+## What this mockup already includes
+
+- Pantheon OS naming throughout
+- goal and task hierarchy
+- heartbeat / recurring check-in logic
+- governance / approval gates
+- budget / cost visibility
+- a first company skill library with real `SKILL.md` packages
+- constitution, registry YAML, and SQL schema layers
 
 ## Key Principles
 

@@ -1,0 +1,37 @@
+
+skills:
+  - id: weekly-operating-review
+    category: company-os
+    owner: Thoth
+    version: 0.1.0
+    status: drafted
+    review_cadence: weekly
+    venture_scope: all
+  - id: venture-status-refresh
+    category: company-os
+    owner: Prometheus
+    version: 0.1.0
+    status: drafted
+    review_cadence: every 2 weeks
+    venture_scope: all ventures
+  - id: decision-gate-review
+    category: company-os
+    owner: A.I.
+    version: 0.1.0
+    status: drafted
+    review_cadence: monthly
+    venture_scope: all
+  - id: goal-tree-planning
+    category: company-os
+    owner: Hermetic_Demiurge
+    version: 0.1.0
+    status: drafted
+    review_cadence: monthly
+    venture_scope: company + venture + project
+  - id: build-stream-synthesis
+    category: company-os
+    owner: Thoth
+    version: 0.1.0
+    status: drafted
+    review_cadence: daily
+    venture_scope: portfolio

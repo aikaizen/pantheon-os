@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pantheon OS — Dashboard Mockup</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">◎</div>
+        <div>
+          <h1>Pantheon OS</h1>
+          <p>Prompt Engines control room</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#ventures">Ventures</a>
+        <a href="#goals">Goals</a>
+        <a href="#heartbeats">Heartbeats</a>
+        <a href="#approvals">Approvals</a>
+        <a href="#budgets">Budgets</a>
+        <a href="#skills">Skills</a>
+        <a href="#agents">Agents</a>
+        <a href="#memory">Memory</a>
+        <a href="#guidance">Guidance</a>
+      </nav>
+      <div class="sidebar-note">
+        <strong>Compatibility</strong>
+        <span>`data/company-os.json` is retained as an alias.</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="hero" id="overview">
+        <div>
+          <p class="eyebrow">Local-first company operating system</p>
+          <h2 id="hero-title">Pantheon OS</h2>
+          <p id="hero-tagline"></p>
+          <div class="hero-flags">
+            <span class="badge info">Dashboard mockup</span>
+            <span class="pill">Future host: dashboard.promptengines.com</span>
+          </div>
+        </div>
+        <div class="hero-meta">
+          <div class="stat-chip">
+            <span>Version</span>
+            <strong id="meta-version"></strong>
+          </div>
+          <div class="stat-chip">
+            <span>Updated</span>
+            <strong id="meta-updated"></strong>
+          </div>
+          <div class="stat-chip">
+            <span>Deployment target</span>
+            <strong>dashboard.promptengines.com</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="card-grid" id="summary-cards"></section>
+
+      <section class="panel" id="ventures">
+        <div class="panel-header">
+          <h3>Portfolio</h3>
+          <p>Canonical ventures, stages, health, and next actions.</p>
+        </div>
+        <div class="venture-grid" id="venture-grid"></div>
+      </section>
+
+      <section class="panel" id="goals">
+        <div class="panel-header">
+          <h3>Goal tree</h3>
+          <p>Company → venture → project hierarchy with task decomposition.</p>
+        </div>
+        <div id="goal-tree"></div>
+      </section>
+
+      <section class="two-col">
+        <section class="panel" id="heartbeats">
+          <div class="panel-header">
+            <h3>Heartbeats</h3>
+            <p>Recurring loops, sitreps, and wake cycles.</p>
+          </div>
+          <div id="heartbeat-list"></div>
+        </section>
+        <section class="panel" id="approvals">
+          <div class="panel-header">
+            <h3>Approvals</h3>
+            <p>Explicit governance gates for higher-risk actions.</p>
+          </div>
+          <div id="approval-list"></div>
+        </section>
+      </section>
+
+      <section class="two-col">
+        <section class="panel" id="budgets">
+          <div class="panel-header">
+            <h3>Budget visibility</h3>
+            <p>Company, venture, and agent runtime cost posture.</p>
+          </div>
+          <div id="budget-summary"></div>
+          <div id="budget-breakdown"></div>
+        </section>
+        <section class="panel" id="skills">
+          <div class="panel-header">
+            <h3>Skill library</h3>
+            <p>First-class operational assets with governance and tests.</p>
+          </div>
+          <div id="skill-list"></div>
+        </section>
+      </section>
+
+      <section class="two-col">
+        <section class="panel" id="agents">
+          <div class="panel-header">
+            <h3>Pantheon agents</h3>
+            <p>Principal plus named operators and their budgets.</p>
+          </div>
+          <div id="agent-list"></div>
+        </section>
+        <section class="panel" id="memory">
+          <div class="panel-header">
+            <h3>Operational memory</h3>
+            <p>Recent decisions, risks, and architecture moves.</p>
+          </div>
+          <div id="memory-list"></div>
+        </section>
+      </section>
+
+      <section class="panel" id="guidance">
+        <div class="panel-header">
+          <h3>Guidance layer</h3>
+          <p>Anthropic-inspired skill standards plus selective Paperclip adoption.</p>
+        </div>
+        <div class="two-col-inline">
+          <div>
+            <h4>Skill standard</h4>
+            <ul id="guidance-skills"></ul>
+          </div>
+          <div>
+            <h4>Paperclip stance</h4>
+            <ul id="guidance-paperclip"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="data/pantheon-os.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
