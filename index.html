@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pantheon OS — Prompt Engines MVP</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">◎</div>
+        <div>
+          <h1>Pantheon OS</h1>
+          <p>Prompt Engines control room</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#activity">Activity</a>
+        <a href="#goals">Goals</a>
+        <a href="#heartbeats">Heartbeats</a>
+        <a href="#approvals">Approvals</a>
+        <a href="#budgets">Budgets</a>
+        <a href="#operators">Operators</a>
+        <a href="#wiring">Wiring</a>
+        <a href="#guidance">Guidance</a>
+      </nav>
+      <div class="sidebar-note">
+        <strong>MVP state</strong>
+        <span>Working static dashboard with Prompt Engines-aligned mock data.</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="hero" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">Prompt Engines · human-agent company operating system</p>
+          <h2 id="hero-title">Pantheon OS</h2>
+          <p id="hero-tagline"></p>
+          <div class="hero-flags">
+            <span class="badge info">MVP</span>
+            <span class="badge warn">Mock data</span>
+            <span class="pill" id="target-host"></span>
+          </div>
+        </div>
+        <div class="hero-meta" id="hero-meta"></div>
+      </header>
+
+      <section class="card-grid" id="summary-cards"></section>
+
+      <section class="panel" id="portfolio">
+        <div class="panel-header">
+          <div>
+            <h3>Portfolio</h3>
+            <p>Products, experiments, prototypes, services, and internal systems.</p>
+          </div>
+          <div class="legend" id="stage-legend"></div>
+        </div>
+        <div id="portfolio-groups"></div>
+      </section>
+
+      <section class="panel" id="activity">
+        <div class="panel-header">
+          <h3>Live activity</h3>
+          <p>Mock build stream and operating-feed events aligned to the current portfolio.</p>
+        </div>
+        <div id="activity-feed" class="list-stack"></div>
+      </section>
+
+      <section class="panel" id="goals">
+        <div class="panel-header">
+          <h3>Goal tree</h3>
+          <p>Company goals, execution threads, and the current MVP work stack.</p>
+        </div>
+        <div id="goal-tree"></div>
+      </section>
+
+      <section class="two-col">
+        <section class="panel" id="heartbeats">
+          <div class="panel-header">
+            <h3>Heartbeats</h3>
+            <p>Recurring operator loops and venture refreshes.</p>
+          </div>
+          <div id="heartbeat-list" class="list-stack"></div>
+        </section>
+        <section class="panel" id="approvals">
+          <div class="panel-header">
+            <h3>Approvals</h3>
+            <p>Decision gates before deployment, metrics wiring, and public exposure.</p>
+          </div>
+          <div id="approval-list" class="list-stack"></div>
+        </section>
+      </section>
+
+      <section class="two-col">
+        <section class="panel" id="budgets">
+          <div class="panel-header">
+            <h3>Budget visibility</h3>
+            <p>Runtime posture by company and operator.</p>
+          </div>
+          <div id="budget-summary"></div>
+          <div id="budget-breakdown" class="budget-bar-grid"></div>
+        </section>
+        <section class="panel" id="operators">
+          <div class="panel-header">
+            <h3>Operators</h3>
+            <p>Core humans and agents currently shaping the Prompt Engines operating surface.</p>
+          </div>
+          <div id="operator-grid" class="operator-grid"></div>
+        </section>
+      </section>
+
+      <section class="two-col">
+        <section class="panel" id="wiring">
+          <div class="panel-header">
+            <h3>Wiring needed from human side</h3>
+            <p>Everything still needed to move from mock data to a deployed, gated, living dashboard.</p>
+          </div>
+          <div id="wiring-list" class="list-stack"></div>
+        </section>
+        <section class="panel" id="guidance">
+          <div class="panel-header">
+            <h3>Guidance</h3>
+            <p>Company skill standard and adopted orchestration patterns.</p>
+          </div>
+          <div class="two-col-inline compact">
+            <div>
+              <h4>Skill standard</h4>
+              <ul id="guidance-skills"></ul>
+            </div>
+            <div>
+              <h4>Operating principles</h4>
+              <ul id="guidance-principles"></ul>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="data/pantheon-os.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

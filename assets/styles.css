@@ -1,0 +1,116 @@
+
+:root {
+  --bg: #090d16;
+  --panel: #121a2b;
+  --panel-2: #192235;
+  --panel-3: #0e1422;
+  --text: #f1f5fb;
+  --muted: #98a2b3;
+  --line: rgba(255,255,255,0.08);
+  --accent: #7c9cff;
+  --accent-2: #52d7b8;
+  --ok: #8ef0be;
+  --warn: #ffd27a;
+  --danger: #ff9797;
+  --shadow: 0 16px 48px rgba(0,0,0,0.28);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(124,156,255,0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(82,215,184,0.12), transparent 25%),
+    linear-gradient(180deg, #090d16 0%, #0f1524 100%);
+}
+.shell { display: grid; grid-template-columns: 270px 1fr; min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 28px 20px;
+  border-right: 1px solid var(--line);
+  background: rgba(8,11,19,0.84);
+  backdrop-filter: blur(14px);
+}
+.brand { display: flex; gap: 14px; align-items: center; margin-bottom: 28px; }
+.brand-mark {
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0b1020; font-weight: 800;
+}
+.brand h1 { margin: 0; font-size: 20px; }
+.brand p, .sidebar-note span, .panel-header p, .muted { color: var(--muted); }
+nav { display: grid; gap: 10px; margin-bottom: 24px; }
+nav a {
+  color: var(--text); text-decoration: none; padding: 10px 12px; border-radius: 12px; border: 1px solid transparent;
+}
+nav a:hover { background: rgba(124,156,255,0.08); border-color: var(--line); }
+.sidebar-note {
+  border: 1px solid var(--line); border-radius: 16px; padding: 14px; background: rgba(255,255,255,0.03);
+  display: grid; gap: 6px; font-size: 14px;
+}
+.main { padding: 28px; display: grid; gap: 22px; }
+.hero, .panel, .summary-card, .venture-card, .goal-card, .heartbeat-card, .approval-card, .operator-card, .activity-card, .wiring-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow);
+}
+.hero { padding: 24px 26px; display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
+.hero-copy { max-width: 760px; }
+.eyebrow { margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; color: var(--accent-2); }
+.hero h2 { margin: 0 0 10px; font-size: clamp(34px, 5vw, 52px); line-height: 1.03; }
+.hero-flags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.hero-meta { display: grid; gap: 12px; min-width: 250px; }
+.stat-chip {
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,0.03);
+}
+.stat-chip span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.card-grid, .venture-grid, .budget-bar-grid, .operator-grid { display: grid; gap: 16px; }
+.card-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.venture-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.operator-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.summary-card, .venture-card, .goal-card, .heartbeat-card, .approval-card, .operator-card, .activity-card, .wiring-card { padding: 18px; }
+.summary-card .label, .tiny, .pill, .money-row span, .venture-meta { color: var(--muted); }
+.summary-card strong { display: block; margin-top: 8px; font-size: 30px; }
+.panel { padding: 22px; }
+.panel-header { margin-bottom: 16px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.panel-header h3 { margin: 0 0 6px; font-size: 24px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.stage-group { margin-top: 18px; }
+.stage-group h4 { margin: 0 0 12px; font-size: 18px; color: var(--accent-2); }
+.venture-card h4, .goal-card h4, .heartbeat-card h4, .approval-card h4, .operator-card h4, .activity-card h4, .wiring-card h4 { margin: 0 0 8px; font-size: 18px; }
+.venture-meta, .operator-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; font-size: 13px; }
+.pill, .badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px;
+  border: 1px solid var(--line); background: rgba(255,255,255,0.04); font-size: 12px;
+}
+.badge.ok { color: var(--ok); }
+.badge.warn { color: var(--warn); }
+.badge.danger { color: var(--danger); }
+.badge.info { color: var(--accent); }
+.goal-tree { display: grid; gap: 14px; }
+.goal-card { margin-bottom: 14px; }
+.goal-children { border-left: 1px solid var(--line); margin-left: 12px; padding-left: 16px; display: grid; gap: 12px; }
+.task-list { display: grid; gap: 8px; margin-top: 12px; }
+.task-line { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; background: rgba(255,255,255,0.02); }
+.two-col, .two-col-inline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.two-col-inline.compact { gap: 18px; }
+.list-stack { display: grid; gap: 12px; }
+.money-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 14px; }
+.bar { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; margin-top: 10px; border: 1px solid var(--line); }
+.bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 999px; }
+.activity-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+ul { margin: 8px 0 0 18px; }
+li { margin: 6px 0; }
+p { line-height: 1.5; }
+@media (max-width: 1080px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .two-col, .two-col-inline { grid-template-columns: 1fr; }
+  .hero { flex-direction: column; }
+  .hero-meta { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .hero-meta { grid-template-columns: 1fr; }
+}

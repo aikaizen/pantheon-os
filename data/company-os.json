@@ -1,0 +1,852 @@
+{
+  "meta": {
+    "system_name": "Pantheon OS",
+    "company": "Prompt Engines",
+    "tagline": "Working control room for products, experiments, prototypes, operators, and approvals.",
+    "version": "0.2.0-mvp",
+    "updated_at": "2026-03-10T19:10:00Z",
+    "target_host": "dashboard.promptengines.com",
+    "mode": "mvp-mock-data",
+    "branch": "feat/pantheon-os-mvp-dashboard",
+    "north_star": "Make Prompt Engines legible, controllable, and shippable from one operating surface."
+  },
+  "summary": {
+    "venture_count": 14,
+    "active_count": 8,
+    "experiment_count": 2,
+    "prototype_count": 2,
+    "internal_system_count": 2,
+    "open_approvals": 4,
+    "due_heartbeats": 3,
+    "wiring_needed": 5,
+    "monthly_budget": 3120,
+    "monthly_forecast": 2615
+  },
+  "guidance": {
+    "principles": [
+      "Constitution aligns agents.",
+      "Skills operationalize repeatable work.",
+      "Memory preserves what is learned.",
+      "Connectors provide access.",
+      "Governance and budgets keep automation bounded."
+    ],
+    "anthropic_skill_standard": [
+      "Skills are first-class operational assets.",
+      "Skills begin from concrete use cases.",
+      "Progressive disclosure: frontmatter, SKILL.md, linked assets.",
+      "Important skills are tested for triggering, success, and workflow improvement."
+    ],
+    "paperclip_elements_adopted": [
+      "Goal and task hierarchy",
+      "Heartbeat logic",
+      "Governance / approvals",
+      "Budget and cost visibility"
+    ]
+  },
+  "agents": [
+    {
+      "id": "ai-principal",
+      "name": "A.I.",
+      "type": "human",
+      "role": "Principal direction, final approval, portfolio decisions",
+      "archetype": "Principal",
+      "status": "active",
+      "budget": 0,
+      "ventures": [
+        "promptengines-web",
+        "consulting",
+        "vajra-upaya",
+        "dashboard"
+      ],
+      "notes": "Internal source of truth for direction and approvals."
+    },
+    {
+      "id": "andy-stable",
+      "name": "Andy Stable",
+      "type": "human",
+      "role": "Public-facing founder/operator profile and legacy operating reference",
+      "archetype": "Operator",
+      "status": "active",
+      "budget": 0,
+      "ventures": [
+        "promptengines-web",
+        "lab-notes"
+      ],
+      "notes": "Public materials still reference Andy heavily; internal mapping should stay explicit."
+    },
+    {
+      "id": "hermetic-demiurge",
+      "name": "Hermetic_Demiurge",
+      "type": "agent",
+      "role": "Build, hardening, shipping, cross-repo implementation",
+      "archetype": "Demiurge",
+      "status": "active",
+      "budget": 980,
+      "ventures": [
+        "dashboard",
+        "storybook-studio",
+        "kaizen",
+        "consulting"
+      ],
+      "notes": "Primary engineering operator for MVP build work."
+    },
+    {
+      "id": "thoth",
+      "name": "Thoth",
+      "type": "agent",
+      "role": "Memory, documentation, synthesis, build-stream interpretation",
+      "archetype": "Scribe",
+      "status": "active",
+      "budget": 460,
+      "ventures": [
+        "lab-notes",
+        "bible",
+        "dashboard",
+        "consulting"
+      ],
+      "notes": "Maintains operational memory and reporting surfaces."
+    },
+    {
+      "id": "prometheus",
+      "name": "Prometheus",
+      "type": "agent",
+      "role": "Prototype ignition, venture acceleration, exploratory build loops",
+      "archetype": "Fire-bringer",
+      "status": "active",
+      "budget": 630,
+      "ventures": [
+        "kaizen",
+        "flow",
+        "video-terminal",
+        "flow-education",
+        "blayde"
+      ],
+      "notes": "Best used on venture motion and prototype-to-product transitions."
+    },
+    {
+      "id": "golem",
+      "name": "Golem",
+      "type": "agent",
+      "role": "Scheduled operations, heartbeats, reliability, recurring maintenance",
+      "archetype": "Executor",
+      "status": "active",
+      "budget": 340,
+      "ventures": [
+        "dashboard",
+        "build-stream"
+      ],
+      "notes": "Natural owner for cron-backed loops and guardrailed automation."
+    }
+  ],
+  "ventures": [
+    {
+      "id": "promptengines-web",
+      "name": "PromptEngines.com",
+      "category": "platform",
+      "stage": "product",
+      "status": "active",
+      "health": "strong",
+      "surface": "public",
+      "domain": "promptengines.com",
+      "repo": "aikaizen/promptengines-main",
+      "owner": "A.I.",
+      "operators": [
+        "Andy Stable",
+        "Hermetic_Demiurge",
+        "Thoth"
+      ],
+      "next_action": "Keep the public platform aligned with the actual portfolio and build stream.",
+      "budget": {
+        "allocated": 420,
+        "spent": 255,
+        "forecast": 395
+      },
+      "telemetry": "partially-wired",
+      "wiring": "Need final decision on what remains public versus internal in the dashboard era."
+    },
+    {
+      "id": "lab-notes",
+      "name": "Lab Notes",
+      "category": "media",
+      "stage": "product",
+      "status": "active",
+      "health": "steady",
+      "surface": "public",
+      "domain": "lab.promptengines.com",
+      "repo": "aikaizen/promptengines-main",
+      "owner": "Thoth",
+      "operators": [
+        "Thoth",
+        "Andy Stable"
+      ],
+      "next_action": "Tighten the loop from build stream to public synthesis.",
+      "budget": {
+        "allocated": 190,
+        "spent": 96,
+        "forecast": 150
+      },
+      "telemetry": "mock",
+      "wiring": "Needs publishing workflow and source-of-truth status sync."
+    },
+    {
+      "id": "dashboard",
+      "name": "Pantheon OS Dashboard",
+      "category": "internal-system",
+      "stage": "mvp",
+      "status": "active-build",
+      "health": "building",
+      "surface": "internal",
+      "domain": "dashboard.promptengines.com",
+      "repo": "aikaizen/pantheon-os",
+      "owner": "Hermetic_Demiurge",
+      "operators": [
+        "Hermetic_Demiurge",
+        "Thoth",
+        "Golem"
+      ],
+      "next_action": "Complete the static MVP, then wire auth, metrics adapters, and deployment.",
+      "budget": {
+        "allocated": 360,
+        "spent": 118,
+        "forecast": 320
+      },
+      "telemetry": "mock",
+      "wiring": "Needs Vercel project/domain hookup, auth provider, and product metrics secrets from human side."
+    },
+    {
+      "id": "build-stream",
+      "name": "Build Stream",
+      "category": "internal-system",
+      "stage": "product",
+      "status": "active",
+      "health": "steady",
+      "surface": "internal-public-bridge",
+      "domain": "lab.promptengines.com/build-stream",
+      "repo": "aikaizen/promptengines-main",
+      "owner": "Thoth",
+      "operators": [
+        "Thoth",
+        "Golem"
+      ],
+      "next_action": "Feed build-stream signal directly into Pantheon OS activity and weekly review.",
+      "budget": {
+        "allocated": 90,
+        "spent": 40,
+        "forecast": 76
+      },
+      "telemetry": "wired-by-mock-contract",
+      "wiring": "Needs authenticated GitHub event/token confirmation for production feed."
+    },
+    {
+      "id": "consulting",
+      "name": "Consulting",
+      "category": "service",
+      "stage": "service",
+      "status": "active",
+      "health": "strong",
+      "surface": "public",
+      "domain": "consulting.promptengines.com",
+      "repo": "aikaizen/consulting",
+      "owner": "A.I.",
+      "operators": [
+        "A.I.",
+        "Hermetic_Demiurge",
+        "Thoth"
+      ],
+      "next_action": "Standardize the offer ladder and bridge services into productized modules.",
+      "budget": {
+        "allocated": 250,
+        "spent": 181,
+        "forecast": 248
+      },
+      "telemetry": "mock",
+      "wiring": "Needs actual pipeline, offer, and delivery KPIs from human side."
+    },
+    {
+      "id": "kaizen",
+      "name": "Kaizen",
+      "category": "product",
+      "stage": "product",
+      "status": "active",
+      "health": "strong",
+      "surface": "public",
+      "domain": "kaizen.promptengines.com",
+      "repo": "aikaizen/kaizen",
+      "owner": "Prometheus",
+      "operators": [
+        "Prometheus",
+        "Hermetic_Demiurge"
+      ],
+      "next_action": "Wire real telemetry, activation, and learning loops into the dashboard.",
+      "budget": {
+        "allocated": 300,
+        "spent": 176,
+        "forecast": 272
+      },
+      "telemetry": "needs-adapter",
+      "wiring": "Need Supabase/project credentials and event contract confirmation."
+    },
+    {
+      "id": "storybook-studio",
+      "name": "Storybook Studio",
+      "category": "product",
+      "stage": "product",
+      "status": "pre-launch",
+      "health": "building",
+      "surface": "public",
+      "domain": "storybookstudio.promptengines.com",
+      "repo": "aikaizen/storybookstudio",
+      "owner": "Hermetic_Demiurge",
+      "operators": [
+        "Hermetic_Demiurge",
+        "Prometheus"
+      ],
+      "next_action": "Stabilize print-ready workflow and launch gating.",
+      "budget": {
+        "allocated": 280,
+        "spent": 151,
+        "forecast": 236
+      },
+      "telemetry": "needs-adapter",
+      "wiring": "Need printing/order metrics mapping and launch approval criteria."
+    },
+    {
+      "id": "norbu",
+      "name": "Norbu",
+      "category": "product",
+      "stage": "product",
+      "status": "active",
+      "health": "steady",
+      "surface": "public",
+      "domain": "norbu.promptengines.com",
+      "repo": "aikaizen/norbu",
+      "owner": "Prometheus",
+      "operators": [
+        "Prometheus",
+        "Thoth"
+      ],
+      "next_action": "Add content cadence, curriculum state, and product heartbeat.",
+      "budget": {
+        "allocated": 165,
+        "spent": 79,
+        "forecast": 138
+      },
+      "telemetry": "mock",
+      "wiring": "Need actual content and learner KPIs."
+    },
+    {
+      "id": "bible",
+      "name": "Bible",
+      "category": "product",
+      "stage": "product",
+      "status": "active",
+      "health": "steady",
+      "surface": "public",
+      "domain": "bible.promptengines.com",
+      "repo": "aikaizen/bible",
+      "owner": "Thoth",
+      "operators": [
+        "Thoth"
+      ],
+      "next_action": "Move from placeholder telemetry to real usage and reliability stats.",
+      "budget": {
+        "allocated": 130,
+        "spent": 58,
+        "forecast": 99
+      },
+      "telemetry": "needs-adapter",
+      "wiring": "Need DB credential and metrics schema confirmation."
+    },
+    {
+      "id": "flow",
+      "name": "Flow",
+      "category": "experiment",
+      "stage": "experiment",
+      "status": "mixed-signal",
+      "health": "mixed",
+      "surface": "public",
+      "domain": "flow.promptengines.com",
+      "repo": "aikaizen/flow",
+      "owner": "A.I.",
+      "operators": [
+        "Prometheus"
+      ],
+      "next_action": "Resolve public status drift and decide whether Flow is active product or held experiment.",
+      "budget": {
+        "allocated": 220,
+        "spent": 124,
+        "forecast": 195
+      },
+      "telemetry": "drifting",
+      "wiring": "Need canonical status decision from human side."
+    },
+    {
+      "id": "video-terminal",
+      "name": "Video Terminal",
+      "category": "experiment",
+      "stage": "experiment",
+      "status": "alpha",
+      "health": "emerging",
+      "surface": "public",
+      "domain": "videoterminal.promptengines.com",
+      "repo": "aikaizen/videoterminal",
+      "owner": "Prometheus",
+      "operators": [
+        "Prometheus"
+      ],
+      "next_action": "Define the smallest shippable operator loop and showcase build stream.",
+      "budget": {
+        "allocated": 180,
+        "spent": 84,
+        "forecast": 151
+      },
+      "telemetry": "mock",
+      "wiring": "Need actual alpha user and workflow metrics if available."
+    },
+    {
+      "id": "flow-education",
+      "name": "Flow Education",
+      "category": "prototype",
+      "stage": "prototype",
+      "status": "active-prototype",
+      "health": "emerging",
+      "surface": "prototype",
+      "domain": "prototype",
+      "repo": "aikaizen/promptengines-main",
+      "owner": "Prometheus",
+      "operators": [
+        "Prometheus"
+      ],
+      "next_action": "Turn prototype lessons into roadmap, milestones, and pilot criteria.",
+      "budget": {
+        "allocated": 150,
+        "spent": 61,
+        "forecast": 112
+      },
+      "telemetry": "mock",
+      "wiring": "Need owner confirmation and promotion criteria."
+    },
+    {
+      "id": "vajra-upaya",
+      "name": "Vajra-Upaya",
+      "category": "prototype",
+      "stage": "prototype",
+      "status": "framing",
+      "health": "emerging",
+      "surface": "prototype",
+      "domain": "prototype",
+      "repo": "aikaizen/promptengines-main",
+      "owner": "A.I.",
+      "operators": [
+        "A.I.",
+        "Thoth",
+        "Prometheus"
+      ],
+      "next_action": "Frame the precision tool-fitting service and decide public launch readiness.",
+      "budget": {
+        "allocated": 140,
+        "spent": 36,
+        "forecast": 94
+      },
+      "telemetry": "mock",
+      "wiring": "Need offer definition and service metrics from human side."
+    },
+    {
+      "id": "blayde",
+      "name": "Blayde",
+      "category": "incubation",
+      "stage": "incubation",
+      "status": "discovery",
+      "health": "emerging",
+      "surface": "internal",
+      "domain": "internal",
+      "repo": "tbd",
+      "owner": "Prometheus",
+      "operators": [
+        "Prometheus"
+      ],
+      "next_action": "Decide whether Blayde remains a concept, prototype, or separate venture track.",
+      "budget": {
+        "allocated": 85,
+        "spent": 18,
+        "forecast": 40
+      },
+      "telemetry": "mock",
+      "wiring": "Need human decision on what Blayde actually is in the portfolio."
+    }
+  ],
+  "goals": [
+    {
+      "id": "g-company-legibility",
+      "parent_id": null,
+      "scope": "company",
+      "title": "Make Prompt Engines legible and controllable from one operating surface.",
+      "status": "in_progress",
+      "owner": "A.I.",
+      "target_metric": "Every venture has owner, stage, health, next action, and wiring status.",
+      "target_date": "2026-03-20"
+    },
+    {
+      "id": "g-dashboard-mvp",
+      "parent_id": "g-company-legibility",
+      "scope": "company",
+      "title": "Ship Pantheon OS MVP with Prompt Engines-aligned mock data.",
+      "status": "in_progress",
+      "owner": "Hermetic_Demiurge",
+      "target_metric": "Working dashboard in repo and portal with static mock data and explicit human wiring list.",
+      "target_date": "2026-03-10"
+    },
+    {
+      "id": "g-metrics-contracts",
+      "parent_id": "g-company-legibility",
+      "scope": "company",
+      "title": "Unify metrics and venture status contracts across the portfolio.",
+      "status": "planned",
+      "owner": "Thoth",
+      "target_metric": "Kaizen, Storybook, Bible, and Flow all have explicit adapter contracts.",
+      "target_date": "2026-03-24"
+    },
+    {
+      "id": "g-heartbeat-program",
+      "parent_id": "g-company-legibility",
+      "scope": "company",
+      "title": "Install recurring operator heartbeats across portfolio review, build stream, and venture refreshes.",
+      "status": "in_progress",
+      "owner": "Golem",
+      "target_metric": "Every active venture has at least one recurring review loop.",
+      "target_date": "2026-03-18"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t-mvp-layout",
+      "goal_id": "g-dashboard-mvp",
+      "title": "Build the static dashboard shell, cards, and sections.",
+      "status": "completed",
+      "owner": "Hermetic_Demiurge",
+      "next_step": "Keep iterating on data fidelity and wiring notes."
+    },
+    {
+      "id": "t-promptengines-data",
+      "goal_id": "g-dashboard-mvp",
+      "title": "Align mock data with Prompt Engines products, experiments, prototypes, and operators.",
+      "status": "completed",
+      "owner": "Thoth",
+      "next_step": "Reconcile with human-confirmed canonical statuses."
+    },
+    {
+      "id": "t-human-wiring-list",
+      "goal_id": "g-dashboard-mvp",
+      "title": "List exactly which credentials, decisions, and integrations are still needed from the human side.",
+      "status": "in_progress",
+      "owner": "A.I.",
+      "next_step": "Provide final auth, domain, and metrics secrets."
+    },
+    {
+      "id": "t-flow-status-reconcile",
+      "goal_id": "g-metrics-contracts",
+      "title": "Resolve Flow status drift between public site, dashboard code, and internal view.",
+      "status": "pending",
+      "owner": "Thoth",
+      "next_step": "Human decision on canonical status."
+    },
+    {
+      "id": "t-adapter-wiring",
+      "goal_id": "g-metrics-contracts",
+      "title": "Wire real metrics adapters for Kaizen, Storybook, Bible, and Flow.",
+      "status": "pending",
+      "owner": "Hermetic_Demiurge",
+      "next_step": "Needs credentials and event contracts from human side."
+    }
+  ],
+  "heartbeats": [
+    {
+      "id": "hb-daily-operator-loop",
+      "name": "Daily operator loop",
+      "status": "due",
+      "owner": "Golem",
+      "cadence": "daily 09:00",
+      "expected_output": "What exists, what changed, what needs attention, what is ready to ship."
+    },
+    {
+      "id": "hb-build-stream",
+      "name": "Build stream digest",
+      "status": "scheduled",
+      "owner": "Thoth",
+      "cadence": "daily 23:55 UTC",
+      "expected_output": "Cross-repo draft and operator notes."
+    },
+    {
+      "id": "hb-weekly-review",
+      "name": "Weekly operating review",
+      "status": "upcoming",
+      "owner": "A.I.",
+      "cadence": "weekly Monday 10:00",
+      "expected_output": "Portfolio review, approvals, next-week priorities."
+    },
+    {
+      "id": "hb-kaizen-refresh",
+      "name": "Kaizen status refresh",
+      "status": "upcoming",
+      "owner": "Prometheus",
+      "cadence": "every 2 days",
+      "expected_output": "Health, activation, and next action refresh."
+    },
+    {
+      "id": "hb-storybook-gate",
+      "name": "Storybook launch gate review",
+      "status": "due",
+      "owner": "Hermetic_Demiurge",
+      "cadence": "weekly Thursday 14:00",
+      "expected_output": "Launch blockers and launch decision packet."
+    }
+  ],
+  "approvals": [
+    {
+      "id": "ap-domain-deploy",
+      "title": "Approve MVP deployment path for dashboard.promptengines.com",
+      "status": "pending",
+      "risk": "high",
+      "approver": "A.I.",
+      "due_date": "2026-03-11"
+    },
+    {
+      "id": "ap-auth-boundary",
+      "title": "Approve internal/public boundary and auth model for Pantheon OS",
+      "status": "in_review",
+      "risk": "high",
+      "approver": "A.I.",
+      "due_date": "2026-03-11"
+    },
+    {
+      "id": "ap-metrics-secrets",
+      "title": "Approve live metrics secrets and adapter wiring for portfolio apps",
+      "status": "pending",
+      "risk": "medium",
+      "approver": "A.I.",
+      "due_date": "2026-03-12"
+    },
+    {
+      "id": "ap-flow-status",
+      "title": "Approve canonical Flow status and stage",
+      "status": "pending",
+      "risk": "medium",
+      "approver": "A.I.",
+      "due_date": "2026-03-10"
+    }
+  ],
+  "budgets": {
+    "currency": "USD",
+    "period": "2026-03",
+    "company": {
+      "allocated": 3120,
+      "spent": 1478,
+      "forecast": 2615
+    },
+    "by_agent": [
+      {
+        "name": "Hermetic_Demiurge",
+        "allocated": 980,
+        "spent": 532,
+        "forecast": 905
+      },
+      {
+        "name": "Thoth",
+        "allocated": 460,
+        "spent": 251,
+        "forecast": 421
+      },
+      {
+        "name": "Prometheus",
+        "allocated": 630,
+        "spent": 348,
+        "forecast": 590
+      },
+      {
+        "name": "Golem",
+        "allocated": 340,
+        "spent": 164,
+        "forecast": 298
+      },
+      {
+        "name": "A.I.",
+        "allocated": 510,
+        "spent": 183,
+        "forecast": 401
+      },
+      {
+        "name": "Andy Stable",
+        "allocated": 200,
+        "spent": 0,
+        "forecast": 0
+      }
+    ]
+  },
+  "skills": [
+    {
+      "name": "Weekly Operating Review",
+      "owner": "Thoth",
+      "status": "drafted",
+      "review_cadence": "weekly",
+      "path": "skills/company-os/weekly-operating-review/SKILL.md",
+      "use_cases": [
+        "Portfolio sitrep",
+        "Leadership review",
+        "Priority reset"
+      ]
+    },
+    {
+      "name": "Venture Status Refresh",
+      "owner": "Prometheus",
+      "status": "drafted",
+      "review_cadence": "every 2 weeks",
+      "path": "skills/company-os/venture-status-refresh/SKILL.md",
+      "use_cases": [
+        "Refresh venture card",
+        "Reconcile drift",
+        "Update next action"
+      ]
+    },
+    {
+      "name": "Decision Gate Review",
+      "owner": "A.I.",
+      "status": "drafted",
+      "review_cadence": "monthly",
+      "path": "skills/company-os/decision-gate-review/SKILL.md",
+      "use_cases": [
+        "Deployment approval",
+        "Publication approval",
+        "Budget escalation"
+      ]
+    },
+    {
+      "name": "Goal Tree Planning",
+      "owner": "Hermetic_Demiurge",
+      "status": "drafted",
+      "review_cadence": "monthly",
+      "path": "skills/company-os/goal-tree-planning/SKILL.md",
+      "use_cases": [
+        "Translate strategy into execution",
+        "Goal decomposition",
+        "Blocker exposure"
+      ]
+    },
+    {
+      "name": "Build Stream Synthesis",
+      "owner": "Thoth",
+      "status": "drafted",
+      "review_cadence": "daily",
+      "path": "skills/company-os/build-stream-synthesis/SKILL.md",
+      "use_cases": [
+        "Commit digest",
+        "Cross-repo pattern review",
+        "Operator signal"
+      ]
+    }
+  ],
+  "activity": [
+    {
+      "time": "2026-03-10 18:52",
+      "venture": "Pantheon OS Dashboard",
+      "actor": "Hermetic_Demiurge",
+      "type": "build",
+      "summary": "Scaffolded the dashboard MVP branch and pushed phase 1."
+    },
+    {
+      "time": "2026-03-10 18:11",
+      "venture": "Build Stream",
+      "actor": "Thoth",
+      "type": "synthesis",
+      "summary": "Prepared next daily digest contract for cross-repo activity."
+    },
+    {
+      "time": "2026-03-10 17:40",
+      "venture": "Kaizen",
+      "actor": "Prometheus",
+      "type": "telemetry",
+      "summary": "Marked telemetry adapter as needing live credentials and event contract review."
+    },
+    {
+      "time": "2026-03-10 17:05",
+      "venture": "Storybook Studio",
+      "actor": "Hermetic_Demiurge",
+      "type": "launch",
+      "summary": "Updated launch gate status to pre-launch with approval path pending."
+    },
+    {
+      "time": "2026-03-10 16:42",
+      "venture": "Flow",
+      "actor": "Thoth",
+      "type": "reconcile",
+      "summary": "Flagged status drift between homepage, dashboard code, and live app list."
+    },
+    {
+      "time": "2026-03-10 15:58",
+      "venture": "Consulting",
+      "actor": "A.I.",
+      "type": "ops",
+      "summary": "Reaffirmed consultancy-to-product bridge as a major strategic path."
+    }
+  ],
+  "wiring": [
+    {
+      "title": "dashboard.promptengines.com deployment target",
+      "status": "human-needed",
+      "owner": "A.I.",
+      "needed_from_human": "Connect Vercel project/domain and confirm whether the MVP is internal-only or gated public.",
+      "impact": "High"
+    },
+    {
+      "title": "Auth boundary and session model",
+      "status": "human-needed",
+      "owner": "A.I.",
+      "needed_from_human": "Choose auth provider and define who can see internal systems, budgets, and approvals.",
+      "impact": "High"
+    },
+    {
+      "title": "Live metrics adapters",
+      "status": "human-needed",
+      "owner": "Hermetic_Demiurge",
+      "needed_from_human": "Provide Supabase/Neon/project secrets and confirm event schema for Kaizen, Storybook, Bible, and Flow.",
+      "impact": "High"
+    },
+    {
+      "title": "GitHub build stream and activity feed token",
+      "status": "human-needed",
+      "owner": "Golem",
+      "needed_from_human": "Provide production token/secret path for authenticated build-stream sync.",
+      "impact": "Medium"
+    },
+    {
+      "title": "Canonical Flow status",
+      "status": "human-needed",
+      "owner": "Thoth",
+      "needed_from_human": "Decide whether Flow should appear as active product, experiment, or coming soon.",
+      "impact": "Medium"
+    },
+    {
+      "title": "Static MVP data contract",
+      "status": "wired",
+      "owner": "Hermetic_Demiurge",
+      "needed_from_human": "None for demo; replace JSON with live adapters later.",
+      "impact": "Low"
+    }
+  ],
+  "memory": [
+    {
+      "type": "decision",
+      "at": "2026-03-10",
+      "summary": "Pantheon OS is the internal system name; the dashboard target host is dashboard.promptengines.com."
+    },
+    {
+      "type": "risk",
+      "at": "2026-03-10",
+      "summary": "Public/private boundary is not yet finalized, so MVP should stay mock-data and cautious."
+    },
+    {
+      "type": "portfolio",
+      "at": "2026-03-10",
+      "summary": "Prompt Engines currently spans products, experiments, prototypes, services, and internal systems that need one shared operating surface."
+    }
+  ]
+}
