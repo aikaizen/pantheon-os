@@ -3,18 +3,21 @@ window.PANTHEON_OS_DATA = {
     "system_name": "Pantheon OS",
     "company": "Prompt Engines",
     "tagline": "Working control room for products, experiments, prototypes, operators, and approvals.",
-    "version": "0.2.0-mvp",
-    "updated_at": "2026-03-10T19:10:00Z",
+    "version": "0.2.1-mvp",
+    "updated_at": "2026-03-10T19:45:00Z",
     "target_host": "dashboard.promptengines.com",
-    "mode": "mvp-mock-data",
-    "branch": "feat/pantheon-os-mvp-dashboard",
-    "north_star": "Make Prompt Engines legible, controllable, and shippable from one operating surface."
+    "mode": "mvp-gated-public-mock-data",
+    "branch": "feat/pantheon-os-mvp-dashboard-v2",
+    "north_star": "Make Prompt Engines legible, controllable, and shippable from one operating surface.",
+    "access_mode": "gated-public",
+    "auth_provider": "supabase-google",
+    "admin_control": "All ventures visible; privileged actions and future visibility controls are admin-managed."
   },
   "summary": {
     "venture_count": 14,
     "active_count": 8,
-    "experiment_count": 2,
-    "prototype_count": 2,
+    "experiment_count": 1,
+    "prototype_count": 3,
     "internal_system_count": 2,
     "open_approvals": 4,
     "due_heartbeats": 3,
@@ -195,7 +198,7 @@ window.PANTHEON_OS_DATA = {
       "stage": "mvp",
       "status": "active-build",
       "health": "building",
-      "surface": "internal",
+      "surface": "gated-public",
       "domain": "dashboard.promptengines.com",
       "repo": "aikaizen/pantheon-os",
       "owner": "Hermetic_Demiurge",
@@ -204,14 +207,14 @@ window.PANTHEON_OS_DATA = {
         "Thoth",
         "Golem"
       ],
-      "next_action": "Complete the static MVP, then wire auth, metrics adapters, and deployment.",
+      "next_action": "Keep the MVP gated public, then wire auth, metrics adapters, and deployment.",
       "budget": {
         "allocated": 360,
         "spent": 118,
         "forecast": 320
       },
       "telemetry": "mock",
-      "wiring": "Needs Vercel project/domain hookup, auth provider, and product metrics secrets from human side."
+      "wiring": "Needs domain hookup, Supabase Google auth wiring, and live metrics secrets from human side."
     },
     {
       "id": "build-stream",
@@ -360,10 +363,10 @@ window.PANTHEON_OS_DATA = {
     {
       "id": "flow",
       "name": "Flow",
-      "category": "experiment",
-      "stage": "experiment",
-      "status": "mixed-signal",
-      "health": "mixed",
+      "category": "prototype",
+      "stage": "prototype",
+      "status": "prototype",
+      "health": "emerging",
       "surface": "public",
       "domain": "flow.promptengines.com",
       "repo": "aikaizen/flow",
@@ -371,14 +374,14 @@ window.PANTHEON_OS_DATA = {
       "operators": [
         "Prometheus"
       ],
-      "next_action": "Resolve public status drift and decide whether Flow is active product or held experiment.",
+      "next_action": "Advance Flow from prototype toward experiment once status, metrics, and next public milestone are confirmed.",
       "budget": {
         "allocated": 220,
         "spent": 124,
         "forecast": 195
       },
-      "telemetry": "drifting",
-      "wiring": "Need canonical status decision from human side."
+      "telemetry": "needs-prototype-contract",
+      "wiring": "Canonical status now set to prototype; next step is defining experiment-readiness metrics."
     },
     {
       "id": "video-terminal",
@@ -627,10 +630,10 @@ window.PANTHEON_OS_DATA = {
       "due_date": "2026-03-12"
     },
     {
-      "id": "ap-flow-status",
-      "title": "Approve canonical Flow status and stage",
-      "status": "pending",
-      "risk": "medium",
+      "id": "ap-access-model",
+      "title": "Confirm gated-public access model with Google auth and admin-controlled visibility.",
+      "status": "approved",
+      "risk": "high",
       "approver": "A.I.",
       "due_date": "2026-03-10"
     }
@@ -793,42 +796,42 @@ window.PANTHEON_OS_DATA = {
       "title": "dashboard.promptengines.com deployment target",
       "status": "human-needed",
       "owner": "A.I.",
-      "needed_from_human": "Connect Vercel project/domain and confirm whether the MVP is internal-only or gated public.",
+      "needed_from_human": "Connect the Pantheon OS project to the dashboard.promptengines.com domain and confirm the deployment target in Vercel.",
       "impact": "High"
     },
     {
-      "title": "Auth boundary and session model",
+      "title": "Supabase Google auth wiring",
       "status": "human-needed",
       "owner": "A.I.",
-      "needed_from_human": "Choose auth provider and define who can see internal systems, budgets, and approvals.",
+      "needed_from_human": "Provide Supabase project URL, anon key, and Google OAuth configuration so the dashboard can be gated public via Google sign-in.",
+      "impact": "High"
+    },
+    {
+      "title": "Initial admin identity",
+      "status": "human-needed",
+      "owner": "A.I.",
+      "needed_from_human": "Provide the admin email(s) that should have full visibility and control over the dashboard.",
       "impact": "High"
     },
     {
       "title": "Live metrics adapters",
       "status": "human-needed",
       "owner": "Hermetic_Demiurge",
-      "needed_from_human": "Provide Supabase/Neon/project secrets and confirm event schema for Kaizen, Storybook, Bible, and Flow.",
+      "needed_from_human": "Provide credentials/contracts for Kaizen, Storybook Studio, Bible, Flow, and other active ventures so live metrics can replace mock data.",
       "impact": "High"
     },
     {
       "title": "GitHub build stream and activity feed token",
       "status": "human-needed",
       "owner": "Golem",
-      "needed_from_human": "Provide production token/secret path for authenticated build-stream sync.",
-      "impact": "Medium"
-    },
-    {
-      "title": "Canonical Flow status",
-      "status": "human-needed",
-      "owner": "Thoth",
-      "needed_from_human": "Decide whether Flow should appear as active product, experiment, or coming soon.",
+      "needed_from_human": "Provide production GitHub token/secret path for authenticated build-stream sync and portfolio activity freshness.",
       "impact": "Medium"
     },
     {
       "title": "Static MVP data contract",
       "status": "wired",
       "owner": "Hermetic_Demiurge",
-      "needed_from_human": "None for demo; replace JSON with live adapters later.",
+      "needed_from_human": "None for demo; mock data is now aligned and can be replaced adapter by adapter.",
       "impact": "Low"
     }
   ],
@@ -847,6 +850,16 @@ window.PANTHEON_OS_DATA = {
       "type": "portfolio",
       "at": "2026-03-10",
       "summary": "Prompt Engines currently spans products, experiments, prototypes, services, and internal systems that need one shared operating surface."
+    },
+    {
+      "type": "decision",
+      "at": "2026-03-10",
+      "summary": "Access model decided: gated public with Google auth via Supabase; all ventures visible with admin-controlled visibility."
+    },
+    {
+      "type": "decision",
+      "at": "2026-03-10",
+      "summary": "Flow canonical status set to prototype; promotion to experiment will happen later."
     }
   ]
 };
