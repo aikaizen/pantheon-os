@@ -1,36 +1,64 @@
 # Pantheon OS
 
-Company operating system for PromptEngines.
+Company operating system for Prompt Engines.
 
 Local-first, constitution-first, pantheon-aware, manifest-driven, connector-flexible.
 
-## Structure
+Current branch status:
+- working MVP dashboard with Prompt Engines-aligned mock data
+- intended eventual host: dashboard.promptengines.com
+- current mode: static MVP with explicit wiring placeholders for human-provided credentials, auth, and live adapters
 
-```
-pantheon-os/
-├── docs/
-│   ├── phase-scope-brief.html      # Phase 1 & 2 outcomes and scope
-│   ├── skill-system-guidelines.md  # Company-wide skill design standard
-│   ├── skill-template.md           # Reusable skill template
-│   ├── paperclip-evaluation.md     # Paperclip platform assessment
-│   └── dual-harness-orchestration.md  # Controller ↔ Operator protocol
-├── constitution/                   # Constitutional grounding (TBD)
-├── registry/                       # Company registry manifests (TBD)
-├── skills/                         # Company skill library (TBD)
-├── data/                           # Operating data / dashboards (TBD)
-└── db/                             # Schema definitions (TBD)
-```
+## MVP included in this repo
 
-## Operating Model
+- `index.html` — working static dashboard shell
+- `assets/styles.css` — dark-mode control-room styling
+- `assets/app.js` — rendering logic for the dashboard sections
+- `data/pantheon-os.json` — Prompt Engines-aligned mock data
+- `data/company-os.json` — compatibility alias
+- `docs/mvp-wiring-checklist.md` — exact human-side inputs still needed
+- `docs/previews/pantheon-os-mvp-preview.png` — preview image of the dashboard mockup
 
-- **Human principal**: Andy Stable (founder/operator, final approver)
-- **Named agent**: Hermetic_Demiurge (autonomous engineering agent)
-- **Standing collaborator**: A.I. (general agent surface)
-- **Executive pantheon**: Unbounded — agents hold archetypal identity, not department roles
+## MVP sections
 
-## Key Principles
+- overview
+- full portfolio across products, experiments, prototypes, services, and internal systems
+- live activity / build-stream style feed
+- goal tree
+- heartbeats
+- approvals
+- budget visibility
+- operators / agents
+- explicit wiring needed from the human side
+- guidance layer
 
-- Ship constantly, document what works, stay close to the work
-- Constitution aligns agents. Skills operationalize work. Memory preserves what is learned. Connectors provide access.
-- Skills do not define an agent's essence — they extend operational precision
-- Local-first on MacBook Pro/Air; lean hosted services only where natural
+## Prompt Engines alignment
+
+The dashboard currently models:
+- PromptEngines.com
+- Lab Notes
+- Pantheon OS Dashboard
+- Build Stream
+- Consulting
+- Kaizen
+- Storybook Studio
+- Norbu
+- Bible
+- Flow
+- Video Terminal
+- Flow Education
+- Vajra-Upaya
+- Blayde
+
+Operators currently modeled:
+- A.I.
+- Andy Stable
+- Hermetic_Demiurge
+- Thoth
+- Prometheus
+- Golem
+
+## Notes
+
+This MVP is intentionally static and safe.
+Anything not yet live-wired is surfaced explicitly in the wiring section so the next step is obvious.
