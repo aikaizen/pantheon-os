@@ -44,3 +44,10 @@ This file lists the exact items still needed from the human side to move the MVP
 - Impact: Low
 - Needed from human side: None for demo; replace JSON with live adapters later.
 
+
+## Decisions already made
+
+- Visibility model: gated public
+- Auth model: Google auth via Supabase Auth
+- Canonical Flow status: prototype
+- All ventures are visible on the dashboard; admin controls visibility/privileged management

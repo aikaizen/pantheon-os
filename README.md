@@ -62,3 +62,14 @@ Operators currently modeled:
 
 This MVP is intentionally static and safe.
 Anything not yet live-wired is surfaced explicitly in the wiring section so the next step is obvious.
+
+## Access model
+
+- Target host: `dashboard.promptengines.com`
+- Visibility model: gated public
+- Auth model: Google auth via Supabase Auth (preferred)
+- Admin control: all ventures visible on the dashboard; admin controls future visibility states and privileged operations
+
+## Metrics pipeline
+
+See `docs/metrics-pipeline-plan.md` for the recommended adapter-based metrics architecture and venture-by-venture wiring plan.

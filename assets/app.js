@@ -21,6 +21,7 @@ function renderHeader() {
   document.getElementById('hero-title').textContent = data.meta.system_name;
   document.getElementById('hero-tagline').textContent = data.meta.tagline;
   document.getElementById('target-host').textContent = `Target: ${data.meta.target_host}`;
+  document.getElementById('access-model').textContent = `Access: ${data.meta.access_mode} · ${data.meta.auth_provider}`;
   const heroMeta = document.getElementById('hero-meta');
   [
     ['Version', data.meta.version],
