@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "title": "PromptEngines Dashboard",
+    "subtitle": "Applied AI lab control surface",
+    "deployment_note": "Built inside pantheon-os for speed. Intended to migrate into the PromptEngines repo later.",
+    "access_model": "gated-public-internal-mvp",
+    "updated_at": "2026-03-11"
+  },
+  "summary": {
+    "active_products": 7,
+    "live_experiments": 5,
+    "internal_systems": 4,
+    "open_decisions": 6,
+    "operators_online": 5,
+    "shipping_focus": "Dashboard + terminal manager"
+  },
+  "surfaces": [
+    {
+      "name": "Public products",
+      "description": "Customer-facing and public-facing surfaces currently shaping PromptEngines.",
+      "items": [
+        "PromptEngines.com",
+        "Kaizen",
+        "Storybook Studio",
+        "Norbu",
+        "Video Terminal",
+        "Consulting"
+      ]
+    },
+    {
+      "name": "Internal systems",
+      "description": "Systems that make the lab operable as a human-led, agent-operated company.",
+      "items": [
+        "Pantheon OS Dashboard",
+        "Operating Terminal",
+        "Build Stream",
+        "Portal"
+      ]
+    },
+    {
+      "name": "Emerging ventures",
+      "description": "Experiments and prototypes in motion.",
+      "items": [
+        "Flow Education",
+        "Bible",
+        "Vajra-Upaya",
+        "Blayde",
+        "Flow"
+      ]
+    }
+  ],
+  "portfolio": [
+    {
+      "category": "platform",
+      "items": [
+        {
+          "name": "PromptEngines.com",
+          "state": "active",
+          "focus": "public face + portfolio coherence"
+        },
+        {
+          "name": "Lab Notes / Build Stream",
+          "state": "active",
+          "focus": "public research and shipping narrative"
+        }
+      ]
+    },
+    {
+      "category": "products",
+      "items": [
+        {
+          "name": "Kaizen",
+          "state": "active",
+          "focus": "kids learning / telemetry"
+        },
+        {
+          "name": "Storybook Studio",
+          "state": "active",
+          "focus": "creator tool / customer flow"
+        },
+        {
+          "name": "Consulting",
+          "state": "active",
+          "focus": "services into product flywheel"
+        },
+        {
+          "name": "Norbu",
+          "state": "active",
+          "focus": "language learning"
+        },
+        {
+          "name": "Video Terminal",
+          "state": "active",
+          "focus": "media interface"
+        }
+      ]
+    },
+    {
+      "category": "experiments",
+      "items": [
+        {
+          "name": "Flow Education",
+          "state": "prototype",
+          "focus": "education venture path"
+        },
+        {
+          "name": "Bible",
+          "state": "prototype",
+          "focus": "shared reading / social surface"
+        },
+        {
+          "name": "Vajra-Upaya",
+          "state": "framing",
+          "focus": "concept formation"
+        },
+        {
+          "name": "Blayde",
+          "state": "incubating",
+          "focus": "future venture slot"
+        }
+      ]
+    }
+  ],
+  "operators": [
+    {
+      "name": "A.I.",
+      "role": "human monad / principal",
+      "status": "online"
+    },
+    {
+      "name": "Hermetic_Demiurge",
+      "role": "builder / shipper",
+      "status": "online"
+    },
+    {
+      "name": "Thoth",
+      "role": "memory / synthesis",
+      "status": "online"
+    },
+    {
+      "name": "Prometheus",
+      "role": "venture acceleration",
+      "status": "online"
+    },
+    {
+      "name": "Golem",
+      "role": "recurring operations",
+      "status": "online"
+    }
+  ],
+  "now": [
+    "Reframe Pantheon OS as a generic company operating system with PromptEngines as first deployment.",
+    "Build the PromptEngines dashboard MVP as a migration-ready surface inside this repo.",
+    "Design the operating terminal / terminal manager as the tactical command center.",
+    "Create metaphors, diagrams, and definitions for the pantheon model, sub-agents, capability sets, and scaling assumptions."
+  ],
+  "build_stream": [
+    {
+      "time": "today",
+      "type": "docs",
+      "title": "Pantheon OS repo reframed around dashboard, terminal, and runtime"
+    },
+    {
+      "time": "today",
+      "type": "design",
+      "title": "Two workstreams defined: PromptEngines dashboard MVP and terminal manager MVP"
+    },
+    {
+      "time": "today",
+      "type": "concept",
+      "title": "Inverted pyramid org, capability sets, and scaling thesis documented"
+    },
+    {
+      "time": "next",
+      "type": "product",
+      "title": "PromptEngines dashboard implementation begins in migration-ready folder"
+    }
+  ],
+  "panels": [
+    {
+      "title": "Why this exists",
+      "body": "PromptEngines needs a clean strategic dashboard surface before the terminal manager goes live. This dashboard makes the company legible while Pantheon OS evolves into a deployable company operating system."
+    },
+    {
+      "title": "Migration plan",
+      "body": "This folder is intentionally standalone: static assets + HTML + JS + JSON. It can be moved into the PromptEngines repo later with minimal translation."
+    },
+    {
+      "title": "What comes after",
+      "body": "Once the dashboard is credible, the operating terminal adds the live control plane: chats, terminals, controllers, agent panes, summaries, and interventions."
+    }
+  ]
+}

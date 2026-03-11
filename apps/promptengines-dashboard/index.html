@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptEngines Dashboard</title>
+  <meta name="description" content="Strategic dashboard surface for PromptEngines, built inside Pantheon OS and ready to migrate later." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="hero">
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <div class="eyebrow">PromptEngines · Applied AI Lab · Strategic surface</div>
+        <h1 id="title">PromptEngines Dashboard</h1>
+        <p class="hero__lede" id="subtitle"></p>
+        <div class="hero__meta">
+          <span class="pill">Static MVP</span>
+          <span class="pill pill--blue">Migration-ready</span>
+          <span class="pill pill--soft" id="access-model"></span>
+        </div>
+      </div>
+      <div class="hero__card">
+        <div class="hero__card-label">Current build note</div>
+        <p id="deployment-note"></p>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="summary-grid" id="summary-grid"></section>
+
+    <section class="section section--split">
+      <div>
+        <div class="section-label">Surface map</div>
+        <h2>What PromptEngines is operating right now</h2>
+      </div>
+      <p class="section-copy">This dashboard is the strategic view of the company. It shows the portfolio, active operators, and current shipping focus while the operating terminal evolves into the tactical control layer.</p>
+    </section>
+
+    <section class="surface-grid" id="surface-grid"></section>
+
+    <section class="section section--split">
+      <div>
+        <div class="section-label">Portfolio</div>
+        <h2>Products, experiments, and internal systems</h2>
+      </div>
+      <p class="section-copy">Built in the aesthetic family of PromptEngines, but bluer and more infrastructural — more control room, less marketing page.</p>
+    </section>
+
+    <section id="portfolio"></section>
+
+    <section class="section section--split">
+      <div>
+        <div class="section-label">Operators</div>
+        <h2>Human monad and pantheon</h2>
+      </div>
+      <p class="section-copy">PromptEngines runs as a human-led, agent-operated company. The dashboard surfaces who is shaping the system while the operating terminal later manages how they work in real time.</p>
+    </section>
+
+    <section class="operators" id="operators"></section>
+
+    <section class="section section--split">
+      <div>
+        <div class="section-label">Now</div>
+        <h2>Current shipping focus</h2>
+      </div>
+      <p class="section-copy">The immediate sequence is to make the strategic surface legible, then build the operating terminal that controls chats, sessions, agents, and interventions.</p>
+    </section>
+
+    <section class="now-grid">
+      <div class="stack-card">
+        <h3>Current focus</h3>
+        <ul id="now-list"></ul>
+      </div>
+      <div class="stack-card">
+        <h3>Build stream</h3>
+        <div id="build-stream" class="stream"></div>
+      </div>
+    </section>
+
+    <section class="section section--split">
+      <div>
+        <div class="section-label">Notes</div>
+        <h2>Why this lives here first</h2>
+      </div>
+      <p class="section-copy">We are building this dashboard in the Pantheon OS repo first so it can move fast, stay visible, and migrate into the PromptEngines repo later with minimal friction.</p>
+    </section>
+
+    <section class="panel-grid" id="panels"></section>
+  </main>
+
+  <footer class="footer">
+    <div>PromptEngines Dashboard MVP</div>
+    <div>Built inside Pantheon OS · migration-ready static site</div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
