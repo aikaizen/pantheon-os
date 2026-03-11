@@ -1,0 +1,23 @@
+{
+  "deployment": "promptengines",
+  "company": "PromptEngines",
+  "model": "manifest-based-org-chart",
+  "root_authority": {
+    "id": "ai-principal",
+    "name": "A.I.",
+    "type": "human"
+  },
+  "executive_agents": [
+    "hermetic-demiurge",
+    "thoth",
+    "prometheus",
+    "golem"
+  ],
+  "surfaces": [
+    "principles",
+    "company-dashboard",
+    "operating-terminal",
+    "runtime-portal"
+  ],
+  "notes": "PromptEngines is the first internal deployment of Pantheon OS. The dashboard is the most visible current surface, followed by the operating terminal."
+}

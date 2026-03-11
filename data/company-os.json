@@ -1,14 +1,14 @@
 {
   "meta": {
     "system_name": "Pantheon OS",
-    "company": "Prompt Engines",
-    "tagline": "Working control room for products, experiments, prototypes, operators, and approvals.",
+    "company": "PromptEngines",
+    "tagline": "Strategic dashboard surface for a deployable company operating system.",
     "version": "0.2.1-mvp",
     "updated_at": "2026-03-10T20:05:00Z",
     "target_host": "dashboard.promptengines.com",
-    "mode": "mvp-gated-public-mock-data",
+    "mode": "company-dashboard-surface-mock-data",
     "branch": "main",
-    "north_star": "Make Prompt Engines legible, controllable, and shippable from one operating surface.",
+    "north_star": "Make companies legible, steerable, and shippable through Pantheon OS, beginning with PromptEngines.",
     "access_mode": "gated-public",
     "auth_provider": "supabase-google",
     "admin_control": "All ventures visible; privileged actions and future visibility controls are admin-managed."
@@ -27,10 +27,10 @@
   },
   "guidance": {
     "principles": [
-      "Constitution aligns agents.",
-      "Skills operationalize repeatable work.",
-      "Memory preserves what is learned.",
-      "Connectors provide access.",
+      "Principles govern the company and its agents.",
+      "The dashboard makes the company legible.",
+      "The operating terminal makes the pantheon steerable.",
+      "The portal preserves continuity across harnesses.",
       "Governance and budgets keep automation bounded."
     ],
     "anthropic_skill_standard": [

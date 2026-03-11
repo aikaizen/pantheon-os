@@ -1,0 +1,16 @@
+{
+  "id": "promptengines",
+  "name": "PromptEngines",
+  "type": "reference-deployment",
+  "description": "First internal deployment of Pantheon OS.",
+  "primary_surfaces": [
+    "company-dashboard",
+    "operating-terminal"
+  ],
+  "runtime": {
+    "local_first": true,
+    "dual_harness": true,
+    "portal_enabled": true
+  },
+  "notes": "PromptEngines uses Pantheon OS as its own company operating system while Pantheon OS is also being shaped as a reusable system for other companies."
+}

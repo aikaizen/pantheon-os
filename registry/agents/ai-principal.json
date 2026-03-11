@@ -1,0 +1,13 @@
+{
+  "id": "ai-principal",
+  "name": "A.I.",
+  "type": "human",
+  "role": "Principal human authority",
+  "mandate": "Final strategic authority, approval, and direction.",
+  "reporting_line": null,
+  "scope": [
+    "company_direction",
+    "approvals",
+    "portfolio_priorities"
+  ]
+}

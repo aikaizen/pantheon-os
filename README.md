@@ -1,75 +1,168 @@
 # Pantheon OS
 
-Company operating system for Prompt Engines.
+Pantheon OS is a human-sovereign, agent-native company operating system.
 
-Local-first, constitution-first, pantheon-aware, manifest-driven, connector-flexible.
+It is being developed as a reusable best-practice system that can be deployed for any company, with PromptEngines as the first internal deployment and reference environment.
 
-Current branch status:
-- working MVP dashboard with Prompt Engines-aligned mock data
-- intended eventual host: dashboard.promptengines.com
-- current mode: static MVP with explicit wiring placeholders for human-provided credentials, auth, and live adapters
+## Product framing
 
-## MVP included in this repo
+Pantheon OS has four major surfaces:
 
-- `index.html` — working static dashboard shell
-- `assets/styles.css` — dark-mode control-room styling
-- `assets/app.js` — rendering logic for the dashboard sections
-- `data/pantheon-os.json` — Prompt Engines-aligned mock data
-- `data/company-os.json` — compatibility alias
-- `docs/mvp-wiring-checklist.md` — exact human-side inputs still needed
-- `docs/previews/pantheon-os-mvp-preview.png` — preview image of the dashboard mockup
+1. Principles
+2. Company Dashboard
+3. Operating Terminal
+4. Runtime / Portal
 
-## MVP sections
+### Principles
+The constitutional and organizational layer.
 
-- overview
-- full portfolio across products, experiments, prototypes, services, and internal systems
-- live activity / build-stream style feed
-- goal tree
-- heartbeats
+This defines:
+- sovereignty
+- authority
+- escalation
+- org structure
+- agent framing
+- omnipotence within scope
+- omnidirectionality across media
+
+### Company Dashboard
+The strategic surface.
+
+This is the most visible part of the current project.
+
+It exists to make the company legible:
+- products
+- prototypes
+- experiments
+- services
+- internal systems
+- budgets
 - approvals
-- budget visibility
-- operators / agents
-- explicit wiring needed from the human side
-- guidance layer
+- health
+- priorities
 
-## Prompt Engines alignment
+### Operating Terminal
+The tactical surface.
 
-The dashboard currently models:
-- PromptEngines.com
-- Lab Notes
-- Pantheon OS Dashboard
-- Build Stream
-- Consulting
-- Kaizen
-- Storybook Studio
-- Norbu
-- Bible
-- Flow
-- Video Terminal
-- Flow Education
-- Vajra-Upaya
-- Blayde
+This is the second major visible surface after the dashboard.
 
-Operators currently modeled:
-- A.I.
-- Andy Stable
-- Hermetic_Demiurge
-- Thoth
-- Prometheus
-- Golem
+It is the command-center IDE for operating teams of agents across:
+- chats
+- terminals
+- tmux panes
+- tools
+- logs
+- summaries
+- artifacts
+- interventions
 
-## Notes
+### Runtime / Portal
+The substrate beneath the visible surfaces.
 
-This MVP is intentionally static and safe.
-Anything not yet live-wired is surfaced explicitly in the wiring section so the next step is obvious.
+This includes:
+- dual-harness orchestration
+- portal state
+- event flow
+- memory
+- runtime supervision
+- agent state transitions
 
-## Access model
+## Current repo state
 
-- Target host: `dashboard.promptengines.com`
-- Visibility model: gated public
-- Auth model: Google auth via Supabase Auth (preferred)
-- Admin control: all ventures visible on the dashboard; admin controls future visibility states and privileged operations
+This repository currently contains:
+- a working static company dashboard MVP
+- PromptEngines-aligned mock data
+- dual-harness notes
+- metrics wiring notes
+- early structure for constitution and registry artifacts
 
-## Metrics pipeline
+The current dashboard MVP is the seed, not the full product.
 
-See `docs/metrics-pipeline-plan.md` for the recommended adapter-based metrics architecture and venture-by-venture wiring plan.
+## Current emphasis
+
+Right now, the project emphasis is:
+1. dashboard as the primary visible surface
+2. operating terminal as the next major surface
+3. principles as the already-strong conceptual foundation
+4. runtime / portal as the substrate that ties the system together
+
+## PromptEngines as first deployment
+
+PromptEngines is the first internal deployment of Pantheon OS.
+
+That means this repo should support two truths at once:
+- Pantheon OS is a general operating system for companies
+- PromptEngines is the first real company using it
+
+The repo should therefore avoid collapsing the whole product into a PromptEngines-only dashboard.
+
+## Repository structure
+
+### Current important files
+- `index.html` — current static dashboard shell
+- `assets/styles.css` — current dashboard styling
+- `assets/app.js` — rendering logic for the static dashboard
+- `data/pantheon-os.json` — dashboard mock data
+- `data/pantheon-os.js` — browser-loaded mock data wrapper
+- `docs/dual-harness-orchestration.md` — current dual-harness note
+- `docs/mvp-wiring-checklist.md` — current MVP wiring needs
+
+### Principles layer
+- `constitution/`
+- `registry/`
+
+### Docs layer
+- `docs/`
+
+## What needs to happen next
+
+### 1. Reframe the repo
+The repo needs to clearly present Pantheon OS as:
+- Principles
+- Company Dashboard
+- Operating Terminal
+- Runtime / Portal
+
+### 2. Populate the principles layer
+The empty structure in `constitution/` and `registry/` needs to become real source-of-truth artifacts.
+
+### 3. Add the operating terminal spec
+The repo needs explicit docs for:
+- pane system
+- portal model
+- agent state model
+- operating terminal behavior
+
+### 4. Evolve the data model
+The current data model is dashboard-first.
+It should evolve to also represent:
+- org structure
+- agent manifests
+- runtime state
+- portal summaries
+- pane/workspace models
+
+### 5. Reposition the current UI
+The current UI should be treated as the Company Dashboard surface, not the whole of Pantheon OS.
+
+## Access / deployment notes
+
+The PromptEngines website dashboard itself may be built in the PromptEngines repo.
+
+Within Pantheon OS, the dashboard remains a first-class surface of the product, but Pantheon OS should not be reduced to that single surface.
+
+## Related docs
+
+- `docs/system-architecture.md`
+- `docs/company-dashboard-spec.md`
+- `docs/operating-terminal-spec.md`
+- `docs/pane-system.md`
+- `docs/portal-model.md`
+- `docs/agent-state-model.md`
+- `constitution/pantheon-os-constitution.md`
+- `registry/README.md`
+- `docs/workstreams/promptengines-dashboard-mvp.md`
+- `docs/workstreams/terminal-manager-mvp.md`
+- `docs/concepts/inverted-pyramid-org.md`
+- `docs/concepts/agent-capability-skill-model.md`
+- `docs/concepts/model-scaling-thesis.md`
