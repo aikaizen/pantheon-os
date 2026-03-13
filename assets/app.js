@@ -1,228 +1,576 @@
+const summary = [
+  { label: 'Live deployments', value: '1', note: 'PromptEngines is live now' },
+  { label: 'Tracked surfaces', value: '15', note: 'Public, prototype, and internal' },
+  { label: 'Active agents', value: '2', note: 'Canonical live roster only' },
+  { label: 'Metric families', value: '6', note: 'Already defined in dashboard work' },
+  { label: 'Visible company surfaces', value: '13', note: 'Public and prototype surfaces on the company map' },
+  { label: 'Internal control surfaces', value: '2', note: 'Dashboard + terminal manager' },
+];
 
-const data = window.PANTHEON_OS_DATA;
-const el = (tag, className, html) => {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (html !== undefined) node.innerHTML = html;
-  return node;
-};
-const money = (n) => `$${Number(n).toLocaleString()}`;
-const niceDate = (value) => String(value).replace('T', ' ').replace('Z', '');
-const badgeTone = (value) => {
-  const lowered = String(value).toLowerCase();
-  if (['approved','active','completed','strong','steady','wired','product'].includes(lowered)) return 'ok';
-  if (['pending','in_review','building','upcoming','mixed','pre-launch','service','experiment','mvp'].includes(lowered)) return 'warn';
-  if (['due','high','framing','mixed-signal','prototype','human-needed','discovery'].includes(lowered)) return 'danger';
-  return 'info';
-};
-const groupOrder = ['platform','product','service','experiment','prototype','incubation','internal-system'];
+const deployments = [
+  {
+    name: 'PromptEngines',
+    stage: 'reference deployment',
+    status: 'live',
+    summary: 'Applied AI lab using Pantheon OS as its first real company operating system deployment.',
+    metrics: [
+      '13 visible company surfaces',
+      '2 active agents + 1 human principal',
+      '6 metric families defined',
+      'Dashboard and terminal-manager split preserved',
+    ],
+  },
+];
 
-function renderHeader() {
-  document.getElementById('hero-title').textContent = data.meta.system_name;
-  document.getElementById('hero-tagline').textContent = data.meta.tagline;
-  document.getElementById('target-host').textContent = `Target: ${data.meta.target_host}`;
-  document.getElementById('access-model').textContent = `Access: ${data.meta.access_mode} · ${data.meta.auth_provider}`;
-  const heroMeta = document.getElementById('hero-meta');
-  [
-    ['Version', data.meta.version],
-    ['Updated', niceDate(data.meta.updated_at)],
-    ['Branch', data.meta.branch]
-  ].forEach(([label, value]) => {
-    const chip = el('div', 'stat-chip');
-    chip.append(el('span', '', label));
-    chip.append(el('strong', '', value));
-    heroMeta.append(chip);
-  });
+const metricFamilies = [
+  {
+    name: 'Growth',
+    route: '/growth',
+    description: 'Acquisition and retention across company and app surfaces.',
+    metrics: ['Total users', 'New users', 'DAU / WAU / MAU', 'Stickiness', 'Retention cohorts'],
+  },
+  {
+    name: 'Finance',
+    route: '/finance',
+    description: 'Commercial performance and cost visibility.',
+    metrics: ['Revenue', 'Monthly revenue', 'Credits purchased / spent', 'COGS', 'Margin', 'Revenue by source'],
+  },
+  {
+    name: 'Engagement',
+    route: '/engagement',
+    description: 'How deeply each product is actually used.',
+    metrics: ['Avg session duration', 'Sessions per user', 'Actions per session', 'Activation rate', 'Top features'],
+  },
+  {
+    name: 'Reliability',
+    route: '/reliability',
+    description: 'Operational quality and trustworthiness.',
+    metrics: ['Success rate', 'Error rate', 'p50 / p95 / p99 latency', 'Status indicators'],
+  },
+  {
+    name: 'Unit Economics',
+    route: '/finance',
+    description: 'Whether usage and growth compound or leak margin.',
+    metrics: ['ARPU', 'Cost per user', 'Margin per user', 'LTV', 'Paying users'],
+  },
+  {
+    name: 'User Profitability',
+    route: '/users',
+    description: 'Per-user value, cost, funnel, and retained behavior.',
+    metrics: ['Plan', 'Funnel stage', 'Revenue vs cost', 'Credits balance', 'Payments', 'Recent activity'],
+  },
+];
+
+const applications = [
+  {
+    id: 'promptengines-web',
+    group: 'Company Surfaces',
+    name: 'PromptEngines.com',
+    stage: 'Product',
+    status: 'active',
+    detail: 'Primary company surface for portfolio framing, app routing, and company narrative.',
+    northStar: 'Make the company legible and convert attention into qualified demand.',
+    metrics: ['Visitors → signups', 'App clickthrough', 'Lead conversion', 'Site freshness'],
+  },
+  {
+    id: 'lab-notes',
+    group: 'Company Surfaces',
+    name: 'Lab Notes',
+    stage: 'Product',
+    status: 'active',
+    detail: 'Publishing and build-intelligence layer. Also the canonical public team page.',
+    northStar: 'Turn active work into legible insight without losing freshness.',
+    metrics: ['Articles shipped', 'Read depth', 'Build-stream freshness', 'Audience growth'],
+  },
+  {
+    id: 'consulting',
+    group: 'Company Surfaces',
+    name: 'Consulting',
+    stage: 'Service',
+    status: 'active',
+    detail: 'Applied AI consulting offer and delivery surface.',
+    northStar: 'Convert inbound demand into healthy revenue and delivery margin.',
+    metrics: ['Inbound leads', 'Proposal conversion', 'Booked revenue', 'Delivery margin'],
+  },
+  {
+    id: 'kaizen',
+    group: 'Products',
+    name: 'Kaizen',
+    stage: 'Active',
+    status: 'active',
+    detail: 'Closest product to a real dashboard adapter and one of the clearest telemetry reference points.',
+    northStar: 'Grow active learners while keeping latency and generation cost bounded.',
+    metrics: ['DAU / WAU / MAU', 'Credits purchased vs spent', 'Signup → first generation', 'Generation latency'],
+  },
+  {
+    id: 'storybook-studio',
+    group: 'Products',
+    name: 'Storybook Studio',
+    stage: 'Pre-Launch',
+    status: 'prelaunch',
+    detail: 'Creator product with print, checkout, and book-generation economics.',
+    northStar: 'Turn creators into repeat book buyers with stable print-ready output.',
+    metrics: ['Active creators', 'Book generations', 'Checkout conversion', 'Print margin'],
+  },
+  {
+    id: 'video-terminal',
+    group: 'Products',
+    name: 'Video Terminal',
+    stage: 'Alpha',
+    status: 'alpha',
+    detail: 'Node-based media tool with workflow, render, and export questions.',
+    northStar: 'Prove a tight creation loop with reliable render success.',
+    metrics: ['Active runs', 'Render success rate', 'Export rate', 'Render latency'],
+  },
+  {
+    id: 'norbu',
+    group: 'Products',
+    name: 'Norbu',
+    stage: 'Active',
+    status: 'active',
+    detail: 'Language-learning product with curriculum and retention questions.',
+    northStar: 'Increase learner retention and paid conversion.',
+    metrics: ['Weekly learners', 'Lesson completion', 'Paid conversion', 'Retention'],
+  },
+  {
+    id: 'bible',
+    group: 'Products',
+    name: 'Bible',
+    stage: 'Active',
+    status: 'active',
+    detail: 'Scripture product with community and notification loops already entering the dashboard model.',
+    northStar: 'Grow repeat reading sessions and notification reliability.',
+    metrics: ['Readers', 'Study sessions', 'Notification success', 'Retention'],
+  },
+  {
+    id: 'flow',
+    group: 'Products',
+    name: 'Flow',
+    stage: 'Mixed Signal',
+    status: 'drift',
+    detail: 'Publicly visible, but still needs canonical resolution versus Flow Education.',
+    northStar: 'Clarify what Flow is before overstating maturity.',
+    metrics: ['Pilot sessions', 'Completion rate', 'Feedback', 'Latency'],
+  },
+  {
+    id: 'flow-education',
+    group: 'Prototypes',
+    name: 'Flow Education',
+    stage: 'Prototype',
+    status: 'planned',
+    detail: 'Prototype education surface that belongs in the company map but not in the mature-product bucket.',
+    northStar: 'Learn whether the teaching loop is strong enough to formalize.',
+    metrics: ['Prototype sessions', 'Lesson completion', 'Curriculum coverage'],
+  },
+  {
+    id: 'vajra-upaya',
+    group: 'Prototypes',
+    name: 'Vajra-Upaya',
+    stage: 'Prototype',
+    status: 'planned',
+    detail: 'Tool-fitting service prototype currently visible on the public site.',
+    northStar: 'Prove signal quality and fit before building the larger shell.',
+    metrics: ['Fit interviews', 'Recommendation quality', 'Pilot conversion'],
+  },
+  {
+    id: 'resources',
+    group: 'Prototypes',
+    name: 'Resources',
+    stage: 'Support Prototype',
+    status: 'planned',
+    detail: 'Reference / API support surface.',
+    northStar: 'Increase internal leverage and reuse.',
+    metrics: ['Reusable utilities', 'Docs usefulness', 'Reference visits'],
+  },
+  {
+    id: 'vibes',
+    group: 'Prototypes',
+    name: 'Vibes',
+    stage: 'Support Prototype',
+    status: 'planned',
+    detail: 'Design support surface and aesthetic R&D lane.',
+    northStar: 'Increase reusable taste across shipped surfaces.',
+    metrics: ['Explorations', 'Adoption into shipped surfaces', 'Asset reuse'],
+  },
+  {
+    id: 'pantheon-dashboard',
+    group: 'Internal Surfaces',
+    name: 'Pantheon Dashboard',
+    stage: 'MVP',
+    status: 'active',
+    detail: 'Strategic command surface for company legibility, metrics, and agent state.',
+    northStar: 'Let the principal steer the company from one page.',
+    metrics: ['Surface coverage', 'Metric-family coverage', 'Unread blockers', 'Approval latency'],
+  },
+  {
+    id: 'terminal-manager',
+    group: 'Internal Surfaces',
+    name: 'Pant OS Terminal Manager',
+    stage: 'Wireframe',
+    status: 'planned',
+    detail: 'Tactical multi-pane operating surface, separate from the dashboard.',
+    northStar: 'Let the operator supervise chats, terminals, sessions, and interventions in one control room.',
+    metrics: ['Active sessions', 'Unread handoffs', 'Intervention time', 'Session health'],
+  },
+];
+
+const principal = {
+  name: 'A.I.',
+  role: 'Human Principal',
+  note: 'Final authority, direction, approvals, and taste. Pantheon OS stays human-sovereign.',
+};
+
+const agents = [
+  {
+    id: 'andy-stable',
+    name: 'Andy Stable 🦾',
+    role: 'Operations & Execution',
+    sitrep: 'Maintaining continuity and making sure the company surface matches reality.',
+    current: 'Reconciling public PromptEngines surfaces with internal dashboard framing.',
+    next: 'Tighten continuity, publish clearer operating state, and keep handoffs legible.',
+    blockers: ['Needs a stronger portal-backed continuity layer.'],
+    workingOn: ['PromptEngines.com', 'Lab Notes', 'Consulting', 'Company continuity'],
+    route: 'terminal-manager://ops/andy-stable',
+  },
+  {
+    id: 'hermetic-demiurge',
+    name: 'Hermetic_Demiurge',
+    role: 'Developer & Engineer',
+    sitrep: 'Reworking the dashboard into a PromptEngines-first command surface and defining the terminal-manager wireframe.',
+    current: 'Translating PromptEngines brand language and Pantheon operating logic into a sharper UI.',
+    next: 'Move from static contract to live adapters and session-registry-backed control.',
+    blockers: ['Needs real adapter coverage and terminal-manager backend wiring.'],
+    workingOn: ['Pantheon Dashboard', 'Terminal Manager', 'Kaizen', 'Storybook Studio'],
+    route: 'terminal-manager://build/hermetic-demiurge',
+  },
+];
+
+const queue = [
+  {
+    to: 'Hermetic_Demiurge',
+    priority: 'high',
+    subject: 'Dashboard taste refresh',
+    body: 'Make the dashboard feel like PromptEngines, not a generic rounded SaaS console.',
+  },
+  {
+    to: 'Andy Stable 🦾',
+    priority: 'medium',
+    subject: 'Continuity pass',
+    body: 'Keep the public company surface and internal dashboard contract aligned.',
+  },
+];
+
+const principles = [
+  {
+    title: 'Human Sovereignty',
+    body: 'The dashboard supports the principal. It does not replace the principal.',
+  },
+  {
+    title: 'Truth Over Performance',
+    body: 'If there is drift, ambiguity, or missing wiring, the UI should show it plainly.',
+  },
+  {
+    title: 'Execution Over Chatter',
+    body: 'State, ownership, blockers, next work, and intervention paths matter more than vanity numbers.',
+  },
+  {
+    title: 'Boundaried Autonomy',
+    body: 'Each active agent needs a lane, a mandate, a state summary, and a message route.',
+  },
+  {
+    title: 'Portal Primacy',
+    body: 'Shared state should survive sessions via explicit notes, tasks, approvals, and handoffs.',
+  },
+];
+
+const surfaceSplit = [
+  {
+    title: 'Dashboard = strategic surface',
+    body: 'Company map, metrics, activity, agent state, and portfolio legibility belong here.',
+  },
+  {
+    title: 'Terminal Manager = tactical surface',
+    body: 'Chats, shells, tmux-like panes, logs, interventions, and operator supervision belong there.',
+  },
+  {
+    title: 'Message handoff is the bridge',
+    body: 'The dashboard can send work into the terminal-manager lane without becoming the terminal itself.',
+  },
+];
+
+const tabs = document.querySelectorAll('.nav-tab');
+const tabPanels = document.querySelectorAll('.tab-panel');
+let selectedSurface = applications[0].id;
+let selectedAgent = agents[0].id;
+
+function stateClass(value) {
+  const lower = String(value).toLowerCase();
+  if (['active', 'live', 'good'].includes(lower)) return 'state-good';
+  if (['alpha', 'prelaunch', 'planned', 'prototype', 'support prototype', 'wireframe'].includes(lower)) return 'state-warn';
+  if (['mixed signal', 'drift', 'blocked'].includes(lower)) return 'state-danger';
+  return 'state-good';
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 function renderSummary() {
-  const cards = [
-    ['Ventures', data.summary.venture_count],
-    ['Active', data.summary.active_count],
-    ['Experiments', data.summary.experiment_count],
-    ['Prototypes', data.summary.prototype_count],
-    ['Wiring needed', data.summary.wiring_needed],
-    ['Forecast spend', money(data.summary.monthly_forecast)]
-  ];
-  const wrap = document.getElementById('summary-cards');
-  cards.forEach(([label, value]) => {
-    const card = el('div', 'summary-card');
-    card.append(el('div', 'label', label));
-    card.append(el('strong', '', value));
-    wrap.append(card);
-  });
+  document.getElementById('summary-grid').innerHTML = summary.map((item) => `
+    <article class="kpi-card">
+      <div class="metric-key">${escapeHtml(item.label)}</div>
+      <strong>${escapeHtml(item.value)}</strong>
+      <p>${escapeHtml(item.note)}</p>
+    </article>
+  `).join('');
+}
+
+function renderDeployments() {
+  document.getElementById('deployments-grid').innerHTML = deployments.map((item) => `
+    <article class="deployment-card">
+      <div class="deployment-head">
+        <div>
+          <div class="item-meta">${escapeHtml(item.stage)}</div>
+          <h3>${escapeHtml(item.name)}</h3>
+        </div>
+        <span class="state-chip ${stateClass(item.status)}">${escapeHtml(item.status)}</span>
+      </div>
+      <p>${escapeHtml(item.summary)}</p>
+      <div class="metric-row">
+        ${item.metrics.map((metric) => `<span class="metric-chip">${escapeHtml(metric)}</span>`).join('')}
+      </div>
+    </article>
+  `).join('');
+}
+
+function renderMetricFamilies() {
+  document.getElementById('metric-families').innerHTML = metricFamilies.map((item) => `
+    <article class="metric-family">
+      <div class="item-meta">route ${escapeHtml(item.route)}</div>
+      <h4>${escapeHtml(item.name)}</h4>
+      <p>${escapeHtml(item.description)}</p>
+      <ul>${item.metrics.map((metric) => `<li>${escapeHtml(metric)}</li>`).join('')}</ul>
+    </article>
+  `).join('');
 }
 
 function renderPortfolio() {
-  const wrap = document.getElementById('portfolio-groups');
-  const legend = document.getElementById('stage-legend');
-  const byCategory = {};
-  data.ventures.forEach((venture) => {
-    const key = venture.category;
-    byCategory[key] ||= [];
-    byCategory[key].push(venture);
-  });
-  groupOrder.filter((key) => byCategory[key]).forEach((key) => {
-    const group = el('section', 'stage-group');
-    group.append(el('h4', '', key.replaceAll('-', ' ')));
-    const grid = el('div', 'venture-grid');
-    byCategory[key].forEach((venture) => {
-      const pct = Math.min(100, Math.round((venture.budget.spent / venture.budget.allocated) * 100));
-      const card = el('article', 'venture-card');
-      card.append(el('h4', '', venture.name));
-      const meta = el('div', 'venture-meta');
-      meta.append(el('span', `badge ${badgeTone(venture.stage)}`, venture.stage));
-      meta.append(el('span', `badge ${badgeTone(venture.status)}`, venture.status));
-      meta.append(el('span', `badge ${badgeTone(venture.health)}`, venture.health));
-      meta.append(el('span', 'pill', venture.surface));
-      card.append(meta);
-      card.append(el('p', '', `<strong>Owner:</strong> ${venture.owner}`));
-      card.append(el('p', '', `<strong>Repo:</strong> ${venture.repo}`));
-      card.append(el('p', '', `<strong>Next:</strong> ${venture.next_action}`));
-      card.append(el('p', 'tiny', `<strong>Wiring:</strong> ${venture.wiring}`));
-      card.append(el('div', 'money-row', `<span>Allocated ${money(venture.budget.allocated)}</span><span>Spent ${money(venture.budget.spent)}</span><span>${venture.telemetry}</span>`));
-      const bar = el('div', 'bar');
-      bar.append(el('span', '', ''));
-      bar.firstChild.style.width = `${pct}%`;
-      card.append(bar);
-      grid.append(card);
+  const groups = [...new Set(applications.map((item) => item.group))];
+  document.getElementById('portfolio-groups').innerHTML = groups.map((group) => {
+    const items = applications.filter((item) => item.group === group);
+    return `
+      <section class="portfolio-group">
+        <div class="portfolio-group-head">
+          <h3>${escapeHtml(group)}</h3>
+          <span class="metric-chip">${items.length} surfaces</span>
+        </div>
+        <div class="portfolio-grid">
+          ${items.map((item) => `
+            <button class="surface-card ${selectedSurface === item.id ? 'is-selected' : ''}" data-surface-id="${item.id}">
+              <div class="card-head">
+                <div>
+                  <div class="item-meta">${escapeHtml(item.group)}</div>
+                  <h4>${escapeHtml(item.name)}</h4>
+                </div>
+                <span class="state-chip ${stateClass(item.stage)}">${escapeHtml(item.stage)}</span>
+              </div>
+              <p>${escapeHtml(item.detail)}</p>
+              <ul>${item.metrics.slice(0, 3).map((metric) => `<li>${escapeHtml(metric)}</li>`).join('')}</ul>
+            </button>
+          `).join('')}
+        </div>
+      </section>
+    `;
+  }).join('');
+
+  document.querySelectorAll('[data-surface-id]').forEach((button) => {
+    button.addEventListener('click', () => {
+      selectedSurface = button.dataset.surfaceId;
+      renderPortfolio();
+      renderSurfaceDetail();
     });
-    group.append(grid);
-    wrap.append(group);
-    legend.append(el('span', `badge ${badgeTone(key)}`, key.replaceAll('-', ' ')));
   });
 }
 
-function renderActivity() {
-  const wrap = document.getElementById('activity-feed');
-  data.activity.forEach((item) => {
-    const card = el('div', 'activity-card');
-    const meta = el('div', 'activity-meta');
-    meta.append(el('span', 'pill', item.time));
-    meta.append(el('span', 'pill', item.venture));
-    meta.append(el('span', `badge ${badgeTone(item.type)}`, item.type));
-    card.append(meta);
-    card.append(el('h4', '', item.summary));
-    card.append(el('p', 'tiny', `Actor: ${item.actor}`));
-    wrap.append(card);
+function renderSurfaceDetail() {
+  const item = applications.find((app) => app.id === selectedSurface);
+  if (!item) return;
+
+  document.getElementById('surface-title').textContent = item.name;
+  document.getElementById('surface-detail').innerHTML = `
+    <div class="detail-block">
+      <div class="item-meta">stage</div>
+      <div class="surface-meta-row">
+        <span class="state-chip ${stateClass(item.stage)}">${escapeHtml(item.stage)}</span>
+        <span class="state-chip ${stateClass(item.status)}">${escapeHtml(item.status)}</span>
+      </div>
+    </div>
+    <div class="detail-block">
+      <h4>Why it belongs here</h4>
+      <p>${escapeHtml(item.detail)}</p>
+    </div>
+    <div class="detail-block">
+      <h4>North star</h4>
+      <p>${escapeHtml(item.northStar)}</p>
+    </div>
+    <div class="detail-block">
+      <h4>Metric focus</h4>
+      <ul>${item.metrics.map((metric) => `<li>${escapeHtml(metric)}</li>`).join('')}</ul>
+    </div>
+  `;
+}
+
+function renderAgents() {
+  document.getElementById('principal-panel').innerHTML = `
+    <div class="item-meta">Human principal</div>
+    <h3>${escapeHtml(principal.name)}</h3>
+    <p>${escapeHtml(principal.note)}</p>
+  `;
+
+  document.getElementById('agent-list').innerHTML = agents.map((agent) => `
+    <button class="agent-list-card ${selectedAgent === agent.id ? 'is-selected' : ''}" data-agent-id="${agent.id}">
+      <div class="agent-head">
+        <div>
+          <div class="item-meta">active agent</div>
+          <h3>${escapeHtml(agent.name)}</h3>
+        </div>
+        <span class="state-chip state-good">active</span>
+      </div>
+      <p class="agent-copy">${escapeHtml(agent.role)}</p>
+    </button>
+  `).join('');
+
+  document.querySelectorAll('[data-agent-id]').forEach((button) => {
+    button.addEventListener('click', () => {
+      selectedAgent = button.dataset.agentId;
+      renderAgents();
+      renderAgentDetail();
+      syncMessageTarget();
+    });
   });
 }
 
-function renderGoalTree() {
-  const wrap = document.getElementById('goal-tree');
-  wrap.className = 'goal-tree';
-  const tasksByGoal = data.tasks.reduce((acc, task) => { (acc[task.goal_id] ||= []).push(task); return acc; }, {});
-  const childrenByGoal = data.goals.reduce((acc, goal) => { (acc[goal.parent_id || 'root'] ||= []).push(goal); return acc; }, {});
-  const renderGoal = (goal) => {
-    const node = el('div', 'goal-card');
-    node.append(el('h4', '', goal.title));
-    const meta = el('div', 'venture-meta');
-    meta.append(el('span', `badge ${badgeTone(goal.scope)}`, goal.scope));
-    meta.append(el('span', `badge ${badgeTone(goal.status)}`, goal.status));
-    meta.append(el('span', 'pill', `Owner: ${goal.owner}`));
-    node.append(meta);
-    node.append(el('p', '', `<strong>Target:</strong> ${goal.target_metric}`));
-    node.append(el('p', 'tiny', `<strong>Due:</strong> ${goal.target_date}`));
-    const taskList = tasksByGoal[goal.id] || [];
-    if (taskList.length) {
-      const tasksWrap = el('div', 'task-list');
-      taskList.forEach((task) => {
-        const line = el('div', 'task-line');
-        line.innerHTML = `<strong>${task.title}</strong><br /><small>${task.status} · ${task.owner} · next: ${task.next_step}</small>`;
-        tasksWrap.append(line);
-      });
-      node.append(tasksWrap);
-    }
-    const kids = childrenByGoal[goal.id] || [];
-    if (kids.length) {
-      const childWrap = el('div', 'goal-children');
-      kids.forEach((kid) => childWrap.append(renderGoal(kid)));
-      node.append(childWrap);
-    }
-    return node;
-  };
-  (childrenByGoal.root || []).forEach((goal) => wrap.append(renderGoal(goal)));
+function renderAgentDetail() {
+  const agent = agents.find((item) => item.id === selectedAgent);
+  if (!agent) return;
+
+  document.getElementById('agent-detail').innerHTML = `
+    <div class="panel-head">
+      <div>
+        <span class="panel-kicker">Selected agent</span>
+        <h3>${escapeHtml(agent.name)}</h3>
+      </div>
+      <span class="state-chip state-good">${escapeHtml(agent.role)}</span>
+    </div>
+    <div class="detail-block">
+      <h4>Sitrep</h4>
+      <p>${escapeHtml(agent.sitrep)}</p>
+    </div>
+    <div class="detail-block">
+      <h4>What they are working on now</h4>
+      <p>${escapeHtml(agent.current)}</p>
+    </div>
+    <div class="detail-block">
+      <h4>What they are working on next</h4>
+      <p>${escapeHtml(agent.next)}</p>
+    </div>
+    <div class="detail-block">
+      <h4>Focus surfaces</h4>
+      <div class="agent-focus-row">${agent.workingOn.map((item) => `<span class="mini-chip">${escapeHtml(item)}</span>`).join('')}</div>
+    </div>
+    <div class="detail-block">
+      <h4>Blockers</h4>
+      <ul>${agent.blockers.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+    </div>
+    <div class="detail-block">
+      <h4>Terminal-manager route</h4>
+      <p>${escapeHtml(agent.route)}</p>
+    </div>
+  `;
 }
 
-function renderHeartbeats() {
-  const wrap = document.getElementById('heartbeat-list');
-  data.heartbeats.forEach((hb) => {
-    const card = el('div', 'heartbeat-card');
-    card.append(el('h4', '', hb.name));
-    card.append(el('div', 'venture-meta', `<span class="badge ${badgeTone(hb.status)}">${hb.status}</span><span class="pill">${hb.cadence}</span><span class="pill">${hb.owner}</span>`));
-    card.append(el('p', '', hb.expected_output));
-    wrap.append(card);
+function renderPrinciples() {
+  document.getElementById('principles-list').innerHTML = principles.map((item, index) => `
+    <article class="principle-item ${index === 0 ? 'accent' : ''}">
+      <div class="item-meta">principle</div>
+      <h4>${escapeHtml(item.title)}</h4>
+      <p>${escapeHtml(item.body)}</p>
+    </article>
+  `).join('');
+
+  document.getElementById('surface-split-list').innerHTML = surfaceSplit.map((item, index) => `
+    <article class="surface-split-item ${index === 0 ? 'accent' : ''}">
+      <div class="item-meta">surface boundary</div>
+      <h4>${escapeHtml(item.title)}</h4>
+      <p>${escapeHtml(item.body)}</p>
+    </article>
+  `).join('');
+}
+
+function syncMessageTarget() {
+  const agent = agents.find((item) => item.id === selectedAgent);
+  if (!agent) return;
+  document.getElementById('message-to').value = agent.name;
+}
+
+function renderQueue() {
+  const queueNode = document.getElementById('message-queue');
+  if (!queue.length) {
+    queueNode.innerHTML = '<div class="empty-state">No queued handoffs.</div>';
+    return;
+  }
+
+  queueNode.innerHTML = queue.map((item) => `
+    <article class="queue-item ${item.priority}">
+      <div class="queue-head">
+        <div>
+          <div class="item-meta">to ${escapeHtml(item.to)}</div>
+          <h4>${escapeHtml(item.subject)}</h4>
+        </div>
+        <span class="queue-priority">${escapeHtml(item.priority)}</span>
+      </div>
+      <p>${escapeHtml(item.body)}</p>
+    </article>
+  `).join('');
+}
+
+document.getElementById('message-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const to = document.getElementById('message-to').value.trim();
+  const priority = document.getElementById('message-priority').value.trim();
+  const subject = document.getElementById('message-subject').value.trim();
+  const body = document.getElementById('message-body').value.trim();
+
+  if (!to || !subject || !body) return;
+
+  queue.unshift({ to, priority, subject, body });
+  renderQueue();
+  event.target.reset();
+  document.getElementById('message-priority').value = 'medium';
+  syncMessageTarget();
+});
+
+tabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    tabs.forEach((item) => item.classList.toggle('is-active', item === tab));
+    tabPanels.forEach((panel) => panel.classList.toggle('is-active', panel.id === `tab-${target}`));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-}
+});
 
-function renderApprovals() {
-  const wrap = document.getElementById('approval-list');
-  data.approvals.forEach((approval) => {
-    const card = el('div', 'approval-card');
-    card.append(el('h4', '', approval.title));
-    card.append(el('div', 'venture-meta', `<span class="badge ${badgeTone(approval.status)}">${approval.status}</span><span class="badge ${badgeTone(approval.risk)}">risk: ${approval.risk}</span><span class="pill">${approval.approver}</span>`));
-    card.append(el('p', 'tiny', `Due: ${approval.due_date}`));
-    wrap.append(card);
-  });
-}
-
-function renderBudgets() {
-  const company = data.budgets.company;
-  document.getElementById('budget-summary').innerHTML = `<div class="summary-card"><div class="label">Company runtime posture</div><strong>${money(company.spent)} / ${money(company.allocated)}</strong><div class="money-row"><span>Forecast ${money(company.forecast)}</span><span>Variance ${money(company.allocated - company.forecast)}</span></div></div>`;
-  const wrap = document.getElementById('budget-breakdown');
-  data.budgets.by_agent.forEach((row) => {
-    const pct = row.allocated ? Math.min(100, Math.round((row.spent / row.allocated) * 100)) : 0;
-    const card = el('div', 'summary-card');
-    card.append(el('div', 'label', row.name));
-    card.append(el('strong', '', money(row.spent)));
-    card.append(el('div', 'money-row', `<span>Allocated ${money(row.allocated)}</span><span>Forecast ${money(row.forecast)}</span>`));
-    const bar = el('div', 'bar');
-    bar.append(el('span', '', ''));
-    bar.firstChild.style.width = `${pct}%`;
-    card.append(bar);
-    wrap.append(card);
-  });
-}
-
-function renderOperators() {
-  const wrap = document.getElementById('operator-grid');
-  data.agents.forEach((agent) => {
-    const card = el('div', 'operator-card');
-    card.append(el('h4', '', agent.name));
-    card.append(el('div', 'operator-meta', `<span class="badge ${badgeTone(agent.status)}">${agent.status}</span><span class="pill">${agent.type}</span><span class="pill">${agent.archetype}</span>`));
-    card.append(el('p', '', agent.role));
-    card.append(el('p', 'tiny', `<strong>Ventures:</strong> ${agent.ventures.join(', ')}`));
-    card.append(el('p', 'tiny', agent.notes));
-    wrap.append(card);
-  });
-}
-
-function renderWiring() {
-  const wrap = document.getElementById('wiring-list');
-  data.wiring.forEach((item) => {
-    const card = el('div', 'wiring-card');
-    card.append(el('h4', '', item.title));
-    card.append(el('div', 'venture-meta', `<span class="badge ${badgeTone(item.status)}">${item.status}</span><span class="pill">Owner: ${item.owner}</span><span class="pill">Impact: ${item.impact}</span>`));
-    card.append(el('p', '', item.needed_from_human));
-    wrap.append(card);
-  });
-}
-
-function renderGuidance() {
-  const skillList = document.getElementById('guidance-skills');
-  data.guidance.anthropic_skill_standard.forEach((item) => skillList.append(el('li', '', item)));
-  const principles = document.getElementById('guidance-principles');
-  data.guidance.principles.forEach((item) => principles.append(el('li', '', item)));
-}
-
-renderHeader();
 renderSummary();
+renderDeployments();
+renderMetricFamilies();
 renderPortfolio();
-renderActivity();
-renderGoalTree();
-renderHeartbeats();
-renderApprovals();
-renderBudgets();
-renderOperators();
-renderWiring();
-renderGuidance();
+renderSurfaceDetail();
+renderAgents();
+renderAgentDetail();
+renderPrinciples();
+syncMessageTarget();
+renderQueue();

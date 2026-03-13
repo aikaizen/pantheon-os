@@ -3,145 +3,234 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pantheon OS — Company Dashboard Surface</title>
-  <link rel="stylesheet" href="assets/styles.css" />
+  <title>PromptEngines Command Surface</title>
+  <meta name="description" content="PromptEngines-first company dashboard for Pantheon OS." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/styles.css" />
 </head>
 <body>
-  <div class="shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">◎</div>
-        <div>
-          <h1>Pantheon OS</h1>
-          <p>Company OS dashboard surface</p>
-        </div>
-      </div>
-      <nav>
-        <a href="#overview">Overview</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#activity">Activity</a>
-        <a href="#goals">Goals</a>
-        <a href="#heartbeats">Heartbeats</a>
-        <a href="#approvals">Approvals</a>
-        <a href="#budgets">Budgets</a>
-        <a href="#operators">Operators</a>
-        <a href="#wiring">Wiring</a>
-        <a href="#guidance">Guidance</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">Prompt<span>Engines</span></a>
+      <nav class="nav">
+        <button class="nav-tab is-active" data-tab="deployments">Deployments</button>
+        <button class="nav-tab" data-tab="company">Company</button>
+        <button class="nav-tab" data-tab="agents">Agents</button>
+        <button class="nav-tab" data-tab="operating-model">Operating Model</button>
       </nav>
-      <div class="sidebar-note">
-        <strong>Current surface</strong>
-        <span>Working static company dashboard surface for the first Pantheon OS deployment.</span>
+      <a class="ghost-link" href="./terminal-manager.html">Terminal Wireframe</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">PromptEngines × Pantheon OS</div>
+          <h1>Company dashboard first. Pantheon logic intact.</h1>
+          <p class="hero-lead">
+            This is a PromptEngines dashboard, not a generic SaaS admin shell. It shows the real company surface area,
+            the metric families already being designed, the active agent roster, and the control link into the future terminal manager.
+          </p>
+          <div class="hero-meta-strip">
+            <div class="meta-cell">
+              <span class="meta-label">Deployment</span>
+              <strong>PromptEngines</strong>
+            </div>
+            <div class="meta-cell">
+              <span class="meta-label">Surface</span>
+              <strong>Strategic command surface</strong>
+            </div>
+            <div class="meta-cell">
+              <span class="meta-label">Style source</span>
+              <strong>Lab Notes visual language</strong>
+            </div>
+          </div>
+        </div>
+        <aside class="hero-aside">
+          <div class="hero-stat">
+            <span class="hero-stat-number">1</span>
+            <span class="hero-stat-label">Live deployment</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">2</span>
+            <span class="hero-stat-label">Active agents</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">6</span>
+            <span class="hero-stat-label">Metric families</span>
+          </div>
+        </aside>
       </div>
-    </aside>
+    </section>
 
-    <main class="main">
-      <header class="hero" id="overview">
-        <div class="hero-copy">
-          <p class="eyebrow">Pantheon OS · reference deployment: PromptEngines</p>
-          <h2 id="hero-title">Pantheon OS</h2>
-          <p id="hero-tagline"></p>
-          <div class="hero-flags">
-            <span class="badge info">MVP</span>
-            <span class="badge warn">Mock data</span>
-            <span class="pill" id="target-host"></span>
-            <span class="pill" id="access-model"></span>
-          </div>
+    <section class="section">
+      <div class="container kpi-grid" id="summary-grid"></div>
+    </section>
+
+    <section class="section tab-panel is-active" id="tab-deployments">
+      <div class="container section-header">
+        <div>
+          <div class="eyebrow">Multi-company view</div>
+          <h2>All companies on one page</h2>
         </div>
-        <div class="hero-meta" id="hero-meta"></div>
-      </header>
+        <div class="section-count">Built for more than one company · PromptEngines is live first</div>
+      </div>
+      <div class="container deployments-grid" id="deployments-grid"></div>
+    </section>
 
-      <section class="card-grid" id="summary-cards"></section>
-
-      <section class="panel" id="portfolio">
-        <div class="panel-header">
-          <div>
-            <h3>Portfolio</h3>
-            <p>Products, experiments, prototypes, services, and internal systems.</p>
-          </div>
-          <div class="legend" id="stage-legend"></div>
+    <section class="section tab-panel" id="tab-company">
+      <div class="container section-header">
+        <div>
+          <div class="eyebrow">Company deep dive</div>
+          <h2>PromptEngines</h2>
         </div>
-        <div id="portfolio-groups"></div>
-      </section>
+        <div class="section-count">Actual public surface + internal operating surfaces</div>
+      </div>
 
-      <section class="panel" id="activity">
-        <div class="panel-header">
-          <h3>Live activity</h3>
-          <p>Mock build stream and operating-feed events aligned to the current portfolio.</p>
-        </div>
-        <div id="activity-feed" class="list-stack"></div>
-      </section>
-
-      <section class="panel" id="goals">
-        <div class="panel-header">
-          <h3>Goal tree</h3>
-          <p>Company goals, execution threads, and the current MVP work stack.</p>
-        </div>
-        <div id="goal-tree"></div>
-      </section>
-
-      <section class="two-col">
-        <section class="panel" id="heartbeats">
-          <div class="panel-header">
-            <h3>Heartbeats</h3>
-            <p>Recurring operator loops and venture refreshes.</p>
-          </div>
-          <div id="heartbeat-list" class="list-stack"></div>
-        </section>
-        <section class="panel" id="approvals">
-          <div class="panel-header">
-            <h3>Approvals</h3>
-            <p>Decision gates before deployment, metrics wiring, and public exposure.</p>
-          </div>
-          <div id="approval-list" class="list-stack"></div>
-        </section>
-      </section>
-
-      <section class="two-col">
-        <section class="panel" id="budgets">
-          <div class="panel-header">
-            <h3>Budget visibility</h3>
-            <p>Runtime posture by company and operator.</p>
-          </div>
-          <div id="budget-summary"></div>
-          <div id="budget-breakdown" class="budget-bar-grid"></div>
-        </section>
-        <section class="panel" id="operators">
-          <div class="panel-header">
-            <h3>Operators</h3>
-            <p>Core humans and agents shaping the first Pantheon OS deployment at PromptEngines.</p>
-          </div>
-          <div id="operator-grid" class="operator-grid"></div>
-        </section>
-      </section>
-
-      <section class="two-col">
-        <section class="panel" id="wiring">
-          <div class="panel-header">
-            <h3>Wiring needed from human side</h3>
-            <p>Everything still needed to move from mock data to a deployed, gated, living dashboard.</p>
-          </div>
-          <div id="wiring-list" class="list-stack"></div>
-        </section>
-        <section class="panel" id="guidance">
-          <div class="panel-header">
-            <h3>Guidance</h3>
-            <p>Platform principles, skill standard, and adopted orchestration patterns.</p>
-          </div>
-          <div class="two-col-inline compact">
-            <div>
-              <h4>Skill standard</h4>
-              <ul id="guidance-skills"></ul>
+      <div class="container company-layout">
+        <section class="company-main">
+          <div class="panel panel-tight">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Metric model</span>
+                <h3>What this dashboard is trying to track</h3>
+              </div>
             </div>
-            <div>
-              <h4>Operating principles</h4>
-              <ul id="guidance-principles"></ul>
+            <div class="metrics-family-grid" id="metric-families"></div>
+          </div>
+
+          <div class="panel panel-tight">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Portfolio registry</span>
+                <h3>Public apps, prototypes, and internal surfaces</h3>
+              </div>
             </div>
+            <div id="portfolio-groups"></div>
           </div>
         </section>
-      </section>
-    </main>
-  </div>
-  <script src="data/pantheon-os.js"></script>
-  <script src="assets/app.js"></script>
+
+        <aside class="company-side">
+          <div class="panel panel-tight sticky-side">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Selected company surface</span>
+                <h3 id="surface-title">PromptEngines.com</h3>
+              </div>
+            </div>
+            <div id="surface-detail"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section tab-panel" id="tab-agents">
+      <div class="container section-header">
+        <div>
+          <div class="eyebrow">Active roster only</div>
+          <h2>Agents</h2>
+        </div>
+        <div class="section-count">No undeployed agents shown here</div>
+      </div>
+
+      <div class="container agents-layout">
+        <section>
+          <div class="panel panel-tight principal-panel" id="principal-panel"></div>
+          <div class="agent-list" id="agent-list"></div>
+        </section>
+
+        <section>
+          <div class="panel panel-tight" id="agent-detail"></div>
+
+          <div class="panel panel-tight message-panel">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Message handoff</span>
+                <h3>Route a message to the terminal manager</h3>
+              </div>
+            </div>
+            <form id="message-form" class="message-form">
+              <div class="form-row">
+                <label>
+                  <span>To</span>
+                  <input id="message-to" type="text" readonly />
+                </label>
+                <label>
+                  <span>Priority</span>
+                  <select id="message-priority">
+                    <option>low</option>
+                    <option selected>medium</option>
+                    <option>high</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                <span>Subject</span>
+                <input id="message-subject" type="text" placeholder="What should happen next?" />
+              </label>
+              <label>
+                <span>Message</span>
+                <textarea id="message-body" rows="5" placeholder="This queues a dashboard handoff into the terminal-manager lane."></textarea>
+              </label>
+              <div class="form-actions">
+                <div class="helper-text">Mock queue for now. This is the dashboard-side message lane, not the full terminal.</div>
+                <button type="submit" class="action-button">Queue Message</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel panel-tight">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Queued handoffs</span>
+                <h3>Terminal-manager inbox preview</h3>
+              </div>
+            </div>
+            <div id="message-queue" class="queue-list"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section tab-panel" id="tab-operating-model">
+      <div class="container section-header">
+        <div>
+          <div class="eyebrow">Pantheon OS</div>
+          <h2>Operating model</h2>
+        </div>
+        <div class="section-count">Constitution, portal logic, and terminal-manager relationship</div>
+      </div>
+
+      <div class="container operating-grid">
+        <div class="panel panel-tight">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">Constitution</span>
+              <h3>Principles inside the dashboard</h3>
+            </div>
+          </div>
+          <div class="principles-list" id="principles-list"></div>
+        </div>
+
+        <div class="panel panel-tight">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">Surface split</span>
+              <h3>What belongs where</h3>
+            </div>
+          </div>
+          <div class="surface-split-list" id="surface-split-list"></div>
+          <a class="action-button text-link" href="./terminal-manager.html">Open terminal-manager wireframe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./assets/app.js"></script>
 </body>
 </html>
