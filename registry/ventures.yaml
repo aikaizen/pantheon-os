@@ -1,0 +1,113 @@
+
+system: Pantheon OS
+ventures:
+  - id: promptengines-web
+    name: PromptEngines.com
+    stage: product
+    status: active
+    health: strong
+    owner: A.I.
+    operators: [Hermetic_Demiurge, Thoth]
+    domain: promptengines.com
+    repo: aikaizen/promptengines-main
+    next_action: Decide the public/private split for Pantheon OS before any public deployment.
+  - id: lab-notes
+    name: Lab Notes
+    stage: product
+    status: active
+    health: steady
+    owner: Thoth
+    operators: [Thoth]
+    domain: lab.promptengines.com
+    repo: aikaizen/promptengines-main
+    next_action: Route build-stream synthesis into a repeatable publishing loop.
+  - id: kaizen
+    name: Kaizen
+    stage: product
+    status: active
+    health: strong
+    owner: Prometheus
+    operators: [Prometheus, Hermetic_Demiurge]
+    domain: kaizen.promptengines.com
+    repo: aikaizen/kaizen
+    next_action: Tighten telemetry and growth review.
+  - id: storybook-studio
+    name: Storybook Studio
+    stage: product
+    status: pre-launch
+    health: building
+    owner: Hermetic_Demiurge
+    operators: [Hermetic_Demiurge, Prometheus]
+    domain: storybookstudio.promptengines.com
+    repo: aikaizen/storybookstudio
+    next_action: Stabilize print-ready flow and publishing approvals.
+  - id: flow
+    name: Flow
+    stage: experiment
+    status: mixed-signal
+    health: mixed
+    owner: A.I.
+    operators: [Prometheus]
+    domain: flow.promptengines.com
+    repo: aikaizen/flow
+    next_action: Reconcile status drift across sources.
+  - id: video-terminal
+    name: Video Terminal
+    stage: experiment
+    status: alpha
+    health: emerging
+    owner: Prometheus
+    operators: [Prometheus]
+    domain: videoterminal.promptengines.com
+    repo: aikaizen/videoterminal
+    next_action: Define the smallest shippable control surface.
+  - id: norbu
+    name: Norbu
+    stage: product
+    status: active
+    health: steady
+    owner: Prometheus
+    operators: [Prometheus, Thoth]
+    domain: norbu.promptengines.com
+    repo: aikaizen/norbu
+    next_action: Install a recurring content and product heartbeat.
+  - id: bible
+    name: Bible
+    stage: product
+    status: active
+    health: steady
+    owner: Thoth
+    operators: [Thoth]
+    domain: bible.promptengines.com
+    repo: aikaizen/bible
+    next_action: Add governance checks before broader publishing.
+  - id: consulting
+    name: Consulting
+    stage: service
+    status: active
+    health: strong
+    owner: A.I.
+    operators: [Thoth, Hermetic_Demiurge]
+    domain: consulting.promptengines.com
+    repo: aikaizen/consulting
+    next_action: Install account-brief and client approval workflows.
+  - id: flow-education
+    name: Flow Education
+    stage: prototype
+    status: active-prototype
+    health: emerging
+    owner: Prometheus
+    operators: [Prometheus]
+    domain: prototype
+    repo: aikaizen/promptengines-main
+    next_action: Convert prototype lessons into a venture roadmap.
+  - id: vajra-upaya
+    name: Vajra-Upaya
+    stage: prototype
+    status: framing
+    health: emerging
+    owner: A.I.
+    operators: [Thoth, Prometheus]
+    domain: prototype
+    repo: aikaizen/promptengines-main
+    next_action: Frame the precision tool-fitting offer before public positioning.

@@ -1,0 +1,28 @@
+
+budget_period: 2026-03
+currency: USD
+company:
+  allocated: 2450
+  spent: 1465
+  forecast: 2140
+agents:
+  - name: Hermetic_Demiurge
+    allocated: 900
+    spent: 510
+    forecast: 860
+  - name: Thoth
+    allocated: 420
+    spent: 240
+    forecast: 395
+  - name: Prometheus
+    allocated: 560
+    spent: 355
+    forecast: 520
+  - name: Golem
+    allocated: 310
+    spent: 172
+    forecast: 265
+  - name: A.I.
+    allocated: 260
+    spent: 188
+    forecast: 100

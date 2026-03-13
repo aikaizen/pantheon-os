@@ -1,0 +1,32 @@
+
+agents:
+  - id: ai-principal
+    name: A.I.
+    type: human
+    role: Principal direction and final approval
+    status: active
+    monthly_budget: 0
+  - id: hermetic-demiurge
+    name: Hermetic_Demiurge
+    type: agent
+    role: Builder, hardening, and shipping
+    status: active
+    monthly_budget: 900
+  - id: thoth
+    name: Thoth
+    type: agent
+    role: Memory, documentation, and synthesis
+    status: active
+    monthly_budget: 420
+  - id: prometheus
+    name: Prometheus
+    type: agent
+    role: Prototype ignition and venture acceleration
+    status: active
+    monthly_budget: 560
+  - id: golem
+    name: Golem
+    type: agent
+    role: Scheduled operations and reliable repeatability
+    status: active
+    monthly_budget: 310
