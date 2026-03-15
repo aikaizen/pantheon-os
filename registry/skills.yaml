@@ -2,14 +2,14 @@
 skills:
   - id: weekly-operating-review
     category: company-os
-    owner: Thoth
+    owner: unassigned
     version: 0.1.0
     status: drafted
     review_cadence: weekly
     venture_scope: all
   - id: venture-status-refresh
     category: company-os
-    owner: Prometheus
+    owner: unassigned
     version: 0.1.0
     status: drafted
     review_cadence: every 2 weeks
@@ -30,7 +30,7 @@ skills:
     venture_scope: company + venture + project
   - id: build-stream-synthesis
     category: company-os
-    owner: Thoth
+    owner: unassigned
     version: 0.1.0
     status: drafted
     review_cadence: daily

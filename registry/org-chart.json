@@ -9,9 +9,6 @@
   },
   "executive_agents": [
     "hermetic-demiurge",
-    "thoth",
-    "prometheus",
-    "golem",
     "dzambhala"
   ],
   "surfaces": [
