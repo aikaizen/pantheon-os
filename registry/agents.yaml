@@ -35,4 +35,4 @@ agents:
     type: agent
     role: Strategy, growth engineering, and resource multiplication
     status: active
-    monthly_budget: 480
+    monthly_budget: 0
