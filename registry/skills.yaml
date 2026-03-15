@@ -35,3 +35,11 @@ skills:
     status: drafted
     review_cadence: daily
     venture_scope: portfolio
+  - id: skill-self-improvement
+    category: company-os
+    owner: Dzambhala
+    version: 0.1.0
+    status: drafted
+    review_cadence: weekly
+    venture_scope: company
+    notes: Cognee cycle — observe, inspect, amend, evaluate across the shared skill pool

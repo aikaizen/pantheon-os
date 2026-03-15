@@ -35,6 +35,20 @@ heartbeats:
     owner: Hermetic_Demiurge
     status: due
     budget_minutes: 25
+  - id: hb-growth-scan
+    name: Growth opportunity and market scan
+    scope: company
+    cadence: weekly Wednesday 11:00
+    owner: Dzambhala
+    status: scheduled
+    budget_minutes: 30
+  - id: hb-skill-improvement
+    name: Shared skill pool review and improvement cycle
+    scope: company
+    cadence: weekly Friday 16:00
+    owner: Dzambhala
+    status: scheduled
+    budget_minutes: 20
   - id: hb-budget-review
     name: Monthly runtime and budget review
     scope: company

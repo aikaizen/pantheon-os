@@ -2,9 +2,9 @@
 budget_period: 2026-03
 currency: USD
 company:
-  allocated: 2450
+  allocated: 2930
   spent: 1465
-  forecast: 2140
+  forecast: 2540
 agents:
   - name: Hermetic_Demiurge
     allocated: 900
@@ -22,6 +22,10 @@ agents:
     allocated: 310
     spent: 172
     forecast: 265
+  - name: Dzambhala
+    allocated: 480
+    spent: 0
+    forecast: 400
   - name: A.I.
     allocated: 260
     spent: 188

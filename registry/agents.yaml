@@ -30,3 +30,9 @@ agents:
     role: Scheduled operations and reliable repeatability
     status: active
     monthly_budget: 310
+  - id: dzambhala
+    name: Dzambhala
+    type: agent
+    role: Strategy, growth engineering, and resource multiplication
+    status: active
+    monthly_budget: 480
