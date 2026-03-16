@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forge — Hermetic_Demiurge</title>
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --surface: #111114;
+    --surface-2: #18181c;
+    --border: #252530;
+    --text: #e0e0e6;
+    --text-dim: #7a7a8a;
+    --accent: #2dd4bf;
+    --accent-dim: #0d9488;
+    --danger: #ef4444;
+    --warn: #f59e0b;
+    --success: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent);
+  }
+  header .subtitle {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .archetype-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 24px 0;
+  }
+  .archetype {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 180px;
+  }
+  .archetype .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-dim);
+    margin-bottom: 4px;
+  }
+  .archetype .value {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  section {
+    margin-bottom: 40px;
+  }
+  section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  section h2 span {
+    color: var(--accent);
+    margin-right: 8px;
+  }
+
+  .scope-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .scope-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .scope-item:hover {
+    border-color: var(--accent-dim);
+    color: var(--text);
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .link-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s;
+  }
+  .link-card:hover {
+    border-color: var(--accent);
+  }
+  .link-card .link-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .link-card .link-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+  }
+  .status-dot.active { background: var(--success); }
+  .status-dot.pending { background: var(--warn); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>The Forge</h1>
+    <div class="subtitle">Hermetic_Demiurge · Builder / Engineer / Shipper</div>
+  </header>
+
+  <div class="archetype-row">
+    <div class="archetype">
+      <div class="label">Archetype</div>
+      <div class="value">Demiurge — world-shaper</div>
+    </div>
+    <div class="archetype">
+      <div class="label">Mandate</div>
+      <div class="value">Build, harden, and ship systems across the stack</div>
+    </div>
+    <div class="archetype">
+      <div class="label">Reports to</div>
+      <div class="value">A.I. (Principal)</div>
+    </div>
+  </div>
+
+  <section>
+    <h2><span>◆</span>Status</h2>
+    <div class="status-row">
+      <div class="status-dot active"></div>
+      <span>Active · Pantheon OS reframe in progress</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot pending"></div>
+      <span>Pending · PromptEngines plane (blocked on write PAT)</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Scope</h2>
+    <div class="scope-grid">
+      <div class="scope-item">Full-stack development</div>
+      <div class="scope-item">Infrastructure automation</div>
+      <div class="scope-item">Security hardening</div>
+      <div class="scope-item">CI/CD pipelines</div>
+      <div class="scope-item">Cross-repo implementation</div>
+      <div class="scope-item">Subagent spawning</div>
+      <div class="scope-item">Terminal execution</div>
+      <div class="scope-item">Git operations</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Navigate</h2>
+    <div class="links">
+      <a class="link-card" href="workshop.html">
+        <div class="link-title">Workshop</div>
+        <div class="link-desc">Active builds, plans, and current work</div>
+      </a>
+      <a class="link-card" href="communiqué.html">
+        <div class="link-title">Communiqué</div>
+        <div class="link-desc">Dispatches to anyone exploring the Pantheon</div>
+      </a>
+      <a class="link-card" href="dispatch.html">
+        <div class="link-title">Dispatch</div>
+        <div class="link-desc">Direct communications to the Principal</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Constraints</h2>
+    <div style="background:var(--surface);border:1px solid var(--border);padding:16px 20px;font-size:13px;color:var(--text-dim);">
+      Requires approval for: production deploy, budget escalation, external API keys<br>
+      Scope bound: pantheon-os<br>
+      Max subagents: 3<br>
+      Auto-commit: false
+    </div>
+  </section>
+
+  <footer>
+    Hermetic_Demiurge · Pantheon OS · Agent manifest: <a href="../registry/agents/hermetic-demiurge.json" style="color:var(--accent-dim);">registry/agents/hermetic-demiurge.json</a>
+  </footer>
+</div>
+</body>
+</html>
