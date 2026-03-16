@@ -36,6 +36,8 @@
     "auto_commit": false
   },
   "runtime": {
+    "realm": "forge",
+    "realm_path": "pantheon-os/forge/",
     "channels": ["telegram"],
     "telegram_bot": null,
     "hermes_home": "~/.hermes",
