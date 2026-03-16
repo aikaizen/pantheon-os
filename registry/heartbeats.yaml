@@ -1,2 +1,28 @@
+# Heartbeat Tracking
+# Each agent can emit heartbeats to signal liveness and progress.
+# Pantheon OS monitors for stale heartbeats and escalates.
 
-heartbeats: []
+# Schema:
+#   agent_id: matches registry/agents.yaml
+#   interval_seconds: expected heartbeat frequency
+#   last_seen: ISO 8601 timestamp of last heartbeat
+#   status: healthy | stale | critical | unknown
+#   last_summary: brief text from last heartbeat payload
+
+heartbeats:
+  - agent_id: hermetic-demiurge
+    interval_seconds: 3600
+    last_seen: null
+    status: unknown
+    last_summary: null
+
+  - agent_id: dzambhala
+    interval_seconds: 3600
+    last_seen: null
+    status: unknown
+    last_summary: null
+
+# Stale detection thresholds:
+#   > 2x interval  → stale
+#   > 5x interval  → critical
+#   > 24h no heartbeat → escalate to ai-principal

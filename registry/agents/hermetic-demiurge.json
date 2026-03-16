@@ -10,6 +10,45 @@
     "code",
     "docs",
     "runtime_execution",
-    "cross_repo_implementation"
-  ]
+    "cross_repo_implementation",
+    "infrastructure",
+    "security_hardening",
+    "ci_cd"
+  ],
+  "capabilities": [
+    "full_stack_development",
+    "infrastructure_automation",
+    "cross_repo_implementation",
+    "security_hardening",
+    "ci_cd_pipelines",
+    "subagent_spawning",
+    "terminal_execution",
+    "git_operations"
+  ],
+  "constraints": {
+    "requires_approval_for": [
+      "production_deploy",
+      "budget_escalation",
+      "external_api_keys"
+    ],
+    "scope_bound": "pantheon-os",
+    "max_subagents": 3,
+    "auto_commit": false
+  },
+  "runtime": {
+    "channels": ["telegram"],
+    "telegram_bot": null,
+    "hermes_home": "~/.hermes",
+    "repos": [
+      "aikaizen/pantheon-os",
+      "aikaizen/promptengines-main"
+    ],
+    "skills": [
+      "github",
+      "company-os",
+      "autonomous-ai-agents",
+      "systematic-debugging",
+      "test-driven-development"
+    ]
+  }
 }

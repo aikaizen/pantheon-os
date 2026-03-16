@@ -1,3 +1,6 @@
+# Agent Registry — Canonical Roster
+# All agent identity and authorization lives here.
+# Per-agent detail files live in agents/<id>.json.
 
 agents:
   - id: ai-principal
@@ -6,15 +9,50 @@ agents:
     role: Principal direction and final approval
     status: active
     monthly_budget: 0
+    capabilities:
+      - final_approval
+      - portfolio_direction
+      - budget_authority
+      - agent_spawning
+    constraints: []
+    reporting_line: null
+    manifest: registry/agents/ai-principal.json
+
   - id: hermetic-demiurge
     name: Hermetic_Demiurge
     type: agent
     role: Builder, hardening, and shipping
     status: active
     monthly_budget: 900
-- id: dzambhala
+    capabilities:
+      - full_stack_development
+      - infrastructure_automation
+      - cross_repo_implementation
+      - security_hardening
+      - ci_cd_pipelines
+      - subagent_spawning
+    constraints:
+      - requires_approval_for: [production_deploy, budget_escalation]
+      - scope_bound: pantheon-os
+    reporting_line: ai-principal
+    manifest: registry/agents/hermetic-demiurge.json
+
+  - id: dzambhala
     name: Dzambhala
     type: agent
     role: Strategy, growth engineering, and resource multiplication
     status: active
     monthly_budget: 0
+    capabilities:
+      - business_strategy
+      - growth_engineering
+      - market_analysis
+      - financial_modeling
+      - content_strategy
+      - product_positioning
+      - competitive_intelligence
+    constraints:
+      - requires_approval_for: [spend_commitment, external_communication]
+      - scope_bound: promptengines
+    reporting_line: ai-principal
+    manifest: registry/agents/dzambhala.json
