@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pantheon OS</title>
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --surface: #111114;
+    --surface-2: #18181c;
+    --border: #252530;
+    --text: #e0e0e6;
+    --text-dim: #7a7a8a;
+    --accent: #2dd4bf;
+    --accent-dim: #0d9488;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 24px; }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  header .tagline {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 640px;
+  }
+
+  .surfaces {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+  }
+  .surface .surface-num {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-dim);
+    margin-bottom: 4px;
+  }
+  .surface .surface-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .surface .surface-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  section { margin-bottom: 48px; }
+  section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  section h2 span { color: var(--accent); margin-right: 8px; }
+
+  .doc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .doc-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s;
+  }
+  .doc-card:hover { border-color: var(--accent-dim); }
+  .doc-card .doc-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .doc-card .doc-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .doc-card .doc-surface {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-dim);
+    margin-top: 8px;
+  }
+
+  .links-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .ext-link {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .ext-link:hover { border-color: var(--accent); }
+
+  .realms {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .realm-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+  }
+  .realm-row .realm-name {
+    font-weight: 600;
+    font-size: 13px;
+    min-width: 120px;
+  }
+  .realm-row .realm-agent {
+    font-size: 12px;
+    color: var(--text-dim);
+    flex: 1;
+  }
+  .realm-row .realm-link {
+    font-size: 11px;
+    color: var(--accent-dim);
+    text-decoration: none;
+  }
+  .realm-row .realm-link:hover { color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 48px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  footer a { color: var(--accent-dim); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .surfaces { grid-template-columns: 1fr; }
+    .doc-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Pantheon OS</h1>
+    <div class="tagline">Human-sovereign, agent-native company operating system. Deployable for any company — PromptEngines is the first deployment.</div>
+  </header>
+
+  <div class="surfaces">
+    <div class="surface">
+      <div class="surface-num">Surface 1</div>
+      <div class="surface-name">Principles</div>
+      <div class="surface-desc">Constitutional layer. Sovereignty, authority, escalation, org structure, agent framing.</div>
+    </div>
+    <div class="surface">
+      <div class="surface-num">Surface 2</div>
+      <div class="surface-name">Company Dashboard</div>
+      <div class="surface-desc">Strategic surface. Ventures, operators, budgets, approvals, goals, health.</div>
+    </div>
+    <div class="surface">
+      <div class="surface-num">Surface 3</div>
+      <div class="surface-name">Operating Terminal</div>
+      <div class="surface-desc">Tactical surface. Command-center IDE for steering agent teams in real time.</div>
+    </div>
+    <div class="surface">
+      <div class="surface-num">Surface 4</div>
+      <div class="surface-name">Runtime / Portal</div>
+      <div class="surface-desc">Substrate. Dual-harness orchestration, portal state, event flow, memory, supervision.</div>
+    </div>
+  </div>
+
+  <section>
+    <h2><span>◆</span>Documentation</h2>
+    <div class="doc-grid">
+      <a class="doc-card" href="system-architecture.html">
+        <div class="doc-title">System Architecture</div>
+        <div class="doc-desc">Four-surface overview and how they integrate into one operating system.</div>
+        <div class="doc-surface">All Surfaces</div>
+      </a>
+      <a class="doc-card" href="realm-framework.html">
+        <div class="doc-title">Realm Framework</div>
+        <div class="doc-desc">How every agent gets a personal realm within the Pantheon.</div>
+        <div class="doc-surface">Principles</div>
+      </a>
+      <a class="doc-card" href="operating-terminal.html">
+        <div class="doc-title">Operating Terminal</div>
+        <div class="doc-desc">Tactical command-center spec — panes, controls, capabilities.</div>
+        <div class="doc-surface">Operating Terminal</div>
+      </a>
+      <a class="doc-card" href="pane-system.html">
+        <div class="doc-title">Pane System</div>
+        <div class="doc-desc">Atomic working surfaces of the Operating Terminal.</div>
+        <div class="doc-surface">Operating Terminal</div>
+      </a>
+      <a class="doc-card" href="agent-state-model.html">
+        <div class="doc-title">Agent State Model</div>
+        <div class="doc-desc">Semantic states for tracking agent lifecycle.</div>
+        <div class="doc-surface">Runtime / Portal</div>
+      </a>
+      <a class="doc-card" href="portal-model.html">
+        <div class="doc-title">Portal Model</div>
+        <div class="doc-desc">Shared membrane between harnesses and operating surfaces.</div>
+        <div class="doc-surface">Runtime / Portal</div>
+      </a>
+      <a class="doc-card" href="data-model.html">
+        <div class="doc-title">Data Model v2</div>
+        <div class="doc-desc">Cross-surface data contracts covering all four surfaces.</div>
+        <div class="doc-surface">All Surfaces</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Agent Realms</h2>
+    <div class="realms">
+      <div class="realm-row">
+        <div class="realm-name">Forge</div>
+        <div class="realm-agent">Hermetic_Demiurge · Builder / Engineer / Shipper</div>
+        <a class="realm-link" href="../forge/">Visit realm →</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Access</h2>
+    <div class="links-row">
+      <a class="ext-link" href="https://github.com/aikaizen/pantheon-os" target="_blank">GitHub Repository</a>
+      <a class="ext-link" href="../index.html">Company Dashboard</a>
+      <a class="ext-link" href="../terminal-manager.html">Terminal Manager Wireframe</a>
+    </div>
+  </section>
+
+  <footer>
+    Pantheon OS · <a href="https://github.com/aikaizen/pantheon-os" target="_blank">aikaizen/pantheon-os</a> · PromptEngines is the first deployment
+  </footer>
+</div>
+</body>
+</html>

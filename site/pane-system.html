@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pane System — Pantheon OS</title>
+<style>
+  :root {
+    --bg: #0a0a0c; --surface: #111114; --border: #252530;
+    --text: #e0e0e6; --text-dim: #7a7a8a; --accent: #2dd4bf; --accent-dim: #0d9488;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px; line-height: 1.6; min-height: 100vh;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 48px 24px; }
+  header {
+    border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 40px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  header h1 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  header a { font-size: 12px; color: var(--text-dim); text-decoration: none; }
+  header a:hover { color: var(--accent); }
+  section { margin-bottom: 36px; }
+  section h2 {
+    font-size: 16px; font-weight: 600; margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  section h2 span { color: var(--accent); margin-right: 8px; }
+  p { font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px; }
+  strong { color: var(--text); }
+  .pane-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px;
+  }
+  .pane-card {
+    background: var(--surface); border: 1px solid var(--border); padding: 16px;
+  }
+  .pane-card .pane-name { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .pane-card .pane-desc { font-size: 12px; color: var(--text-dim); }
+  .principles {
+    background: var(--surface); border: 1px solid var(--border); padding: 20px;
+  }
+  .principles ul { padding-left: 20px; }
+  .principles li { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+  footer {
+    border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px;
+    font-size: 11px; color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Pane System</h1>
+    <a href="index.html">← Pantheon OS</a>
+  </header>
+
+  <section>
+    <h2><span>◆</span>Overview</h2>
+    <p>Panes are the <strong>atomic working surfaces</strong> of the Operating Terminal.
+    Each pane has a type, a data source, and semantic identity within a workspace.</p>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Core Pane Types</h2>
+    <div class="pane-grid">
+      <div class="pane-card">
+        <div class="pane-name">Channel Pane</div>
+        <div class="pane-desc">Message threads from Telegram, WhatsApp, and internal channels</div>
+      </div>
+      <div class="pane-card">
+        <div class="pane-name">Execution Pane</div>
+        <div class="pane-desc">Live shell, tmux, and docker console output</div>
+      </div>
+      <div class="pane-card">
+        <div class="pane-name">Summary Pane</div>
+        <div class="pane-desc">Agent state, blockers, and current task overview</div>
+      </div>
+      <div class="pane-card">
+        <div class="pane-name">Artifact Pane</div>
+        <div class="pane-desc">Files, outputs, and deliverables from agent work</div>
+      </div>
+      <div class="pane-card">
+        <div class="pane-name">Portal Pane</div>
+        <div class="pane-desc">Task state, checkpoints, and handoff notes</div>
+      </div>
+      <div class="pane-card">
+        <div class="pane-name">Telemetry Pane</div>
+        <div class="pane-desc">Metrics, heartbeat status, and resource usage</div>
+      </div>
+      <div class="pane-card">
+        <div class="pane-name">Oversight Pane</div>
+        <div class="pane-desc">Harness state, control actions, and approval queue</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Pane Principles</h2>
+    <div class="principles">
+      <ul>
+        <li>Panes should be composable — combine freely in workspace layouts</li>
+        <li>Panes should be saveable — persist workspace configurations</li>
+        <li>Panes should have semantic identity — not just windows, but typed surfaces</li>
+        <li>Panes should support drill-down — from summary to raw execution</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <a href="index.html">← Pantheon OS</a> · Pane System · Surface 3
+  </footer>
+</div>
+</body>
+</html>
