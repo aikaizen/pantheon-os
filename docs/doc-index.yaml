@@ -1,0 +1,237 @@
+generated: '2026-03-18T05:28:18.988218'
+docs_root: /project/pantheon-os/docs
+staleness_threshold_days: 30
+entries:
+  pane-system.md:
+    path: pane-system.md
+    title: Pane System
+    last_modified: '2026-03-13T00:43:00.944123'
+    size: 410
+    dependencies: []
+    staleness: null
+    tags: null
+  portal-model.md:
+    path: portal-model.md
+    title: Portal Model
+    last_modified: '2026-03-13T00:43:00.946120'
+    size: 326
+    dependencies: []
+    staleness: null
+    tags: null
+  metrics-pipeline-plan.md:
+    path: metrics-pipeline-plan.md
+    title: Prompt Engines Metrics Pipeline Plan
+    last_modified: '2026-03-11T15:38:18.355404'
+    size: 7677
+    dependencies: []
+    staleness: null
+    tags: null
+  system-architecture.md:
+    path: system-architecture.md
+    title: Pantheon OS System Architecture
+    last_modified: '2026-03-13T00:43:00.947495'
+    size: 1024
+    dependencies: []
+    staleness: null
+    tags: null
+  mvp-wiring-checklist.md:
+    path: mvp-wiring-checklist.md
+    title: Pantheon OS MVP Wiring Checklist
+    last_modified: '2026-03-11T15:38:18.355667'
+    size: 1609
+    dependencies: []
+    staleness: null
+    tags: null
+  skill-template.md:
+    path: skill-template.md
+    title: PromptEngines Skill Template
+    last_modified: '2026-03-11T15:38:18.359332'
+    size: 1360
+    dependencies: []
+    staleness: null
+    tags: null
+  pantheon-os-upgrade-summary.md:
+    path: pantheon-os-upgrade-summary.md
+    title: Pantheon OS Upgrade Summary
+    last_modified: '2026-03-18T04:36:03.111928'
+    size: 1312
+    dependencies: []
+    staleness: null
+    tags: null
+  dual-harness-orchestration.md:
+    path: dual-harness-orchestration.md
+    title: Dual-Harness Orchestration Protocol
+    last_modified: '2026-03-11T15:38:18.354811'
+    size: 5052
+    dependencies: []
+    staleness: null
+    tags: null
+  output_capping_spec.md:
+    path: output_capping_spec.md
+    title: Output Capping Specification for PantheonOS ACI
+    last_modified: '2026-03-18T05:27:13.102740'
+    size: 7201
+    dependencies: []
+    staleness: null
+    tags: null
+  skill-system-guidelines.md:
+    path: skill-system-guidelines.md
+    title: PromptEngines Skill System Guidelines
+    last_modified: '2026-03-11T15:38:18.359075'
+    size: 10121
+    dependencies: []
+    staleness: null
+    tags: null
+  company-dashboard-spec.md:
+    path: company-dashboard-spec.md
+    title: Company Dashboard Spec
+    last_modified: '2026-03-13T00:43:00.938249'
+    size: 649
+    dependencies: []
+    staleness: null
+    tags: null
+  paperclip-evaluation.md:
+    path: paperclip-evaluation.md
+    title: Paperclip Evaluation for Prompt Engines
+    last_modified: '2026-03-11T15:38:18.355968'
+    size: 6667
+    dependencies: []
+    staleness: null
+    tags: null
+  pantheon-os-guidance.md:
+    path: pantheon-os-guidance.md
+    title: Pantheon OS Guidance Layer
+    last_modified: '2026-03-18T04:36:03.111712'
+    size: 2007
+    dependencies: []
+    staleness: null
+    tags: null
+  operating-terminal-spec.md:
+    path: operating-terminal-spec.md
+    title: Operating Terminal Spec
+    last_modified: '2026-03-13T00:43:00.943609'
+    size: 963
+    dependencies: []
+    staleness: null
+    tags: null
+  agent-state-model.md:
+    path: agent-state-model.md
+    title: Agent State Model
+    last_modified: '2026-03-13T00:43:00.937642'
+    size: 262
+    dependencies: []
+    staleness: null
+    tags: null
+  plans/2026-03-13-pantheonos-open-source-promptengines-plan.md:
+    path: plans/2026-03-13-pantheonos-open-source-promptengines-plan.md
+    title: PantheonOS Open-Source Plan for PromptEngines
+    last_modified: '2026-03-13T03:45:08.311461'
+    size: 12607
+    dependencies: []
+    staleness: null
+    tags: null
+  plans/pantheon-os-spec-v1.md:
+    path: plans/pantheon-os-spec-v1.md
+    title: Pantheon OS Spec v1
+    last_modified: '2026-03-13T00:43:00.945658'
+    size: 1146
+    dependencies: []
+    staleness: null
+    tags: null
+  plans/aci-build-tasks.md:
+    path: plans/aci-build-tasks.md
+    title: ACI Build Plan - Task Tracker
+    last_modified: '2026-03-18T04:36:03.143087'
+    size: 1577
+    dependencies: []
+    staleness: null
+    tags: null
+  plans/pantheon-os-repo-work-plan.md:
+    path: plans/pantheon-os-repo-work-plan.md
+    title: Pantheon OS Repo Work Plan
+    last_modified: '2026-03-13T00:43:00.944948'
+    size: 787
+    dependencies: []
+    staleness: null
+    tags: null
+  plans/aci-implementation-plan.md:
+    path: plans/aci-implementation-plan.md
+    title: ACI Implementation Plan for PantheonOS
+    last_modified: '2026-03-18T04:36:03.143880'
+    size: 5913
+    dependencies:
+    - references/aci-principles.md
+    staleness: null
+    tags: null
+  references/aci-principles.md:
+    path: references/aci-principles.md
+    title: Agent-Computer Interface (ACI) Principles
+    last_modified: '2026-03-18T04:36:03.144753'
+    size: 6067
+    dependencies: []
+    staleness: null
+    tags: null
+  diagrams/README.md:
+    path: diagrams/README.md
+    title: Diagrams
+    last_modified: '2026-03-13T00:43:00.940759'
+    size: 211
+    dependencies: []
+    staleness: null
+    tags: null
+  status/next-steps.md:
+    path: status/next-steps.md
+    title: Next Steps
+    last_modified: '2026-03-13T00:43:00.946905'
+    size: 560
+    dependencies: []
+    staleness: null
+    tags: null
+  concepts/model-scaling-thesis.md:
+    path: concepts/model-scaling-thesis.md
+    title: Model Scaling Thesis
+    last_modified: '2026-03-13T00:43:00.940076'
+    size: 695
+    dependencies: []
+    staleness: null
+    tags: null
+  concepts/inverted-pyramid-org.md:
+    path: concepts/inverted-pyramid-org.md
+    title: Inverted Pyramid Org Chart
+    last_modified: '2026-03-13T00:43:00.939542'
+    size: 775
+    dependencies: []
+    staleness: null
+    tags: null
+  concepts/agent-capability-skill-model.md:
+    path: concepts/agent-capability-skill-model.md
+    title: Agent, Sub-Agent, Capability Set, and Skill Model
+    last_modified: '2026-03-13T00:43:00.938946'
+    size: 875
+    dependencies: []
+    staleness: null
+    tags: null
+  workstreams/promptengines-dashboard-mvp.md:
+    path: workstreams/promptengines-dashboard-mvp.md
+    title: "Workstream A \u2014 PromptEngines Dashboard MVP"
+    last_modified: '2026-03-13T00:43:00.949245'
+    size: 1713
+    dependencies: []
+    staleness: null
+    tags: null
+  workstreams/terminal-manager-mvp.md:
+    path: workstreams/terminal-manager-mvp.md
+    title: "Workstream B \u2014 Terminal Manager MVP"
+    last_modified: '2026-03-13T00:43:00.949948'
+    size: 1322
+    dependencies: []
+    staleness: null
+    tags: null
+  workstreams/README.md:
+    path: workstreams/README.md
+    title: Workstreams
+    last_modified: '2026-03-13T00:43:00.948399'
+    size: 212
+    dependencies: []
+    staleness: null
+    tags: null
