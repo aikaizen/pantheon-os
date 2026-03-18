@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PantheonOS — Development Plan</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111;
+    --border: #1a1a1a;
+    --text: #c8c8c8;
+    --dim: #666;
+    --accent: #4a9eff;
+    --accent2: #8b5cf6;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --teal: #14b8a6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace; line-height: 1.7; padding: 2rem; max-width: 960px; margin: 0 auto; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1 { font-size: 1.5rem; color: #fff; margin-bottom: 0.25rem; letter-spacing: -0.5px; }
+  h2 { font-size: 1.15rem; color: #fff; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1rem; color: #e0e0e0; margin: 1.5rem 0 0.75rem; }
+  h4 { font-size: 0.9rem; color: var(--dim); margin: 1rem 0 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+  p, li { font-size: 0.85rem; margin-bottom: 0.5rem; }
+  ul, ol { padding-left: 1.5rem; }
+  .meta { color: var(--dim); font-size: 0.8rem; margin-bottom: 2rem; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 0.7rem; font-weight: 600; margin-right: 4px; }
+  .tag-done { background: rgba(16,185,129,0.15); color: var(--green); }
+  .tag-progress { background: rgba(74,158,255,0.15); color: var(--accent); }
+  .tag-plan { background: rgba(139,92,246,0.15); color: var(--accent2); }
+  .tag-blocked { background: rgba(239,68,68,0.15); color: var(--red); }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 1.25rem; margin: 1rem 0; }
+  .card h3 { margin-top: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  .phase-header { display: flex; align-items: center; gap: 0.75rem; margin-top: 2.5rem; margin-bottom: 1rem; }
+  .phase-num { background: var(--accent); color: #000; font-weight: 700; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+  .phase-num.p2 { background: var(--accent2); }
+  .phase-num.p3 { background: var(--teal); }
+  .phase-num.p4 { background: var(--yellow); color: #000; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.8rem; }
+  th { text-align: left; color: var(--dim); font-weight: 600; padding: 0.5rem; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.7rem; }
+  td { padding: 0.5rem; border-bottom: 1px solid var(--border); }
+  code { background: #1a1a1a; padding: 2px 6px; font-size: 0.8rem; }
+  .sep { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .nav { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .nav a { font-size: 0.8rem; padding: 4px 10px; border: 1px solid var(--border); }
+  .nav a:hover { border-color: var(--accent); text-decoration: none; }
+  .stat-row { display: flex; gap: 2rem; margin: 1rem 0; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat .num { font-size: 1.5rem; font-weight: 700; color: #fff; }
+  .stat .label { font-size: 0.7rem; color: var(--dim); text-transform: uppercase; }
+  .dep { font-size: 0.75rem; color: var(--dim); margin-top: 0.25rem; }
+  .dep::before { content: "→ "; color: var(--yellow); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html">← Docs</a>
+  <a href="system-architecture.html">Architecture</a>
+  <a href="realm-framework.html">Realms</a>
+  <a href="data-model.html">Data Model</a>
+  <a href="https://github.com/aikaizen/pantheon-os">GitHub ↗</a>
+</nav>
+
+<h1>PantheonOS — Full Development Plan</h1>
+<p class="meta">Agent Orchestration System · Version 1.0 Roadmap · Updated 2026-03-18</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="num">3</div><div class="label">Agents Deployed</div></div>
+  <div class="stat"><div class="num">1</div><div class="label">Active Realms</div></div>
+  <div class="stat"><div class="num">6</div><div class="label">Skills Defined</div></div>
+  <div class="stat"><div class="num">11</div><div class="label">Ventures Tracked</div></div>
+  <div class="stat"><div class="num">4</div><div class="label">Surfaces</div></div>
+</div>
+
+<!-- WHAT MAKES THIS UNIQUE -->
+
+<h2>What Makes PantheonOS Unique</h2>
+
+<div class="card">
+<h3>Not Another Agent Framework</h3>
+<p>PantheonOS is not LangGraph, CrewAI, or AutoGen. Those are <em>workflow engines</em> — they define how LLMs call each other in sequences or graphs. PantheonOS is an <em>operating system</em> for autonomous agents that persist across sessions, own their workspaces, and coordinate through shared organizational structure.</p>
+
+<h3>Core Differentiators</h3>
+<ul>
+  <li><strong>Realm Architecture</strong> — Every agent gets a sovereign workspace (realm) with its own pages, build logs, dispatches. Not a chat window — a <em>place</em>.</li>
+  <li><strong>Registry-Driven</strong> — Agents, ventures, skills, budgets are declared in YAML manifests. The system reads its own configuration. Git is the database.</li>
+  <li><strong>Self-Observing</strong> — The state engine reads registry + git + realms and produces a JSON snapshot of the entire system. The system can see itself.</li>
+  <li><strong>HTML as Communication Medium</strong> — All definitional docs are web pages, not markdown. Accessible from anywhere. No IDE required.</li>
+  <li><strong>Constitutional Governance</strong> — Hard rules encoded in a constitution. Approval gates for high-risk actions. Budget caps per agent.</li>
+  <li><strong>Local-First</strong> — Runs on a MacBook, not a cluster. Git is the sync layer. Agents work offline and push when ready.</li>
+  <li><strong>Multi-Repo Awareness</strong> — Agents understand the full organizational topology, not just the repo they're in.</li>
+</ul>
+</div>
+
+<!-- CURRENT STATE -->
+
+<h2>Current State: What's Built</h2>
+
+<div class="grid">
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> Documentation Site</h3>
+    <p>8 HTML pages at <code>site/</code> — system architecture, realm framework, data model, operating terminal, pane system, agent state model, portal model. All dark monospace design.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> Realm Framework</h3>
+    <p>Forge realm at <code>forge/</code> — 4 HTML pages (portal, workshop, communiqué, dispatch). Protocol defined for spawning new realms.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> State Engine</h3>
+    <p><code>engine/state_engine.py</code> — 250 lines. Reads registry YAML, git state, realm dirs → outputs <code>data/pantheon-os-state.json</code>. Self-observing.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> Registry</h3>
+    <p><code>registry/</code> — agents.yaml (3 agents), ventures.yaml (11 ventures), skills.yaml (6 skills), budgets.yaml, heartbeats.yaml, approvals.yaml. Per-agent JSON manifests.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> ACI Sprint 1-2</h3>
+    <p>Output governor, disclosure controls, observability basics. Based on SWE-Agent principles — context window is consciousness, not RAM.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> Constitution</h3>
+    <p>10 operating laws. Sovereignty, governance, budget caps, approval gates. The alignment layer for all agents.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> Skill Library</h3>
+    <p>6 Company OS skills — weekly operating review, venture status refresh, decision gate review, goal tree planning, build stream synthesis, skill self-improvement. All drafted v0.1.0.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-done">DONE</span> Database Schema</h3>
+    <p><code>db/schema.sql</code> — 9 tables: ventures, agents, skills, goals, approvals, heartbeats, tasks, budget_periods, memory_events. Ready for Postgres when needed.</p>
+  </div>
+</div>
+
+<!-- GAPS -->
+
+<h2>Gaps & Known Issues</h2>
+
+<div class="card">
+<table>
+  <tr><th>Issue</th><th>Severity</th><th>Fix</th></tr>
+  <tr><td><code>data/pantheon-os.json</code> (mock) out of sync with registry</td><td><span class="tag tag-progress">MEDIUM</span></td><td>Replace mock data with state engine output</td></tr>
+  <tr><td>Heartbeats all "unknown" — no live agents yet</td><td><span class="tag tag-progress">MEDIUM</span></td><td>Implement heartbeat emission in agent runtime</td></tr>
+  <tr><td>Terminal Manager is wireframe only</td><td><span class="tag tag-plan">PLAN</span></td><td>Phase A build: React shell with pane system</td></tr>
+  <tr><td>Skills are drafted, none tested or running</td><td><span class="tag tag-plan">PLAN</span></td><td>Run first skill (weekly-operating-review) end-to-end</td></tr>
+  <tr><td>Budgets all zero — no real cost tracking</td><td><span class="tag tag-plan">PLAN</span></td><td>Wire up API cost reporting per agent</td></tr>
+  <tr><td>promptengines-main needs write PAT</td><td><span class="tag tag-blocked">BLOCKED</span></td><td>Human action: create PAT with repo write scope</td></tr>
+  <tr><td>Site not deployed to promptengines.com</td><td><span class="tag tag-plan">PLAN</span></td><td>Deploy site/ to Cloudflare Pages or GitHub Pages</td></tr>
+  <tr><td>Dzambhala has no realm</td><td><span class="tag tag-plan">PLAN</span></td><td>Spawn realm/dzambhala-mandala</td></tr>
+</table>
+</div>
+
+<!-- DEVELOPMENT PHASES -->
+
+<h2>Development Phases</h2>
+
+<!-- PHASE 1 -->
+<div class="phase-header"><div class="phase-num">1</div><h2 style="margin:0;border:none;padding:0;">Foundation Hardening</h2></div>
+<p class="meta">Goal: Self-consistent system with live data flow. No more mock data.</p>
+
+<div class="card">
+<h3>1.1 — Wire State Engine to Dashboard</h3>
+<p>Replace <code>data/pantheon-os.json</code> mock data with live state engine output.</p>
+<ul>
+  <li>Run state engine on schedule (cron or agent-triggered)</li>
+  <li>Dashboard <code>index.html</code> reads from <code>pantheon-os-state.json</code> instead of mock JSON</li>
+  <li>Remove stale agent references (Thoth, Prometheus, Golem) from ventures.yaml</li>
+  <li>Verify: dashboard shows 3 agents, 1 realm, real git state</li>
+</ul>
+<div class="dep">Depends on: state engine (done), dashboard HTML (done)</div>
+</div>
+
+<div class="card">
+<h3>1.2 — Implement Heartbeat System</h3>
+<p>Agents must emit heartbeats. This is how the system knows they're alive.</p>
+<ul>
+  <li>Define heartbeat protocol: timestamp + agent_id + status + metadata</li>
+  <li>Create <code>scripts/heartbeat.sh</code> — one-liner agents call to check in</li>
+  <li>State engine reads heartbeat files, calculates staleness</li>
+  <li>Dashboard shows live/dead/stale status per agent</li>
+  <li>Alert mechanism: if heartbeat stale > 24h, flag in dispatch</li>
+</ul>
+<div class="dep">Depends on: registry/heartbeats.yaml (done), state engine (done)</div>
+</div>
+
+<div class="card">
+<h3>1.3 — Clean Registry Inconsistencies</h3>
+<ul>
+  <li>Remove Thoth/Prometheus/Golem references from ventures.yaml operators</li>
+  <li>Align venture count between registry and state output</li>
+  <li>Update skills.yaml owners to match deployed agents only</li>
+  <li>Add real budget numbers or remove budget section until needed</li>
+</ul>
+<div class="dep">No dependencies</div>
+</div>
+
+<div class="card">
+<h3>1.4 — Deploy Documentation Site</h3>
+<ul>
+  <li>Deploy <code>site/</code> to promptengines.com/hermetic-demiurge/</li>
+  <li>Options: Cloudflare Pages (free), GitHub Pages, or Netlify</li>
+  <li>Set up CI: push to branch → auto-deploy</li>
+  <li>Add analytics (Plausible or similar, privacy-respecting)</li>
+</ul>
+<div class="dep">Needs: domain DNS access, hosting platform choice</div>
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase-header"><div class="phase-num p2">2</div><h2 style="margin:0;border:none;padding:0;">Agent Runtime & Realms</h2></div>
+<p class="meta">Goal: Agents can spawn, do work, report status, and own their space.</p>
+
+<div class="card">
+<h3>2.1 — Spawn Dzambhala's Realm</h3>
+<p>Dzambhala is registered but has no realm. Build <code>realm/dzambhala-mandala/</code>:</p>
+<ul>
+  <li>Copy forge/ structure: index.html, workshop.html, communiqué.html, dispatch.html</li>
+  <li>Customize for strategy/growth agent identity</li>
+  <li>Set scope: promptengines-main (read-only), no build permissions</li>
+  <li>Define capabilities: analysis, recommendations, venture status, budget review</li>
+</ul>
+<div class="dep">Depends on: realm framework (done)</div>
+</div>
+
+<div class="card">
+<h3>2.2 — Agent Runtime Control Plane</h3>
+<p>The missing piece: how agents actually run, get tasks, and report back.</p>
+<ul>
+  <li><strong>Task Queue</strong>: YAML or JSON file in registry that agents poll</li>
+  <li><strong>Execution Protocol</strong>: Agent receives task → works → writes result → updates status</li>
+  <li><strong>Error Handling</strong>: Failed tasks → retry once → escalate to principal</li>
+  <li><strong>Inter-Agent Messaging</strong>: Dispatch files between realms (agent A posts to agent B's inbox)</li>
+  <li><strong>Capacity Management</strong>: Max concurrent tasks per agent, cooldown periods</li>
+</ul>
+<div class="dep">Depends on: heartbeat system (1.2), realm framework (done)</div>
+</div>
+
+<div class="card">
+<h3>2.3 — Skill Execution Engine</h3>
+<p>Skills exist on paper. Make them run.</p>
+<ul>
+  <li>Pick first skill: <code>weekly-operating-review</code></li>
+  <li>Implement: read skill frontmatter → execute steps → produce output → log observation</li>
+  <li>Skill triggers: cron schedule, manual invocation, or event-driven</li>
+  <li>Output artifacts go to agent's realm workshop page</li>
+  <li>Add skill execution log to state engine output</li>
+</ul>
+<div class="dep">Depends on: skills/ (done), agent runtime (2.2)</div>
+</div>
+
+<div class="card">
+<h3>2.4 — ACI Sprint 3: Browser/CDP Self-Verification</h3>
+<p>Agents can inspect their own output by rendering HTML and checking it.</p>
+<ul>
+  <li>Chrome DevTools Protocol integration for headless page inspection</li>
+  <li>Agent renders its realm page → takes screenshot → analyzes output</li>
+  <li>Catches: broken links, missing data, layout issues</li>
+  <li>Especially important for Hermetic_Demiurge's HTML-heavy workflow</li>
+</ul>
+<div class="dep">Depends on: ACI Sprint 1-2 (done)</div>
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase-header"><div class="phase-num p3">3</div><h2 style="margin:0;border:none;padding:0;">Operating Terminal</h2></div>
+<p class="meta">Goal: Real-time multi-pane command center for the human principal.</p>
+
+<div class="card">
+<h3>3.1 — Terminal Shell (Phase A)</h3>
+<p>Build the React shell with the pane system defined in <code>docs/operating-terminal-spec.md</code>.</p>
+<ul>
+  <li>Pane types: text, table, chart, status-grid, log, agent-chat, approval-gate, budget-meter</li>
+  <li>Layout: resizable split panes, save/restore layouts</li>
+  <li>Navigation: agent selector, venture filter, time range</li>
+  <li>Dark theme matching existing site/ design language</li>
+</ul>
+<div class="dep">Depends on: terminal spec (done), pane system spec (done)</div>
+</div>
+
+<div class="card">
+<h3>3.2 — Live Data Bridge (Phase B)</h3>
+<p>Wire the terminal to live state.</p>
+<ul>
+  <li>WebSocket or polling connection to state engine output</li>
+  <li>Real-time agent status updates (heartbeat feed)</li>
+  <li>Venture health dashboard with drill-down</li>
+  <li>Skill execution feed (what's running, what completed, what failed)</li>
+</ul>
+<div class="dep">Depends on: terminal shell (3.1), state engine (done), heartbeat system (1.2)</div>
+</div>
+
+<div class="card">
+<h3>3.3 — Intervention Controls (Phase C)</h3>
+<p>Human can act through the terminal.</p>
+<ul>
+  <li>Approve/reject approval gates</li>
+  <li>Pause/resume agents</li>
+  <li>Assign tasks to agents</li>
+  <li>Adjust budget caps in real-time</li>
+  <li>Trigger skills manually</li>
+</ul>
+<div class="dep">Depends on: live data bridge (3.2), agent runtime (2.2)</div>
+</div>
+
+<!-- PHASE 4 -->
+<div class="phase-header"><div class="phase-num p4">4</div><h2 style="margin:0;border:none;padding:0;">Scale & Orchestration</h2></div>
+<p class="meta">Goal: Multi-agent coordination, venture-level operations, production hardening.</p>
+
+<div class="card">
+<h3>4.1 — Multi-Agent Coordination</h3>
+<ul>
+  <li><strong>Task Decomposition</strong>: Principal assigns to Hermetic_Demiurge → HD breaks into subtasks → some delegated to future agents</li>
+  <li><strong>Cross-Realm Communication</strong>: Dispatch protocol between agent realms</li>
+  <li><strong>Conflict Resolution</strong>: What happens when agents disagree or compete for resources</li>
+  <li><strong>Shared Knowledge Base</strong>: Agents can publish findings others can discover</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>4.2 — Venture Operations Layer</h3>
+<ul>
+  <li>Venture-level dashboards pulling from multiple agent outputs</li>
+  <li>Venture health scoring based on agent activity, git commits, deployment status</li>
+  <li>Venture-to-agent mapping: which agents serve which ventures</li>
+  <li>Cross-venture dependency tracking</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>4.3 — Budget & Cost Tracking</h3>
+<ul>
+  <li>Per-agent API cost reporting (token counts, model usage)</li>
+  <li>Per-venture cost allocation</li>
+  <li>Budget alerts: warn at 80%, hard stop at 100%</li>
+  <li>Monthly budget review skill (automated)</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>4.4 — Agent Spawning Protocol</h3>
+<p>Define how new agents are created and onboarded.</p>
+<ul>
+  <li>Agent manifest template (JSON schema)</li>
+  <li>Realm scaffolding script (copy template, customize identity)</li>
+  <li>Registry update workflow (YAML entry + manifest + realm = deployed)</li>
+  <li>Agent retirement protocol (archive realm, update registry, reassign tasks)</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>4.5 — Production Hardening</h3>
+<ul>
+  <li>Backup strategy: repo is the backup, but add state snapshots</li>
+  <li>Monitoring: uptime checks for deployed surfaces</li>
+  <li>Security: agent capability boundaries, repo access controls</li>
+  <li>Documentation: keep site/ in sync as system evolves</li>
+</ul>
+</div>
+
+<!-- SURFACE MAP -->
+
+<h2>Surface Map</h2>
+
+<div class="card">
+<table>
+  <tr><th>Surface</th><th>Purpose</th><th>Status</th><th>Owner</th></tr>
+  <tr><td><strong>Documentation Site</strong> (<code>site/</code>)</td><td>Definitional docs as HTML webpages</td><td><span class="tag tag-done">LIVE</span></td><td>Hermetic_Demiurge</td></tr>
+  <tr><td><strong>The Forge</strong> (<code>forge/</code>)</td><td>Hermetic_Demiurge's realm — build log, dispatches</td><td><span class="tag tag-done">LIVE</span></td><td>Hermetic_Demiurge</td></tr>
+  <tr><td><strong>Dashboard</strong> (<code>index.html</code>)</td><td>Organization-wide status view</td><td><span class="tag tag-progress">WIRED</span></td><td>PantheonOS</td></tr>
+  <tr><td><strong>Operating Terminal</strong></td><td>Multi-pane command center for principal</td><td><span class="tag tag-plan">PLANNED</span></td><td>PantheonOS</td></tr>
+  <tr><td><strong>Dzambhala's Mandala</strong></td><td>Strategy agent realm</td><td><span class="tag tag-plan">PLANNED</span></td><td>Dzambhala</td></tr>
+  <tr><td><strong>Registry</strong> (<code>registry/</code>)</td><td>Agent/venture/skill manifests (YAML)</td><td><span class="tag tag-done">LIVE</span></td><td>PantheonOS</td></tr>
+  <tr><td><strong>State Engine</strong> (<code>engine/</code>)</td><td>System self-observation → JSON snapshot</td><td><span class="tag tag-done">LIVE</span></td><td>PantheonOS</td></tr>
+  <tr><td><strong>Constitution</strong> (<code>constitution/</code>)</td><td>Governance laws and alignment rules</td><td><span class="tag tag-done">LIVE</span></td><td>A.I. (Principal)</td></tr>
+  <tr><td><strong>Skill Library</strong> (<code>skills/</code>)</td><td>Reusable workflow definitions</td><td><span class="tag tag-progress">DRAFTED</span></td><td>Shared</td></tr>
+</table>
+</div>
+
+<!-- TECHNICAL DECISIONS -->
+
+<h2>Technical Decisions</h2>
+
+<div class="card">
+<h3>Why YAML + Git, Not a Database</h3>
+<p>For now, PantheonOS runs on a single MacBook. YAML files in git are the right abstraction: versioned, diffable, mergeable, human-readable. The SQL schema exists for when we need Postgres, but that's a scale problem we don't have yet.</p>
+</div>
+
+<div class="card">
+<h3>Why HTML Pages, Not Markdown</h3>
+<p>Markdown is for READMEs. Definitional docs — things that define what the system <em>is</em> — need to be accessible from any browser on any device. No rendering pipeline, no markdown engine. Open URL, see doc. GitHub renders markdown, but you need GitHub. HTML works everywhere.</p>
+</div>
+
+<div class="card">
+<h3>Why Realms, Not Chat Windows</h3>
+<p>Chat is ephemeral. Realms are persistent. An agent's realm is its <em>home</em> — it has a build log, a dispatch board, a workshop. You can visit it. It accumulates history. This is fundamentally different from "the AI's last 10 messages."</p>
+</div>
+
+<div class="card">
+<h3>Why Local-First</h3>
+<p>No cloud bills. No infrastructure to maintain. No vendor lock-in. The principal's laptop is the server. Git is the sync layer. When we need to scale, we deploy the surfaces to CDN and keep the engine local, or move the engine to a VPS. But we start local.</p>
+</div>
+
+<!-- SUCCESS METRICS -->
+
+<h2>Success Metrics</h2>
+
+<div class="card">
+<table>
+  <tr><th>Metric</th><th>Current</th><th>Phase 1 Target</th><th>Phase 4 Target</th></tr>
+  <tr><td>Agents deployed</td><td>3</td><td>3 (all heartbeating)</td><td>6+</td></tr>
+  <tr><td>Active realms</td><td>1</td><td>2</td><td>6+</td></tr>
+  <tr><td>Skills running</td><td>0</td><td>1 (weekly review)</td><td>6 (all automated)</td></tr>
+  <tr><td>Dashboard data source</td><td>Mock JSON</td><td>Live state engine</td><td>Live state engine</td></tr>
+  <tr><td>Heartbeat staleness</td><td>Unknown</td><td>< 1 hour</td><td>< 5 minutes</td></tr>
+  <tr><td>Terminal deployed</td><td>No</td><td>No</td><td>Yes (with interventions)</td></tr>
+  <tr><td>Budget tracking</td><td>None</td><td>Manual</td><td>Automated per-agent</td></tr>
+  <tr><td>Site deployed</td><td>No</td><td>Yes</td><td>Yes (auto-deploy on push)</td></tr>
+</table>
+</div>
+
+<hr class="sep">
+
+<p class="meta">
+  PantheonOS by PromptEngines · <a href="https://github.com/aikaizen/pantheon-os">GitHub</a> ·
+  <a href="index.html">Documentation Home</a><br>
+  Hermetic_Demiurge · Built, not imagined.
+</p>
+
+</body>
+</html>
