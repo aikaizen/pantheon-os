@@ -56,6 +56,9 @@ Defines who can approve what, per domain.
   "deployment_id": "promptengines",
   "deployment_ref": "registry:deployments/promptengines.json",
   "modes": ["observe", "message", "control"],
+  "default_runtime_system": "hermes",
+  "default_branding_mode": "white_labeled",
+  "supported_runtime_systems": ["hermes", "openclaw", "nanoclaw", "pantheon"],
   "pilot_scope": {
     "tier_1": ["promptengines-web", "lab-notes", "kaizen", "consulting"]
   }
@@ -164,6 +167,12 @@ Preserves existing v1 schema and adds deployment-aware overlays.
   "ref": "registry:runtimes.yaml#promptengines-hermes-primary",
   "runtime_system": "hermes",
   "kind": "docker",
+  "packaging": "docker",
+  "branding_mode": "white_labeled|native",
+  "deployment_mode": "provisioned|attached",
+  "support_level": "first_party|adapter|experimental",
+  "image": "pantheonos/hermes-runtime:pilot-v1",
+  "version": "pilot-v1",
   "status": "active|planned|failed",
   "host": {"id": "promptengines-local-macbook", "os": "macos"},
   "access_mode": "observe|message|control"

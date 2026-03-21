@@ -2,9 +2,23 @@
   "deployment": "promptengines",
   "primary_onboarding_path": "connect-existing-setup",
   "tiers": {
-    "tier_1": ["promptengines-web", "lab-notes", "kaizen", "consulting"],
-    "tier_2": ["norbu", "bible", "storybook-studio"],
-    "tier_3": ["flow", "video-terminal", "flow-education", "vajra-upaya"]
+    "tier_1": [
+      "promptengines-web",
+      "lab-notes",
+      "kaizen",
+      "consulting"
+    ],
+    "tier_2": [
+      "norbu",
+      "bible",
+      "storybook-studio"
+    ],
+    "tier_3": [
+      "flow",
+      "video-terminal",
+      "flow-education",
+      "vajra-upaya"
+    ]
   },
   "persona_agents": [
     "ai-principal",
@@ -23,5 +37,25 @@
     "hermetic-demiurge-telegram",
     "dzambhala-telegram",
     "promptengines-host-controller-cli"
-  ]
+  ],
+  "default_runtime_system": "hermes",
+  "default_branding_mode": "white_labeled",
+  "supported_runtime_systems": [
+    "hermes",
+    "openclaw",
+    "nanoclaw",
+    "pantheon"
+  ],
+  "runtime_profiles": {
+    "promptengines-hermes-primary": {
+      "runtime_system": "hermes",
+      "branding_mode": "white_labeled",
+      "deployment_mode": "provisioned"
+    },
+    "promptengines-openclaw-lab": {
+      "runtime_system": "openclaw",
+      "branding_mode": "native",
+      "deployment_mode": "attached"
+    }
+  }
 }

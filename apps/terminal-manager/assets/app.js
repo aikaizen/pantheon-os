@@ -86,9 +86,10 @@ function renderRuntimes(runtimes) {
     <div class="item">
       <div class="item__meta">runtime</div>
       <strong>${runtime.name}</strong>
-      <p>${runtime.runtime_system} · ${runtime.kind}</p>
+      <p>${runtime.runtime_system} · ${runtime.kind} · ${runtime.branding_mode || 'native'}</p>
       ${makeStatus((runtime.heartbeat || {}).status || runtime.status || 'unknown')}
       <div class="item__row"><span>mode</span><span>${runtime.access_mode}</span></div>
+      <div class="item__row"><span>deploy</span><span>${runtime.deployment_mode || '—'} · ${runtime.support_level || '—'}</span></div>
       <div class="item__row"><span>host</span><span>${runtime.host ? runtime.host.label : '—'}</span></div>
     </div>`).join('');
 }
@@ -126,7 +127,8 @@ async function boot() {
   const deployment = (data.deployments || [])[0] || {};
   document.getElementById('hero-lede').textContent = `Loaded ${source}. ${data.summary.runtime_count} runtimes, ${data.summary.controller_count} controllers, ${data.summary.channel_count} channels, ${data.summary.agent_count} agents.`;
   document.getElementById('deployment-name').textContent = deployment.name || 'PromptEngines';
-  document.getElementById('deployment-mode').textContent = `modes: ${((deployment.modes || ['observe'])).join(' · ')}`;
+  const runtimeLine = deployment.default_runtime_system ? `default runtime: ${deployment.default_runtime_system} (${deployment.default_branding_mode || 'native'})` : '';
+  document.getElementById('deployment-mode').textContent = `modes: ${((deployment.modes || ['observe'])).join(' · ')}${runtimeLine ? ' · ' + runtimeLine : ''}`;
 
   renderSummary(data.summary);
   renderPersonas(data.agents || [], data.runtimes || [], data.channels || []);

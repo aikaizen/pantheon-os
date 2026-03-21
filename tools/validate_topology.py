@@ -64,9 +64,18 @@ def validate():
         if len(ids) != len(items):
             errors.append(f"Duplicate IDs detected in {label}")
 
+    required_runtime_fields = ["runtime_system", "packaging", "branding_mode", "deployment_mode", "support_level", "image", "version"]
+
     for runtime in runtimes:
         if runtime.get("deployment") != deployment["id"]:
             errors.append(f"Runtime {runtime['id']} points to unexpected deployment")
+        for field in required_runtime_fields:
+            if not runtime.get(field):
+                errors.append(f"Runtime {runtime['id']} missing required field {field}")
+        if runtime.get("branding_mode") not in {"native", "white_labeled"}:
+            errors.append(f"Runtime {runtime['id']} has invalid branding_mode {runtime.get('branding_mode')}")
+        if runtime.get("deployment_mode") not in {"attached", "provisioned"}:
+            errors.append(f"Runtime {runtime['id']} has invalid deployment_mode {runtime.get('deployment_mode')}")
         for agent_id in runtime.get("agent_bindings", []):
             if agent_id not in agent_ids:
                 errors.append(f"Runtime {runtime['id']} references unknown agent {agent_id}")
@@ -109,6 +118,13 @@ def validate():
         for venture_id in item.get("venture_ids", []):
             if venture_id not in venture_ids:
                 errors.append(f"deployment_scope references unknown venture {venture_id}")
+
+    if deployment.get("default_runtime_system") not in set(deployment.get("supported_runtime_systems", [])):
+        errors.append("Deployment default_runtime_system is not included in supported_runtime_systems")
+    if not deployment.get("default_branding_mode"):
+        errors.append("Deployment missing default_branding_mode")
+    if not deployment.get("provisioning_templates"):
+        errors.append("Deployment missing provisioning_templates")
 
     for tier_name, tier_values in deployment.get("pilot_scope", {}).items():
         for venture_id in tier_values:

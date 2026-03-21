@@ -1,6 +1,6 @@
 {
   "meta": {
-    "engine_version": "0.3.0"
+    "engine_version": "0.3.1"
   },
   "summary": {
     "agent_count": 3,
@@ -8,16 +8,35 @@
     "controller_count": 1,
     "channel_count": 4,
     "deployment_count": 1,
-    "venture_count": 11
+    "venture_count": 11,
+    "runtime_system_count": 2,
+    "white_labeled_runtime_count": 1
   },
   "deployments": [
     {
       "id": "promptengines",
       "name": "PromptEngines",
-      "modes": ["observe", "message", "control"],
+      "modes": [
+        "observe",
+        "message",
+        "control"
+      ],
       "pilot_scope": {
-        "tier_1": ["promptengines-web", "lab-notes", "kaizen", "consulting"]
-      }
+        "tier_1": [
+          "promptengines-web",
+          "lab-notes",
+          "kaizen",
+          "consulting"
+        ]
+      },
+      "default_runtime_system": "hermes",
+      "default_branding_mode": "white_labeled",
+      "supported_runtime_systems": [
+        "hermes",
+        "openclaw",
+        "nanoclaw",
+        "pantheon"
+      ]
     }
   ],
   "agents": [
@@ -26,27 +45,58 @@
       "name": "A.I.",
       "role": "Principal direction and final approval",
       "status": "active",
-      "heartbeat": { "status": "unknown" },
+      "heartbeat": {
+        "status": "unknown"
+      },
       "runtime_bindings": [],
-      "channel_bindings": [{ "channel_id": "ai-principal-cli", "status": "active" }]
+      "channel_bindings": [
+        {
+          "channel_id": "ai-principal-cli",
+          "status": "active"
+        }
+      ]
     },
     {
       "id": "hermetic-demiurge",
       "name": "Hermetic_Demiurge",
       "role": "Builder, hardening, and shipping",
       "status": "active",
-      "heartbeat": { "status": "stale" },
-      "runtime_bindings": [{ "runtime_id": "promptengines-hermes-primary", "status": "active" }],
-      "channel_bindings": [{ "channel_id": "hermetic-demiurge-telegram", "status": "planned" }]
+      "heartbeat": {
+        "status": "stale"
+      },
+      "runtime_bindings": [
+        {
+          "runtime_id": "promptengines-hermes-primary",
+          "status": "active"
+        }
+      ],
+      "channel_bindings": [
+        {
+          "channel_id": "hermetic-demiurge-telegram",
+          "status": "planned"
+        }
+      ]
     },
     {
       "id": "dzambhala",
       "name": "Dzambhala",
       "role": "Strategy, growth engineering, and resource multiplication",
       "status": "active",
-      "heartbeat": { "status": "unknown" },
-      "runtime_bindings": [{ "runtime_id": "promptengines-hermes-primary", "status": "active" }],
-      "channel_bindings": [{ "channel_id": "dzambhala-telegram", "status": "active" }]
+      "heartbeat": {
+        "status": "unknown"
+      },
+      "runtime_bindings": [
+        {
+          "runtime_id": "promptengines-hermes-primary",
+          "status": "active"
+        }
+      ],
+      "channel_bindings": [
+        {
+          "channel_id": "dzambhala-telegram",
+          "status": "active"
+        }
+      ]
     }
   ],
   "runtimes": [
@@ -57,8 +107,16 @@
       "kind": "docker",
       "status": "active",
       "access_mode": "observe",
-      "heartbeat": { "status": "unknown" },
-      "host": { "label": "PromptEngines local-first MacBook" }
+      "heartbeat": {
+        "status": "unknown"
+      },
+      "host": {
+        "label": "PromptEngines local-first MacBook"
+      },
+      "packaging": "docker",
+      "branding_mode": "white_labeled",
+      "deployment_mode": "provisioned",
+      "support_level": "first_party"
     },
     {
       "id": "promptengines-openclaw-lab",
@@ -67,8 +125,16 @@
       "kind": "docker",
       "status": "planned",
       "access_mode": "observe",
-      "heartbeat": { "status": "unknown" },
-      "host": { "label": "PromptEngines local-first MacBook" }
+      "heartbeat": {
+        "status": "unknown"
+      },
+      "host": {
+        "label": "PromptEngines local-first MacBook"
+      },
+      "packaging": "docker",
+      "branding_mode": "native",
+      "deployment_mode": "attached",
+      "support_level": "adapter"
     }
   ],
   "controllers": [
@@ -78,21 +144,78 @@
       "agent_system": "claude-code",
       "access_level": "host",
       "status": "planned",
-      "heartbeat": { "status": "unknown" },
-      "manages": ["promptengines-hermes-primary", "promptengines-openclaw-lab"]
+      "heartbeat": {
+        "status": "unknown"
+      },
+      "manages": [
+        "promptengines-hermes-primary",
+        "promptengines-openclaw-lab"
+      ]
     }
   ],
   "channels": [
-    { "id": "ai-principal-cli", "name": "Principal CLI", "platform": "local", "kind": "cli_session", "status": "active", "access_mode": "control" },
-    { "id": "hermetic-demiurge-telegram", "name": "Hermetic_Demiurge Telegram", "platform": "telegram", "kind": "telegram_chat", "status": "planned", "access_mode": "message" },
-    { "id": "dzambhala-telegram", "name": "Dzambhala Telegram", "platform": "telegram", "kind": "telegram_chat", "status": "active", "access_mode": "message" },
-    { "id": "promptengines-host-controller-cli", "name": "Host Controller CLI", "platform": "local", "kind": "cli_session", "status": "planned", "access_mode": "control" }
+    {
+      "id": "ai-principal-cli",
+      "name": "Principal CLI",
+      "platform": "local",
+      "kind": "cli_session",
+      "status": "active",
+      "access_mode": "control"
+    },
+    {
+      "id": "hermetic-demiurge-telegram",
+      "name": "Hermetic_Demiurge Telegram",
+      "platform": "telegram",
+      "kind": "telegram_chat",
+      "status": "planned",
+      "access_mode": "message"
+    },
+    {
+      "id": "dzambhala-telegram",
+      "name": "Dzambhala Telegram",
+      "platform": "telegram",
+      "kind": "telegram_chat",
+      "status": "active",
+      "access_mode": "message"
+    },
+    {
+      "id": "promptengines-host-controller-cli",
+      "name": "Host Controller CLI",
+      "platform": "local",
+      "kind": "cli_session",
+      "status": "planned",
+      "access_mode": "control"
+    }
   ],
   "ventures": [
-    { "id": "promptengines-web", "name": "PromptEngines.com", "domain": "promptengines.com", "status": "active", "next_action": "Decide the public/private split for Pantheon OS before any public deployment." },
-    { "id": "lab-notes", "name": "Lab Notes", "domain": "lab.promptengines.com", "status": "active", "next_action": "Route build-stream synthesis into a repeatable publishing loop." },
-    { "id": "kaizen", "name": "Kaizen", "domain": "kaizen.promptengines.com", "status": "active", "next_action": "Tighten telemetry and growth review." },
-    { "id": "consulting", "name": "Consulting", "domain": "consulting.promptengines.com", "status": "active", "next_action": "Install account-brief and client approval workflows." }
+    {
+      "id": "promptengines-web",
+      "name": "PromptEngines.com",
+      "domain": "promptengines.com",
+      "status": "active",
+      "next_action": "Decide the public/private split for Pantheon OS before any public deployment."
+    },
+    {
+      "id": "lab-notes",
+      "name": "Lab Notes",
+      "domain": "lab.promptengines.com",
+      "status": "active",
+      "next_action": "Route build-stream synthesis into a repeatable publishing loop."
+    },
+    {
+      "id": "kaizen",
+      "name": "Kaizen",
+      "domain": "kaizen.promptengines.com",
+      "status": "active",
+      "next_action": "Tighten telemetry and growth review."
+    },
+    {
+      "id": "consulting",
+      "name": "Consulting",
+      "domain": "consulting.promptengines.com",
+      "status": "active",
+      "next_action": "Install account-brief and client approval workflows."
+    }
   ],
   "bindings": {}
 }

@@ -1,8 +1,8 @@
 {
   "meta": {
     "system_name": "Pantheon OS",
-    "generated_at": "2026-03-21T04:31:27.500645+00:00",
-    "engine_version": "0.3.0",
+    "generated_at": "2026-03-21T15:55:57.262668+00:00",
+    "engine_version": "0.3.1",
     "source": "engine/state_engine.py"
   },
   "summary": {
@@ -12,6 +12,8 @@
     "active_runtime_count": 1,
     "controller_count": 1,
     "active_controller_count": 0,
+    "runtime_system_count": 2,
+    "white_labeled_runtime_count": 1,
     "channel_count": 4,
     "active_channel_count": 2,
     "deployment_count": 1,
@@ -20,7 +22,7 @@
     "active_venture_count": 6,
     "skill_count": 6,
     "stale_heartbeat_count": 1,
-    "current_branch": "feat/promptengines-pilot-foundations",
+    "current_branch": "feat/promptengines-runtime-branding",
     "working_tree_clean": false,
     "remote_synced": true,
     "budget": {
@@ -29,66 +31,66 @@
       "spent": 0,
       "forecast": 0
     },
-    "last_updated": "2026-03-21T04:31:27.500623+00:00"
+    "last_updated": "2026-03-21T15:55:57.262660+00:00"
   },
   "git": {
-    "branch": "feat/promptengines-pilot-foundations",
+    "branch": "feat/promptengines-runtime-branding",
     "last_commit": {
-      "hash": "afde3dd",
-      "message": "docs: align terminal docs with persona-runtime-controller model",
-      "date": "2026-03-21 04:29:56 +0000",
+      "hash": "b4a4ae5",
+      "message": "docs: publish deployment PRD as definitional HTML",
+      "date": "2026-03-21 15:49:48 +0000",
       "author": "Hermes Agent"
     },
     "recent_commits": [
       {
+        "hash": "b4a4ae5",
+        "message": "docs: publish deployment PRD as definitional HTML",
+        "date": "2026-03-21 15:49:48 +0000"
+      },
+      {
+        "hash": "2789449",
+        "message": "docs: link deployment PRD from README",
+        "date": "2026-03-21 15:43:24 +0000"
+      },
+      {
+        "hash": "7da0be9",
+        "message": "docs: add Pantheon agent deployment PRD",
+        "date": "2026-03-21 15:43:00 +0000"
+      },
+      {
+        "hash": "fb56545",
+        "message": "test: keep readiness checks from dirtying the repo",
+        "date": "2026-03-21 04:59:58 +0000"
+      },
+      {
+        "hash": "d56aeee",
+        "message": "test: add PromptEngines readiness check script",
+        "date": "2026-03-21 04:58:52 +0000"
+      },
+      {
+        "hash": "285798b",
+        "message": "docs: add PromptEngines reference deployment package",
+        "date": "2026-03-21 04:56:44 +0000"
+      },
+      {
+        "hash": "ca4f31e",
+        "message": "feat: add topology-aware terminal manager app scaffold",
+        "date": "2026-03-21 04:55:49 +0000"
+      },
+      {
+        "hash": "ceb7d64",
+        "message": "test: add topology validation and state engine tests",
+        "date": "2026-03-21 04:50:39 +0000"
+      },
+      {
+        "hash": "b233e15",
+        "message": "feat: add PromptEngines pilot rollout and safety gates",
+        "date": "2026-03-21 04:31:35 +0000"
+      },
+      {
         "hash": "afde3dd",
         "message": "docs: align terminal docs with persona-runtime-controller model",
         "date": "2026-03-21 04:29:56 +0000"
-      },
-      {
-        "hash": "c429dee",
-        "message": "docs: add onboarding paths for existing and new operators",
-        "date": "2026-03-21 04:26:39 +0000"
-      },
-      {
-        "hash": "0ecd7f0",
-        "message": "feat: expand state engine for deployment topology",
-        "date": "2026-03-21 04:24:51 +0000"
-      },
-      {
-        "hash": "47eeeda",
-        "message": "feat: add PromptEngines topology registries and data model",
-        "date": "2026-03-21 04:21:29 +0000"
-      },
-      {
-        "hash": "3c53a78",
-        "message": "docs: publish PromptEngines pilot plan in site docs",
-        "date": "2026-03-21 04:13:32 +0000"
-      },
-      {
-        "hash": "834fb0e",
-        "message": "docs: add PromptEngines pilot readiness plan",
-        "date": "2026-03-21 04:13:27 +0000"
-      },
-      {
-        "hash": "034a2ff",
-        "message": "docs: correct PantheonOS system model and repo alignment plan",
-        "date": "2026-03-21 04:03:00 +0000"
-      },
-      {
-        "hash": "fe06eb4",
-        "message": "Merge docs/reframe-pantheon-os-v1 into main",
-        "date": "2026-03-21 00:53:13 +0000"
-      },
-      {
-        "hash": "49f1682",
-        "message": "feat: Site deploy infrastructure \u2014 GitHub Pages Actions workflow + serve script",
-        "date": "2026-03-18 19:41:40 +0000"
-      },
-      {
-        "hash": "4f5de06",
-        "message": "feat: Phase 1 \u2014 state engine v0.2.0, heartbeat system, registry cleanup",
-        "date": "2026-03-18 19:40:45 +0000"
       }
     ],
     "working_tree_clean": false,
@@ -140,7 +142,36 @@
           "vajra-upaya"
         ]
       },
-      "notes": "PromptEngines uses Pantheon OS as its own company operating system while Pantheon OS is also being shaped as a reusable system for other companies. Existing channels and runtimes should be connected before greenfield provisioning is assumed."
+      "notes": "PromptEngines uses Pantheon OS as its own company operating system while Pantheon OS is also being shaped as a reusable system for other companies. Existing channels and runtimes should be connected before greenfield provisioning is assumed.",
+      "default_runtime_system": "hermes",
+      "default_branding_mode": "white_labeled",
+      "supported_runtime_systems": [
+        "hermes",
+        "openclaw",
+        "nanoclaw",
+        "pantheon"
+      ],
+      "provisioning_templates": [
+        {
+          "id": "deploy-with-pantheon",
+          "runtime_system": "hermes",
+          "branding_mode": "white_labeled",
+          "packaging": "docker",
+          "support_level": "first_party"
+        },
+        {
+          "id": "attach-existing-runtime",
+          "runtime_systems": [
+            "hermes",
+            "openclaw",
+            "nanoclaw",
+            "pantheon"
+          ],
+          "branding_mode": "native_or_white_labeled",
+          "packaging": "docker",
+          "support_level": "adapter"
+        }
+      ]
     }
   ],
   "agents": [
@@ -327,7 +358,13 @@
         "aikaizen/pantheon-os",
         "aikaizen/promptengines-main"
       ],
-      "notes": "Shared dockerized Hermes runtime for the PromptEngines pilot. Observe-first before broader control actions.",
+      "notes": "Pantheon-branded deployment package backed by Hermes. Observe-first before broader control actions.",
+      "packaging": "docker",
+      "branding_mode": "white_labeled",
+      "deployment_mode": "provisioned",
+      "support_level": "first_party",
+      "image": "pantheonos/hermes-runtime:pilot-v1",
+      "version": "pilot-v1",
       "ref": "registry:runtimes.yaml#promptengines-hermes-primary",
       "heartbeat": {
         "status": "unknown",
@@ -364,7 +401,13 @@
         }
       ],
       "repos": [],
-      "notes": "Optional second runtime for comparative pilot testing and controller workflows.",
+      "notes": "Optional attached OpenClaw comparison runtime for adapter testing and controller workflows.",
+      "packaging": "docker",
+      "branding_mode": "native",
+      "deployment_mode": "attached",
+      "support_level": "adapter",
+      "image": "local/openclaw-lab:current",
+      "version": "planned-v1",
       "ref": "registry:runtimes.yaml#promptengines-openclaw-lab",
       "heartbeat": {
         "status": "unknown",

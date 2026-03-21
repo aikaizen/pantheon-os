@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pantheon OS State Engine v0.3.0
+Pantheon OS State Engine v0.3.1
 
 Reads actual system state from registry, git, deployment topology, and realm files.
 Generates data/pantheon-os-state.json for the dashboard and operating terminal.
@@ -331,6 +331,8 @@ def get_system_summary(agents, runtimes, controllers, channels, git_state, realm
     active_agents = [a for a in agents if a.get("status") == "active"]
     active_runtimes = [r for r in runtimes if r.get("status") == "active"]
     active_controllers = [c for c in controllers if c.get("status") == "active"]
+    runtime_systems = {r.get("runtime_system") for r in runtimes if r.get("runtime_system")}
+    white_labeled_runtimes = [r for r in runtimes if r.get("branding_mode") == "white_labeled"]
     active_channels = [c for c in channels if c.get("status") == "active"]
     active_ventures = [v for v in ventures if v.get("status") == "active"]
 
@@ -347,6 +349,8 @@ def get_system_summary(agents, runtimes, controllers, channels, git_state, realm
         "active_runtime_count": len(active_runtimes),
         "controller_count": len(controllers),
         "active_controller_count": len(active_controllers),
+        "runtime_system_count": len(runtime_systems),
+        "white_labeled_runtime_count": len(white_labeled_runtimes),
         "channel_count": len(channels),
         "active_channel_count": len(active_channels),
         "deployment_count": len(deployments),
@@ -378,7 +382,7 @@ def main():
     args = parse_args()
     output_path = Path(args.output)
 
-    print("Pantheon OS State Engine v0.3.0")
+    print("Pantheon OS State Engine v0.3.1")
     print(f"Repo: {REPO_ROOT}")
     print(f"Output: {output_path}")
     print()
@@ -433,7 +437,7 @@ def main():
         "meta": {
             "system_name": "Pantheon OS",
             "generated_at": datetime.now(timezone.utc).isoformat(),
-            "engine_version": "0.3.0",
+            "engine_version": "0.3.1",
             "source": "engine/state_engine.py",
         },
         "summary": summary,

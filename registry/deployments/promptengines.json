@@ -43,5 +43,34 @@
       "vajra-upaya"
     ]
   },
-  "notes": "PromptEngines uses Pantheon OS as its own company operating system while Pantheon OS is also being shaped as a reusable system for other companies. Existing channels and runtimes should be connected before greenfield provisioning is assumed."
+  "notes": "PromptEngines uses Pantheon OS as its own company operating system while Pantheon OS is also being shaped as a reusable system for other companies. Existing channels and runtimes should be connected before greenfield provisioning is assumed.",
+  "default_runtime_system": "hermes",
+  "default_branding_mode": "white_labeled",
+  "supported_runtime_systems": [
+    "hermes",
+    "openclaw",
+    "nanoclaw",
+    "pantheon"
+  ],
+  "provisioning_templates": [
+    {
+      "id": "deploy-with-pantheon",
+      "runtime_system": "hermes",
+      "branding_mode": "white_labeled",
+      "packaging": "docker",
+      "support_level": "first_party"
+    },
+    {
+      "id": "attach-existing-runtime",
+      "runtime_systems": [
+        "hermes",
+        "openclaw",
+        "nanoclaw",
+        "pantheon"
+      ],
+      "branding_mode": "native_or_white_labeled",
+      "packaging": "docker",
+      "support_level": "adapter"
+    }
+  ]
 }

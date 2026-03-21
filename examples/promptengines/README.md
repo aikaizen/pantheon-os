@@ -12,6 +12,7 @@ This example package exists so later operators can see:
 - sovereign persona agents are defined separately from runtimes and controllers
 - existing channels are treated as first-class surfaces
 - dockerized agent systems are modeled as runtimes
+- Pantheon-branded deployment can be white-labeled Hermes under the hood
 - host-side overseer agents are modeled as controllers
 - bindings explicitly connect persona agents, channels, runtimes, and controllers
 
@@ -34,9 +35,15 @@ Tier 1 ventures:
 
 Primary runtime:
 - `promptengines-hermes-primary`
+  - runtime_system: `hermes`
+  - branding_mode: `white_labeled`
+  - deployment_mode: `provisioned`
 
 Optional comparison runtime:
 - `promptengines-openclaw-lab`
+  - runtime_system: `openclaw`
+  - branding_mode: `native`
+  - deployment_mode: `attached`
 
 Primary controller:
 - `promptengines-host-controller`
@@ -51,3 +58,4 @@ Primary onboarding path:
 3. keep persona agents, runtimes, controllers, channels, and bindings separate
 4. start in observe mode before enabling message or control
 5. validate the topology and regenerate the state snapshot
+6. decide whether your default packaged deployment is white-labeled Hermes or another runtime path

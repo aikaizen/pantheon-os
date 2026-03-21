@@ -111,6 +111,8 @@
   "deployment_id": "promptengines",
   "deployment_ref": "registry:deployments/promptengines.json",
   "modes": ["observe", "message", "control"],
+  "default_runtime_system": "hermes",
+  "default_branding_mode": "white_labeled",
   "pilot_scope": {
     "tier_1": ["promptengines-web", "lab-notes", "kaizen", "consulting"]
   }
@@ -155,7 +157,7 @@
     <h2><span>◆</span>Runtime / portal layer</h2>
     <table class="schema-table">
       <tr><th>Entity</th><th>Key fields</th></tr>
-      <tr><td>Runtime</td><td>id, runtime_system, kind, host, status, access_mode</td></tr>
+      <tr><td>Runtime</td><td>id, runtime_system, kind, packaging, branding_mode, deployment_mode, support_level, image, version, host, status, access_mode</td></tr>
       <tr><td>Controller</td><td>id, agent_system, access_level, status, manages[]</td></tr>
       <tr><td>Channel</td><td>id, platform, kind, status, access_mode</td></tr>
       <tr><td>Binding</td><td>binding_type, source_ref, target_ref, relationship, status</td></tr>

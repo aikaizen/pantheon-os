@@ -1,46 +1,59 @@
 system: Pantheon OS
 runtimes:
-  - id: promptengines-hermes-primary
-    name: PromptEngines Hermes Primary
-    deployment: promptengines
-    kind: docker
-    runtime_system: hermes
-    status: active
-    lifecycle: persistent
-    host:
-      id: promptengines-local-macbook
-      label: PromptEngines local-first MacBook
-      os: macos
-    access_mode: observe
-    channels_supported:
-      - telegram
-      - cli
-    agent_bindings:
-      - hermetic-demiurge
-      - dzambhala
-    controller_bindings:
-      - promptengines-host-controller
-    repos:
-      - aikaizen/pantheon-os
-      - aikaizen/promptengines-main
-    notes: Shared dockerized Hermes runtime for the PromptEngines pilot. Observe-first before broader control actions.
-
-  - id: promptengines-openclaw-lab
-    name: PromptEngines OpenClaw Lab
-    deployment: promptengines
-    kind: docker
-    runtime_system: openclaw
-    status: planned
-    lifecycle: persistent
-    host:
-      id: promptengines-local-macbook
-      label: PromptEngines local-first MacBook
-      os: macos
-    access_mode: observe
-    channels_supported:
-      - cli
-    agent_bindings: []
-    controller_bindings:
-      - promptengines-host-controller
-    repos: []
-    notes: Optional second runtime for comparative pilot testing and controller workflows.
+- id: promptengines-hermes-primary
+  name: PromptEngines Hermes Primary
+  deployment: promptengines
+  kind: docker
+  runtime_system: hermes
+  status: active
+  lifecycle: persistent
+  host:
+    id: promptengines-local-macbook
+    label: PromptEngines local-first MacBook
+    os: macos
+  access_mode: observe
+  channels_supported:
+  - telegram
+  - cli
+  agent_bindings:
+  - hermetic-demiurge
+  - dzambhala
+  controller_bindings:
+  - promptengines-host-controller
+  repos:
+  - aikaizen/pantheon-os
+  - aikaizen/promptengines-main
+  notes: Pantheon-branded deployment package backed by Hermes. Observe-first before
+    broader control actions.
+  packaging: docker
+  branding_mode: white_labeled
+  deployment_mode: provisioned
+  support_level: first_party
+  image: pantheonos/hermes-runtime:pilot-v1
+  version: pilot-v1
+- id: promptengines-openclaw-lab
+  name: PromptEngines OpenClaw Lab
+  deployment: promptengines
+  kind: docker
+  runtime_system: openclaw
+  status: planned
+  lifecycle: persistent
+  host:
+    id: promptengines-local-macbook
+    label: PromptEngines local-first MacBook
+    os: macos
+  access_mode: observe
+  channels_supported:
+  - cli
+  agent_bindings: []
+  controller_bindings:
+  - promptengines-host-controller
+  repos: []
+  notes: Optional attached OpenClaw comparison runtime for adapter testing and controller
+    workflows.
+  packaging: docker
+  branding_mode: native
+  deployment_mode: attached
+  support_level: adapter
+  image: local/openclaw-lab:current
+  version: planned-v1
