@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Deployment — PantheonOS</title>
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --surface: #111114;
+    --surface-2: #17171d;
+    --border: #252530;
+    --text: #e0e0e6;
+    --text-dim: #7a7a8a;
+    --accent: #2dd4bf;
+    --accent-2: #4a9eff;
+    --warn: #f59e0b;
+    --good: #10b981;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 40px 24px 80px; }
+  .nav { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .nav a { color: var(--accent); text-decoration: none; border: 1px solid var(--border); padding: 6px 12px; font-size: 12px; }
+  .nav a:hover { border-color: var(--accent); }
+  h1 { font-size: 32px; margin: 0 0 8px; color: #fff; }
+  h2 { font-size: 18px; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); color: #fff; }
+  h3 { font-size: 14px; margin: 0 0 8px; color: #fff; }
+  p, li { font-size: 13px; color: var(--text-dim); }
+  .lede { color: var(--text); max-width: 820px; }
+  .tag { display: inline-block; padding: 3px 8px; border: 1px solid var(--border); color: var(--accent); font-size: 11px; text-transform: uppercase; margin-bottom: 10px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: linear-gradient(180deg, var(--surface), var(--surface-2)); border: 1px solid var(--border); padding: 18px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; border: 1px solid var(--border); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 12px; }
+  th { color: #fff; background: #0f0f13; }
+  code { color: var(--accent-2); }
+  .good { color: var(--good); }
+  .warn { color: var(--warn); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a href="index.html">← Docs</a>
+    <a href="system-model.html">System Model</a>
+    <a href="promptengines-pilot.html">PromptEngines Pilot</a>
+    <a href="https://github.com/aikaizen/pantheon-os">GitHub ↗</a>
+  </nav>
+
+  <div class="tag">Definitional doc</div>
+  <h1>Agent Deployment Layer</h1>
+  <p class="lede">PantheonOS is the operating surface. The runtime underneath may be Hermes, OpenClaw, NanoClaw, or PantheonOS itself. In v1, PantheonOS should white-label Hermes as the default packaged deployment path while still supporting attachment of existing orchestrators.</p>
+
+  <h2>Core distinction</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 class="good">PantheonOS</h3>
+      <p>The shared observation and intervention surface. This is the product the operator experiences.</p>
+    </div>
+    <div class="card">
+      <h3 class="warn">Runtime system</h3>
+      <p>The underlying Dockerized engine that actually hosts and executes the agents: Hermes, OpenClaw, NanoClaw, or later a Pantheon-native runtime.</p>
+    </div>
+  </div>
+
+  <h2>Supported runtime systems</h2>
+  <table>
+    <tr><th>Runtime system</th><th>Role in v1</th><th>Support level</th></tr>
+    <tr><td>Hermes</td><td>Default packaged runtime behind “Deploy with Pantheon”</td><td>First-party / white-labeled</td></tr>
+    <tr><td>OpenClaw</td><td>Attach existing runtime into PantheonOS</td><td>Adapter-supported</td></tr>
+    <tr><td>NanoClaw</td><td>Attach existing runtime into PantheonOS</td><td>Adapter-supported / experimental</td></tr>
+    <tr><td>PantheonOS runtime</td><td>Future native runtime path</td><td>Planned</td></tr>
+  </table>
+
+  <h2>Two deployment paths</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>1. Connect Existing Runtime</h3>
+      <p>Register an existing Dockerized Hermes, OpenClaw, NanoClaw, or Pantheon runtime inside PantheonOS without rebuilding the agent estate from scratch.</p>
+    </div>
+    <div class="card">
+      <h3>2. Deploy with Pantheon</h3>
+      <p>Provision a Pantheon-branded deployment package. In v1, this should usually mean a white-labeled Hermes runtime with Pantheon topology and onboarding conventions layered on top.</p>
+    </div>
+  </div>
+
+  <h2>White-labeled Hermes</h2>
+  <p>“Deploy with Pantheon” should not force a Pantheon-native runtime before that runtime exists. Instead, PantheonOS should package Hermes as the default runtime substrate while making the relationship explicit in registry and state output.</p>
+  <table>
+    <tr><th>Field</th><th>Meaning</th></tr>
+    <tr><td><code>runtime_system</code></td><td>The actual runtime engine, e.g. <code>hermes</code></td></tr>
+    <tr><td><code>branding_mode</code></td><td>Whether the runtime is shown as native or white-labeled in the operator experience</td></tr>
+    <tr><td><code>deployment_mode</code></td><td>Whether the runtime was attached or provisioned by PantheonOS</td></tr>
+    <tr><td><code>support_level</code></td><td>First-party, adapter-supported, or experimental</td></tr>
+  </table>
+
+  <h2>Operator truth</h2>
+  <p>The operator should always be able to answer:</p>
+  <ul>
+    <li>what runtime system is this using?</li>
+    <li>is it attached or provisioned?</li>
+    <li>is it white-labeled Hermes or a native runtime?</li>
+    <li>which controller maintains it?</li>
+    <li>which persona agents and channels are bound to it?</li>
+  </ul>
+
+  <h2>Registry implication</h2>
+  <p>Runtimes must store runtime identity, branding mode, deployment mode, support level, image, version, and bindings. Deployments must declare their default runtime path and supported runtime systems.</p>
+
+  <h2>PromptEngines v1 default</h2>
+  <p>For PromptEngines, the default packaged path should be:</p>
+  <ul>
+    <li><strong>PantheonOS product experience</strong></li>
+    <li><strong>white-labeled Hermes runtime</strong></li>
+    <li><strong>Docker packaging</strong></li>
+    <li><strong>controller-based maintenance</strong></li>
+    <li><strong>observe-first onboarding</strong></li>
+  </ul>
+</div>
+</body>
+</html>
