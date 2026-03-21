@@ -1,11 +1,32 @@
 heartbeats:
-- agent_id: hermetic-demiurge
-  interval_seconds: 3600
-  last_seen: '2026-03-18T19:40:01Z'
-  last_summary: Phase 1 build started - state engine v0.2.0
-  status: healthy
-- agent_id: dzambhala
-  interval_seconds: 3600
-  last_seen: null
-  last_summary: null
-  status: unknown
+  - object_type: agent
+    object_ref: registry:agents.yaml#hermetic-demiurge
+    agent_id: hermetic-demiurge
+    interval_seconds: 3600
+    last_seen: '2026-03-18T19:40:01Z'
+    last_summary: Phase 1 build started - state engine v0.2.0
+    status: healthy
+
+  - object_type: agent
+    object_ref: registry:agents.yaml#dzambhala
+    agent_id: dzambhala
+    interval_seconds: 3600
+    last_seen: null
+    last_summary: null
+    status: unknown
+
+  - object_type: runtime
+    object_ref: registry:runtimes.yaml#promptengines-hermes-primary
+    runtime_id: promptengines-hermes-primary
+    interval_seconds: 3600
+    last_seen: null
+    last_summary: null
+    status: unknown
+
+  - object_type: controller
+    object_ref: registry:controllers.yaml#promptengines-host-controller
+    controller_id: promptengines-host-controller
+    interval_seconds: 3600
+    last_seen: null
+    last_summary: null
+    status: unknown

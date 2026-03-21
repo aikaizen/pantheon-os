@@ -1,22 +1,45 @@
-
 approvals:
   - id: ap-branding
     title: Adopt Pantheon OS as the canonical internal system name
     risk: medium
     approver: A.I.
     status: approved
+
   - id: ap-public-deploy
     title: Approve any hosted or public-facing Pantheon OS deployment
     risk: high
     approver: A.I.
     status: pending
+
   - id: ap-agent-wake-cycles
     title: Approve budgeted recurring wake cycles for operators and maintenance agents
     risk: medium
     approver: A.I.
     status: in_review
+
   - id: ap-budget-caps
     title: Approve initial monthly runtime caps per agent and venture
     risk: medium
     approver: A.I.
     status: pending
+
+  - id: ap-promptengines-pilot-observe
+    title: Approve observe-only internal PromptEngines pilot
+    risk: low
+    approver: A.I.
+    status: approved
+    target_ref: registry:deployments/promptengines.json
+
+  - id: ap-promptengines-pilot-message
+    title: Approve message-level access into registered PromptEngines channels
+    risk: medium
+    approver: A.I.
+    status: pending
+    target_ref: registry:deployments/promptengines.json
+
+  - id: ap-controller-runtime-control
+    title: Approve controller actions that restart runtimes, inspect logs, or send test messages
+    risk: high
+    approver: A.I.
+    status: pending
+    target_ref: registry:controllers.yaml#promptengines-host-controller

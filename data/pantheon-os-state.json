@@ -1,7 +1,7 @@
 {
   "meta": {
     "system_name": "Pantheon OS",
-    "generated_at": "2026-03-21T04:24:41.534377+00:00",
+    "generated_at": "2026-03-21T04:31:27.500645+00:00",
     "engine_version": "0.3.0",
     "source": "engine/state_engine.py"
   },
@@ -29,17 +29,32 @@
       "spent": 0,
       "forecast": 0
     },
-    "last_updated": "2026-03-21T04:24:41.534366+00:00"
+    "last_updated": "2026-03-21T04:31:27.500623+00:00"
   },
   "git": {
     "branch": "feat/promptengines-pilot-foundations",
     "last_commit": {
-      "hash": "47eeeda",
-      "message": "feat: add PromptEngines topology registries and data model",
-      "date": "2026-03-21 04:21:29 +0000",
+      "hash": "afde3dd",
+      "message": "docs: align terminal docs with persona-runtime-controller model",
+      "date": "2026-03-21 04:29:56 +0000",
       "author": "Hermes Agent"
     },
     "recent_commits": [
+      {
+        "hash": "afde3dd",
+        "message": "docs: align terminal docs with persona-runtime-controller model",
+        "date": "2026-03-21 04:29:56 +0000"
+      },
+      {
+        "hash": "c429dee",
+        "message": "docs: add onboarding paths for existing and new operators",
+        "date": "2026-03-21 04:26:39 +0000"
+      },
+      {
+        "hash": "0ecd7f0",
+        "message": "feat: expand state engine for deployment topology",
+        "date": "2026-03-21 04:24:51 +0000"
+      },
       {
         "hash": "47eeeda",
         "message": "feat: add PromptEngines topology registries and data model",
@@ -74,21 +89,6 @@
         "hash": "4f5de06",
         "message": "feat: Phase 1 \u2014 state engine v0.2.0, heartbeat system, registry cleanup",
         "date": "2026-03-18 19:40:45 +0000"
-      },
-      {
-        "hash": "7e6b159",
-        "message": "feat: Full development plan \u2014 4-phase roadmap with surface map, success metrics, and technical decisions",
-        "date": "2026-03-18 17:48:23 +0000"
-      },
-      {
-        "hash": "012670d",
-        "message": "feat: Build ACI implementation - all four priority modules",
-        "date": "2026-03-18 05:34:18 +0000"
-      },
-      {
-        "hash": "6028462",
-        "message": "docs: Add ACI principles reference and implementation plan",
-        "date": "2026-03-18 04:35:58 +0000"
       }
     ],
     "working_tree_clean": false,
@@ -332,7 +332,7 @@
       "heartbeat": {
         "status": "unknown",
         "last_seen": null,
-        "interval_seconds": null,
+        "interval_seconds": 3600,
         "computed_status": "unknown",
         "summary": null
       }
@@ -407,7 +407,7 @@
       "heartbeat": {
         "status": "unknown",
         "last_seen": null,
-        "interval_seconds": null,
+        "interval_seconds": 3600,
         "computed_status": "unknown",
         "summary": null
       }
@@ -783,6 +783,30 @@
       "risk": "medium",
       "approver": "A.I.",
       "status": "pending"
+    },
+    {
+      "id": "ap-promptengines-pilot-observe",
+      "title": "Approve observe-only internal PromptEngines pilot",
+      "risk": "low",
+      "approver": "A.I.",
+      "status": "approved",
+      "target_ref": "registry:deployments/promptengines.json"
+    },
+    {
+      "id": "ap-promptengines-pilot-message",
+      "title": "Approve message-level access into registered PromptEngines channels",
+      "risk": "medium",
+      "approver": "A.I.",
+      "status": "pending",
+      "target_ref": "registry:deployments/promptengines.json"
+    },
+    {
+      "id": "ap-controller-runtime-control",
+      "title": "Approve controller actions that restart runtimes, inspect logs, or send test messages",
+      "risk": "high",
+      "approver": "A.I.",
+      "status": "pending",
+      "target_ref": "registry:controllers.yaml#promptengines-host-controller"
     }
   ],
   "skills": [
