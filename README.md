@@ -63,6 +63,7 @@ python3 scripts/check_promptengines_pilot.py
 - `site/start-fresh.html` — greenfield onboarding path for new operators
 - `docs/plans/2026-03-21-promptengines-pilot-readiness-plan.md` — execution plan for getting the repo ready for the PromptEngines reference deployment
 - `examples/promptengines/README.md` — first reference deployment package for future operators adapting PantheonOS
+- `pantheon-agent-deployment-prd.md` — PRD for dockerized agent deployment, multi-runtime support, and white-labeled Hermes packaging
 
 - `docs/plans/pantheon-os-spec-v1.md` — Product spec
 - `docs/plans/pantheon-os-repo-work-plan.md` — Work plan
