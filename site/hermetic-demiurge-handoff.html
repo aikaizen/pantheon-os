@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermetic_Demiurge Handoff — PantheonOS</title>
+<style>
+  :root { --bg:#0a0a0c; --surface:#111114; --surface-2:#17171d; --border:#252530; --text:#e0e0e6; --text-dim:#7a7a8a; --accent:#2dd4bf; --accent2:#4a9eff; --warn:#f59e0b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:'JetBrains Mono','SF Mono','Fira Code',monospace; line-height:1.7; }
+  .wrap { max-width:980px; margin:0 auto; padding:40px 24px 80px; }
+  .nav { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; }
+  .nav a { color:var(--accent); text-decoration:none; border:1px solid var(--border); padding:6px 12px; font-size:12px; }
+  .nav a:hover { border-color:var(--accent); }
+  h1 { font-size:30px; margin:0 0 8px; color:#fff; }
+  h2 { font-size:18px; margin:32px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); color:#fff; }
+  h3 { font-size:14px; margin:0 0 8px; color:#fff; }
+  p, li { font-size:13px; color:var(--text-dim); }
+  .lede { color:var(--text); max-width:820px; }
+  .tag { display:inline-block; padding:3px 8px; border:1px solid var(--border); color:var(--accent); font-size:11px; text-transform:uppercase; margin-bottom:10px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:760px){ .grid{grid-template-columns:1fr;} }
+  .card { background:linear-gradient(180deg,var(--surface),var(--surface-2)); border:1px solid var(--border); padding:18px; }
+  code { color:var(--accent2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a href="index.html">← Docs</a>
+    <a href="agent-deployment.html">Deployment Layer</a>
+    <a href="promptengines-pilot.html">PromptEngines Pilot</a>
+  </nav>
+
+  <div class="tag">Execution handoff</div>
+  <h1>Hermetic_Demiurge — Builder Handoff</h1>
+  <p class="lede">Continue execution from the current PromptEngines pilot foundation and runtime-branding build. PantheonOS is now pilot-ready at the repo layer; your next work is live runtime/channel/controller integration and deployment packaging.</p>
+
+  <h2>Current context</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Working branch</h3>
+      <p><code>feat/promptengines-runtime-branding</code></p>
+      <p>This branch includes the PromptEngines pilot foundations, the deployment PRD, the deployment HTML page, and runtime branding metadata.</p>
+    </div>
+    <div class="card">
+      <h3>What is already built</h3>
+      <p>Topology registries, state engine v0.3.1, onboarding docs, terminal app scaffold, PromptEngines example package, readiness checks, deployment PRD, and white-labeled Hermes model.</p>
+    </div>
+  </div>
+
+  <h2>Files that matter most</h2>
+  <ul>
+    <li><code>registry/runtimes.yaml</code></li>
+    <li><code>registry/deployments/promptengines.json</code></li>
+    <li><code>engine/state_engine.py</code></li>
+    <li><code>apps/terminal-manager/</code></li>
+    <li><code>tools/validate_topology.py</code></li>
+    <li><code>scripts/check_promptengines_pilot.py</code></li>
+    <li><code>pantheon-agent-deployment-prd.md</code></li>
+    <li><code>site/agent-deployment.html</code></li>
+  </ul>
+
+  <h2>Primary execution queue</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>1. Real runtime attachment</h3>
+      <p>Build the actual runtime/controller bridge for the PromptEngines Hermes deployment. Goal: move from modeled runtime to inspectable runtime.</p>
+    </div>
+    <div class="card">
+      <h3>2. Channel adapter path</h3>
+      <p>Implement the first real adapter path for bound channels, starting with the smallest useful Telegram/CLI observation bridge.</p>
+    </div>
+    <div class="card">
+      <h3>3. White-labeled Hermes package</h3>
+      <p>Create the first Pantheon-branded deployment package template for Hermes in Docker so “Deploy with Pantheon” becomes concrete.</p>
+    </div>
+    <div class="card">
+      <h3>4. Terminal app evolution</h3>
+      <p>Upgrade <code>apps/terminal-manager</code> from topology-aware static scaffold into a real observation console using live state and adapter feeds.</p>
+    </div>
+  </div>
+
+  <h2>Immediate technical goals</h2>
+  <ul>
+    <li>define runtime bridge contract for Docker/container inspection</li>
+    <li>define controller bridge contract for host-side maintenance actions</li>
+    <li>add first deployment template artifacts for white-labeled Hermes</li>
+    <li>keep all new work observable through <code>state_engine.py</code></li>
+    <li>expand readiness checks as each integration lands</li>
+  </ul>
+
+  <h2>Constraints</h2>
+  <ul>
+    <li>push atomically and frequently</li>
+    <li>PromptEngines-main write PAT remains blocked</li>
+    <li>local-first MacBook environment remains the reference runtime model</li>
+    <li>definitional docs should be HTML, not markdown-only blobs</li>
+    <li>do not overbuild hosted infra before the live local pilot proves the need</li>
+  </ul>
+</div>
+</body>
+</html>
