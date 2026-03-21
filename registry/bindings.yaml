@@ -1,0 +1,58 @@
+system: Pantheon OS
+bindings:
+  agent_runtime:
+    - agent_id: hermetic-demiurge
+      runtime_id: promptengines-hermes-primary
+      relationship: primary
+      status: active
+
+    - agent_id: dzambhala
+      runtime_id: promptengines-hermes-primary
+      relationship: primary
+      status: active
+
+  agent_channel:
+    - agent_id: ai-principal
+      channel_id: ai-principal-cli
+      relationship: primary
+      status: active
+
+    - agent_id: hermetic-demiurge
+      channel_id: ai-principal-cli
+      relationship: shared-supervision
+      status: active
+
+    - agent_id: hermetic-demiurge
+      channel_id: hermetic-demiurge-telegram
+      relationship: dedicated
+      status: planned
+
+    - agent_id: dzambhala
+      channel_id: dzambhala-telegram
+      relationship: dedicated
+      status: active
+
+    - agent_id: promptengines-host-controller
+      channel_id: promptengines-host-controller-cli
+      relationship: dedicated
+      status: planned
+
+  runtime_controller:
+    - runtime_id: promptengines-hermes-primary
+      controller_id: promptengines-host-controller
+      relationship: primary
+      status: planned
+
+    - runtime_id: promptengines-openclaw-lab
+      controller_id: promptengines-host-controller
+      relationship: primary
+      status: planned
+
+  deployment_scope:
+    - deployment_id: promptengines
+      phase: tier-1
+      venture_ids:
+        - promptengines-web
+        - lab-notes
+        - kaizen
+        - consulting

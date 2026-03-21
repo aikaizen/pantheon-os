@@ -6,58 +6,81 @@
 <title>Data Model v2 — Pantheon OS</title>
 <style>
   :root {
-    --bg: #0a0a0c; --surface: #111114; --border: #252530;
-    --text: #e0e0e6; --text-dim: #7a7a8a; --accent: #2dd4bf; --accent-dim: #0d9488;
+    --bg: #0a0a0c;
+    --surface: #111114;
+    --surface-2: #17171d;
+    --border: #252530;
+    --text: #e0e0e6;
+    --text-dim: #7a7a8a;
+    --accent: #2dd4bf;
+    --accent-dim: #0d9488;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: var(--bg); color: var(--text);
+    background: var(--bg);
+    color: var(--text);
     font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-    font-size: 14px; line-height: 1.6; min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
   }
-  .container { max-width: 780px; margin: 0 auto; padding: 48px 24px; }
+  .container { max-width: 820px; margin: 0 auto; padding: 48px 24px; }
   header {
-    border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 40px;
-    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
-  header h1 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  header h1 { font-size: 24px; color: var(--accent); }
   header a { font-size: 12px; color: var(--text-dim); text-decoration: none; }
   header a:hover { color: var(--accent); }
   section { margin-bottom: 36px; }
   section h2 {
-    font-size: 16px; font-weight: 600; margin-bottom: 12px;
-    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
   }
   section h2 span { color: var(--accent); margin-right: 8px; }
-  section h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; margin-top: 16px; }
-  p { font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px; }
-  strong { color: var(--text); }
+  section h3 { font-size: 14px; margin: 16px 0 8px; }
+  p, li { color: var(--text-dim); margin-bottom: 12px; }
   code { background: var(--surface); padding: 2px 6px; font-size: 12px; }
   .code-block {
-    background: var(--surface); border: 1px solid var(--border);
-    padding: 16px 20px; margin-bottom: 16px; font-size: 12px; line-height: 1.6;
-    overflow-x: auto; white-space: pre;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre;
+    overflow-x: auto;
   }
-  .schema-table {
-    width: 100%; border-collapse: collapse; margin-bottom: 16px;
-  }
+  .schema-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
   .schema-table th {
-    text-align: left; font-size: 10px; text-transform: uppercase;
-    letter-spacing: 1.5px; color: var(--accent-dim); padding: 8px 12px;
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-dim);
+    padding: 8px 12px;
     border-bottom: 1px solid var(--border);
   }
   .schema-table td {
-    padding: 8px 12px; font-size: 12px; border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
     color: var(--text-dim);
+    vertical-align: top;
   }
-  .schema-table td:first-child { color: var(--text); font-family: monospace; }
-  .layer-label {
-    font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
-    color: var(--accent-dim); margin-bottom: 4px;
-  }
+  .schema-table td:first-child { color: var(--text); }
   footer {
-    border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px;
-    font-size: 11px; color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-dim);
   }
 </style>
 </head>
@@ -68,122 +91,99 @@
     <a href="index.html">← Pantheon OS</a>
   </header>
 
-  <p>Cross-surface data model covering all four Pantheon OS surfaces. Extends the dashboard-only
-  v1 model. All agent references use <code>registry:agents.yaml#&lt;id&gt;</code> format.</p>
+  <p>Cross-surface data model for PantheonOS as an observational and intervention surface over sovereign persona agents, channels, runtimes, controllers, and bindings. Persona agents remain canonical in <code>agents.yaml</code>, but they are no longer treated as the whole system.</p>
 
-  <!-- Principles Layer -->
   <section>
-    <h2><span>◆</span>Principles Layer</h2>
-    <div class="layer-label">Organization</div>
+    <h2><span>◆</span>Core object types</h2>
+    <table class="schema-table">
+      <tr><th>Object</th><th>Registry</th><th>Meaning</th></tr>
+      <tr><td>Persona agent</td><td><code>agents.yaml</code></td><td>Sovereign identity with soul, voice, memory, and mandate.</td></tr>
+      <tr><td>Runtime</td><td><code>runtimes.yaml</code></td><td>Execution substrate where one or more persona agents live.</td></tr>
+      <tr><td>Controller</td><td><code>controllers.yaml</code></td><td>Overseer agent with host or machine access.</td></tr>
+      <tr><td>Channel</td><td><code>channels.yaml</code></td><td>Telegram, CLI, or other conversational/control surface.</td></tr>
+      <tr><td>Binding</td><td><code>bindings.yaml</code></td><td>Relationship between persona agents, runtimes, controllers, and channels.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Principles & deployment layer</h2>
     <div class="code-block">{
-  "org_id": "promptengines",
-  "name": "PromptEngines",
-  "sovereignty": {
-    "principal": "registry:agents.yaml#ai-principal",
-    "authority_model": "human-sovereign"
+  "deployment_id": "promptengines",
+  "deployment_ref": "registry:deployments/promptengines.json",
+  "modes": ["observe", "message", "control"],
+  "pilot_scope": {
+    "tier_1": ["promptengines-web", "lab-notes", "kaizen", "consulting"]
   }
 }</div>
+    <p>Deployments describe how a real company installation is staged. PromptEngines is the first reference deployment.</p>
+  </section>
 
-    <h3>Authority Chain</h3>
-    <p>Defines who can approve what, per domain.</p>
+  <section>
+    <h2><span>◆</span>Dashboard layer</h2>
+    <table class="schema-table">
+      <tr><th>Entity</th><th>Key fields</th></tr>
+      <tr><td>Venture</td><td>id, name, stage, status, owner, operators, repo, deployment</td></tr>
+      <tr><td>Goal</td><td>id, venture, title, status, owner, due</td></tr>
+      <tr><td>Approval</td><td>id, type, requester, approver, status</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Operating Terminal layer</h2>
+    <table class="schema-table">
+      <tr><th>Pane type</th><th>Source</th><th>Purpose</th></tr>
+      <tr><td>persona_channel</td><td><code>channels.yaml</code></td><td>Conversation with a sovereign persona agent.</td></tr>
+      <tr><td>controller_terminal</td><td><code>channels.yaml</code> / runtime bridge</td><td>Host-side controller console.</td></tr>
+      <tr><td>runtime_health</td><td><code>runtimes.yaml</code> + telemetry</td><td>Runtime health, model config, container/process state.</td></tr>
+      <tr><td>artifact</td><td>artifact store</td><td>Files, outputs, deliverables.</td></tr>
+      <tr><td>summary</td><td>state engine</td><td>Cross-pane state and blockers.</td></tr>
+      <tr><td>intervention</td><td>runtime + registry</td><td>Human/operator control actions.</td></tr>
+    </table>
+
     <div class="code-block">{
-  "domain": "production_deploy",
-  "chain": [
-    {"agent": "hermetic-demiurge", "action": "propose"},
-    {"agent": "ai-principal", "action": "approve", "threshold": "required"}
-  ],
-  "escalation_timeout_seconds": 86400
-}</div>
-
-    <h3>Escalation Rules</h3>
-    <div class="code-block">{
-  "rule_id": "heartbeat-stale",
-  "condition": "heartbeat.status == 'critical'",
-  "action": "notify",
-  "target": "registry:agents.yaml#ai-principal",
-  "severity": "high"
+  "id": "ws-main",
+  "panes": [
+    {"type": "persona_channel", "source": "registry:channels.yaml#hermetic-demiurge-telegram"},
+    {"type": "persona_channel", "source": "registry:channels.yaml#dzambhala-telegram"},
+    {"type": "controller_terminal", "source": "registry:channels.yaml#promptengines-host-controller-cli"},
+    {"type": "runtime_health", "source": "registry:runtimes.yaml#promptengines-hermes-primary"}
+  ]
 }</div>
   </section>
 
-  <!-- Dashboard Layer -->
   <section>
-    <h2><span>◆</span>Dashboard Layer</h2>
+    <h2><span>◆</span>Runtime / portal layer</h2>
     <table class="schema-table">
-      <tr><th>Entity</th><th>Key Fields</th></tr>
-      <tr><td>Venture</td><td>id, name, type, status, owner, budget, health, goals, repos</td></tr>
-      <tr><td>Goal</td><td>id, venture, title, status, milestones[], owner, due</td></tr>
-      <tr><td>Approval</td><td>id, type, requester, approver, status, payload, timestamps</td></tr>
-    </table>
-  </section>
-
-  <!-- Terminal Layer -->
-  <section>
-    <h2><span>◆</span>Operating Terminal Layer</h2>
-    <table class="schema-table">
-      <tr><th>Entity</th><th>Key Fields</th></tr>
-      <tr><td>Workspace</td><td>id, name, layout (grid/tab), panes[] with position</td></tr>
-      <tr><td>Pane</td><td>id, type, source/agent, position {col, row}</td></tr>
-      <tr><td>Intervention</td><td>id, type, target_agent, operator, reason, result</td></tr>
-    </table>
-    <h3>Pane Types</h3>
-    <table class="schema-table">
-      <tr><th>Type</th><th>Data Source</th></tr>
-      <tr><td>channel</td><td>Telegram/WhatsApp/internal message threads</td></tr>
-      <tr><td>execution</td><td>Runtime bridge — shell, tmux, docker</td></tr>
-      <tr><td>summary</td><td>Portal — agent state and blockers</td></tr>
-      <tr><td>artifact</td><td>Artifact store — files, outputs</td></tr>
-      <tr><td>portal</td><td>Portal — task state, checkpoints</td></tr>
-      <tr><td>telemetry</td><td>Runtime — metrics, heartbeat</td></tr>
-      <tr><td>oversight</td><td>Outer harness — control actions</td></tr>
-    </table>
-  </section>
-
-  <!-- Runtime Layer -->
-  <section>
-    <h2><span>◆</span>Runtime / Portal Layer</h2>
-    <h3>Portal State</h3>
-    <div class="code-block">{
-  "venture": "pantheon-os",
-  "task_id": "task-172",
-  "state": {
-    "status": "in_progress",
-    "current_agent": "registry:agents.yaml#hermetic-demiurge",
-    "phase": "implementation",
-    "blockers": [],
-    "checkpoints": [...]
-  },
-  "summaries": [{"level": "brief", "text": "..."}]
-}</div>
-
-    <h3>Agent Runtime Instance</h3>
-    <table class="schema-table">
-      <tr><th>Field</th><th>Description</th></tr>
-      <tr><td>instance_id</td><td>Unique runtime instance ID</td></tr>
-      <tr><td>agent_id</td><td>Reference to registry</td></tr>
-      <tr><td>state</td><td>running | idle | paused | waiting | error | terminated</td></tr>
-      <tr><td>session</td><td>harness, channel, chat_id</td></tr>
-      <tr><td>resource_usage</td><td>api_calls, cost_usd, tokens_in, tokens_out</td></tr>
-    </table>
-
-    <h3>Event</h3>
-    <table class="schema-table">
-      <tr><th>Type</th><th>Payload</th></tr>
-      <tr><td>state_change</td><td>agent, from_state, to_state, reason</td></tr>
-      <tr><td>log</td><td>agent, level, message</td></tr>
-      <tr><td>artifact</td><td>agent, artifact_id, path</td></tr>
-      <tr><td>approval</td><td>approval_id, decision</td></tr>
-      <tr><td>heartbeat</td><td>agent, status, summary, metrics</td></tr>
+      <tr><th>Entity</th><th>Key fields</th></tr>
+      <tr><td>Runtime</td><td>id, runtime_system, kind, host, status, access_mode</td></tr>
+      <tr><td>Controller</td><td>id, agent_system, access_level, status, manages[]</td></tr>
+      <tr><td>Channel</td><td>id, platform, kind, status, access_mode</td></tr>
+      <tr><td>Binding</td><td>binding_type, source_ref, target_ref, relationship, status</td></tr>
+      <tr><td>Runtime instance</td><td>instance_id, runtime_ref, controllers[], channels[], resource_usage</td></tr>
+      <tr><td>Heartbeat</td><td>object_type, object_ref, interval_seconds, status, summary</td></tr>
     </table>
   </section>
 
   <section>
-    <h2><span>◆</span>v1 → v2 Migration</h2>
-    <p>v2 is <strong>additive</strong>. All v1 fields preserved. New layers opt-in:</p>
+    <h2><span>◆</span>Cross-surface references</h2>
+    <p>Use explicit registry references for each object type:</p>
+    <ul>
+      <li><code>registry:agents.yaml#&lt;id&gt;</code></li>
+      <li><code>registry:runtimes.yaml#&lt;id&gt;</code></li>
+      <li><code>registry:controllers.yaml#&lt;id&gt;</code></li>
+      <li><code>registry:channels.yaml#&lt;id&gt;</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span>◆</span>Migration</h2>
+    <p>v2 remains additive. The current dashboard model survives, but deployment topology becomes first-class:</p>
     <table class="schema-table">
-      <tr><th>Layer</th><th>New Entities</th></tr>
-      <tr><td>Dashboard</td><td>goals[], kpis[]</td></tr>
-      <tr><td>Terminal</td><td>workspaces[], interventions[]</td></tr>
-      <tr><td>Runtime</td><td>portal_states[], runtime_instances[], events[], heartbeats[]</td></tr>
+      <tr><th>Layer</th><th>New entities</th></tr>
+      <tr><td>Dashboard</td><td><code>deployments[]</code>, expanded venture overlays</td></tr>
+      <tr><td>Terminal</td><td><code>workspaces[]</code>, <code>interventions[]</code>, new pane types</td></tr>
+      <tr><td>Topology</td><td><code>runtimes[]</code>, <code>controllers[]</code>, <code>channels[]</code>, <code>bindings[]</code></td></tr>
+      <tr><td>Runtime</td><td><code>portal_states[]</code>, <code>runtime_instances[]</code>, <code>events[]</code>, <code>heartbeats[]</code></td></tr>
     </table>
   </section>
 

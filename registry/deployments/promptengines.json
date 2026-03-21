@@ -10,7 +10,38 @@
   "runtime": {
     "local_first": true,
     "dual_harness": true,
-    "portal_enabled": true
+    "portal_enabled": true,
+    "observation_first": true
   },
-  "notes": "PromptEngines uses Pantheon OS as its own company operating system while Pantheon OS is also being shaped as a reusable system for other companies."
+  "modes": [
+    "observe",
+    "message",
+    "control"
+  ],
+  "registries": {
+    "runtimes": "registry/runtimes.yaml",
+    "controllers": "registry/controllers.yaml",
+    "channels": "registry/channels.yaml",
+    "bindings": "registry/bindings.yaml"
+  },
+  "pilot_scope": {
+    "tier_1": [
+      "promptengines-web",
+      "lab-notes",
+      "kaizen",
+      "consulting"
+    ],
+    "tier_2": [
+      "norbu",
+      "bible",
+      "storybook-studio"
+    ],
+    "tier_3": [
+      "flow",
+      "video-terminal",
+      "flow-education",
+      "vajra-upaya"
+    ]
+  },
+  "notes": "PromptEngines uses Pantheon OS as its own company operating system while Pantheon OS is also being shaped as a reusable system for other companies. Existing channels and runtimes should be connected before greenfield provisioning is assumed."
 }
