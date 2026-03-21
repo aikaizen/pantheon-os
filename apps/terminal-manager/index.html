@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PantheonOS Terminal Manager</title>
+  <meta name="description" content="Topology-aware static scaffold for the PantheonOS Operating Terminal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="../../site/index.html">PantheonOS</a>
+      <div class="topbar__meta">Operating Terminal · static scaffold</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Surface 3 · Tactical workbench</div>
+        <h1>Terminal Manager</h1>
+        <p class="hero__lede" id="hero-lede">Loading deployment topology…</p>
+      </div>
+      <div class="hero__card">
+        <div class="hero__card-label">Deployment</div>
+        <div id="deployment-name" class="hero__card-title">—</div>
+        <div id="deployment-mode" class="hero__card-copy">—</div>
+      </div>
+    </section>
+
+    <section class="summary-grid" id="summary-grid"></section>
+
+    <section class="section section--split">
+      <div>
+        <div class="section-label">Workspace</div>
+        <h2>One screen for persona lanes, controller lanes, and runtime health</h2>
+      </div>
+      <p class="section-copy">This scaffold renders the corrected PantheonOS model directly from the state snapshot. It is not a fake chat wall. It is an operational surface that distinguishes who the persona is, what runtime they live on, and which controller maintains that runtime.</p>
+    </section>
+
+    <section class="workspace-grid">
+      <article class="pane pane--large">
+        <div class="pane__head"><span>Persona lanes</span><span id="persona-count">0</span></div>
+        <div class="pane__body list" id="persona-list"></div>
+      </article>
+
+      <article class="pane">
+        <div class="pane__head"><span>Controller lanes</span><span id="controller-count">0</span></div>
+        <div class="pane__body list" id="controller-list"></div>
+      </article>
+
+      <article class="pane">
+        <div class="pane__head"><span>Runtime health</span><span id="runtime-count">0</span></div>
+        <div class="pane__body list" id="runtime-list"></div>
+      </article>
+
+      <article class="pane">
+        <div class="pane__head"><span>Channel registry</span><span id="channel-count">0</span></div>
+        <div class="pane__body list" id="channel-list"></div>
+      </article>
+
+      <article class="pane">
+        <div class="pane__head"><span>Tier 1 ventures</span><span id="venture-count">0</span></div>
+        <div class="pane__body list" id="venture-list"></div>
+      </article>
+
+      <article class="pane">
+        <div class="pane__head"><span>Intervention model</span><span>Modes</span></div>
+        <div class="pane__body">
+          <div class="mode-row"><strong>Observe</strong><span>See topology, health, and summaries</span></div>
+          <div class="mode-row"><strong>Message</strong><span>Send approved messages into bound channels</span></div>
+          <div class="mode-row"><strong>Control</strong><span>Attach to controllers and operate runtimes under approval</span></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>apps/terminal-manager</div>
+    <div>Loads live state first, falls back to local mock state</div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

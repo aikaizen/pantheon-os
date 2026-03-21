@@ -41,6 +41,8 @@ Pantheon OS has four integrated surfaces, not four separate products:
 │   └── diagrams/               # Excalidraw diagrams
 ├── skills/                     # Shared skill definitions
 └── apps/                       # Application scaffolds
+    ├── promptengines-dashboard/ # Strategic dashboard app scaffold
+    └── terminal-manager/        # Topology-aware Operating Terminal scaffold
 ```
 
 ## PromptEngines as first deployment
