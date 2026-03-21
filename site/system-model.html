@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PantheonOS — System Model</title>
+  <style>
+    :root { --bg:#0a0d10; --panel:#11161c; --panel-2:#161d25; --text:#e6edf3; --muted:#9eb0c2; --line:#253140; --accent:#9dd1ff; --good:#8fd18a; --warn:#f0c36a; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+    .wrap { max-width:1080px; margin:0 auto; padding:48px 24px 80px; }
+    h1,h2,h3 { font-weight:700; letter-spacing:.01em; }
+    h1 { margin:0 0 10px; font-size:42px; }
+    h2 { margin:42px 0 14px; font-size:24px; border-top:1px solid var(--line); padding-top:24px; }
+    h3 { margin:0 0 10px; font-size:18px; }
+    p,li { color:var(--muted); }
+    .lede { font-size:18px; color:var(--text); max-width:820px; }
+    .grid { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:18px; }
+    .card { background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid var(--line); padding:18px; }
+    .tag { display:inline-block; padding:3px 8px; border:1px solid var(--line); color:var(--accent); font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+    table { width:100%; border-collapse:collapse; margin-top:16px; border:1px solid var(--line); background:var(--panel); }
+    th,td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { color:var(--text); background:#0f1419; }
+    code { color:var(--accent); }
+    .good { color:var(--good); }
+    .warn { color:var(--warn); }
+    .example { background:var(--panel); border:1px solid var(--line); padding:16px; white-space:pre-wrap; color:var(--text); margin-top:16px; }
+    a { color:var(--accent); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="tag">Definitional doc</div>
+    <h1>PantheonOS — System Model</h1>
+    <p class="lede">PantheonOS is not a central router that all agents must pass through. It is a shared multi-surface workbench for observing, understanding, and intervening across many sovereign agents, their channels, their runtimes, and the controller agents that maintain those runtimes.</p>
+
+    <h2>Core correction</h2>
+    <div class="grid">
+      <div class="card"><h3 class="good">What PantheonOS is</h3><p>A TMUX-like observation and intervention surface that brings many parallel agent relationships onto one screen: chats, terminals, runtime health, logs, artifacts, summaries, and interventions.</p></div>
+      <div class="card"><h3 class="warn">What PantheonOS is not</h3><p>Not a requirement that every agent be created inside Pantheon. Not a single-channel dispatcher. Not a workflow graph engine that scripts every interaction between agents.</p></div>
+    </div>
+
+    <h2>Five system objects</h2>
+    <table>
+      <tr><th>Object</th><th>Meaning</th><th>Examples</th></tr>
+      <tr><td>Persona agent</td><td>Sovereign agent identity with soul, memory, motivations, voice, and continuity.</td><td><code>Hermetic_Demiurge</code>, <code>Dzambhala</code></td></tr>
+      <tr><td>Runtime</td><td>The execution substrate where one or more persona agents live.</td><td>Hermes docker, OpenClaw docker, local process</td></tr>
+      <tr><td>Controller</td><td>An overseer agent with machine access that manages a runtime.</td><td>Claude Code on host, Codex on host, Hermes maintainer instance</td></tr>
+      <tr><td>Channel</td><td>A conversational or control surface through which the persona is reached.</td><td>Telegram bot/chat, CLI session, web pane</td></tr>
+      <tr><td>Binding</td><td>The mapping between persona agent, channel, runtime, and controller.</td><td><code>Hermetic_Demiurge -> Telegram -> Hermes docker -> Claude Code</code></td></tr>
+    </table>
+
+    <h2>Operating Terminal</h2>
+    <p>The Operating Terminal should feel like a web-native TMUX for multi-agent work. Each pane is a live relationship, not just a generic process.</p>
+    <div class="example">Example workspace
+
+- pane 1: Hermetic_Demiurge Telegram thread
+- pane 2: Dzambhala Telegram thread
+- pane 3: CLI conversation with a controller agent
+- pane 4: docker/runtime health and model config
+- pane 5: artifacts, diffs, and deliverables
+- pane 6: heartbeats, blockers, and interventions</div>
+
+    <h2>State engine</h2>
+    <p>The state engine is an observer and normalizer. It should aggregate facts from registry files, git state, runtimes, channels, heartbeats, artifacts, and controller status into a shared state document.</p>
+    <p>It should not pretend to be the sole runtime controller. Its job is legibility.</p>
+
+    <h2>Two onboarding modes</h2>
+    <div class="grid">
+      <div class="card"><div class="tag">Primary adoption path</div><h3>1. Connect Existing Setup</h3><p>For users who already have computers, dockers, models, bots, and controller workflows. PantheonOS should attach to what they already run.</p><ul><li>Import existing persona agents</li><li>Bind existing Telegram channels and CLI sessions</li><li>Register runtimes and host machines</li><li>Register controller/overseer agents</li><li>Start in <code>observe</code> mode before enabling control</li></ul></div>
+      <div class="card"><div class="tag">Greenfield path</div><h3>2. Start Fresh</h3><p>For users new to agents. PantheonOS can help provision a first runtime, define persona agents, create channels, and add a controller agent.</p></div>
+    </div>
+
+    <h2>Registry implication</h2>
+    <p><code>registry/agents.yaml</code> should remain the canonical persona roster. But the final repo shape also needs explicit registries for <code>runtimes</code>, <code>controllers</code>, <code>channels</code>, and <code>bindings</code>.</p>
+
+    <h2>Immediate repo consequence</h2>
+    <p>The repo should evolve from a mostly agent-only registry into a multi-object system model. The dashboard and operating terminal should be able to render both sovereign persona agents and the controller/runtimes around them without conflating the two.</p>
+  </div>
+</body>
+</html>

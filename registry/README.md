@@ -35,6 +35,18 @@ The registry is consumed by:
 - **Operating Terminal** — agent sessions, intervention targets
 - **Runtime/Portal** — agent state transitions, heartbeat monitoring, event routing
 
+## Current Scope vs Target Scope
+
+Today `agents.yaml` is the canonical persona roster. That is correct, but it is not the full system model.
+
+PantheonOS also needs explicit records for:
+- `runtimes` — dockerized agent systems or other execution substrates
+- `controllers` — overseer agents with host/machine access
+- `channels` — Telegram bots/chats, CLI sessions, and other communication surfaces
+- `bindings` — relationships between persona agents, channels, runtimes, and controllers
+
+This keeps sovereign agent identity separate from the machines, containers, and channels they happen to use.
+
 ## Adding an agent
 
 1. Add entry to `agents.yaml` with id, type, role, budget, capabilities, constraints

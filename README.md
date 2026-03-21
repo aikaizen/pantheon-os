@@ -10,9 +10,9 @@ Pantheon OS has four integrated surfaces, not four separate products:
 
 **2. Company Dashboard** — Strategic surface. Makes the company legible: ventures, operators, budgets, approvals, goals, health, priorities. Current MVP is the seed, not the final product.
 
-**3. Operating Terminal** — Tactical surface. Command-center IDE for steering agent teams across chats, terminals, tmux panes, tools, logs, summaries, artifacts, and interventions in real time.
+**3. Operating Terminal** — Tactical surface. TMUX-like multi-pane workspace for working across sovereign agent conversations, controller terminals, runtime health, logs, summaries, artifacts, and interventions in real time.
 
-**4. Runtime / Portal** — Substrate. Dual-harness orchestration, portal state, event flow, memory, supervision, agent state transitions. Powers everything above.
+**4. Runtime / Portal** — Substrate. Observation and integration layer for runtimes, channels, heartbeats, artifacts, memory, and supervision. It is not a workflow engine; it is the shared state and control substrate that powers everything above.
 
 ## Repo structure
 
@@ -48,6 +48,8 @@ Pantheon OS has four integrated surfaces, not four separate products:
 Pantheon OS is general. PromptEngines is the first real company using it. The repo supports both truths — the system is reusable, the deployment is real.
 
 ## Related docs
+
+- `site/system-model.html` — corrected system model: persona agents, runtimes, controllers, channels, bindings, and onboarding modes
 
 - `docs/plans/pantheon-os-spec-v1.md` — Product spec
 - `docs/plans/pantheon-os-repo-work-plan.md` — Work plan
