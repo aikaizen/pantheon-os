@@ -50,6 +50,8 @@ Pantheon OS is general. PromptEngines is the first real company using it. The re
 ## Related docs
 
 - `site/system-model.html` — corrected system model: persona agents, runtimes, controllers, channels, bindings, and onboarding modes
+- `site/promptengines-pilot.html` — PromptEngines-first pilot readiness plan for internal testing and later external packaging
+- `docs/plans/2026-03-21-promptengines-pilot-readiness-plan.md` — execution plan for getting the repo ready for the PromptEngines reference deployment
 
 - `docs/plans/pantheon-os-spec-v1.md` — Product spec
 - `docs/plans/pantheon-os-repo-work-plan.md` — Work plan

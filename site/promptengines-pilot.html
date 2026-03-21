@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PromptEngines Pilot — PantheonOS</title>
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --surface: #111114;
+    --surface-2: #17171d;
+    --border: #252530;
+    --text: #e0e0e6;
+    --text-dim: #7a7a8a;
+    --accent: #2dd4bf;
+    --accent-2: #4a9eff;
+    --warn: #f59e0b;
+    --good: #10b981;
+    --red: #ef4444;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+  .nav { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .nav a { color: var(--accent); text-decoration: none; border: 1px solid var(--border); padding: 6px 12px; font-size: 12px; }
+  .nav a:hover { border-color: var(--accent); }
+  h1 { font-size: 30px; margin: 0 0 8px; color: #fff; }
+  h2 { font-size: 18px; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); color: #fff; }
+  h3 { font-size: 14px; margin: 0 0 8px; color: #fff; }
+  p, li { font-size: 13px; color: var(--text-dim); }
+  .lede { color: var(--text); max-width: 800px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: linear-gradient(180deg, var(--surface), var(--surface-2)); border: 1px solid var(--border); padding: 18px; }
+  .tag { display: inline-block; padding: 3px 8px; border: 1px solid var(--border); font-size: 11px; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; }
+  .good { color: var(--good); }
+  .warn { color: var(--warn); }
+  .red { color: var(--red); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; border: 1px solid var(--border); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 12px; }
+  th { color: #fff; background: #0f0f13; }
+  code { color: var(--accent-2); }
+  .checklist { background: var(--surface); border: 1px solid var(--border); padding: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a href="index.html">← Docs</a>
+    <a href="system-model.html">System Model</a>
+    <a href="development-plan.html">Development Plan</a>
+    <a href="https://github.com/aikaizen/pantheon-os">GitHub ↗</a>
+  </nav>
+
+  <div class="tag">Reference deployment</div>
+  <h1>PromptEngines Pilot Readiness</h1>
+  <p class="lede">PantheonOS should become useful to other operators by first becoming genuinely useful for PromptEngines.com and the PromptEngines suite of ventures/apps. This plan defines what the repo must contain before internal testing is real instead of theatrical.</p>
+
+  <h2>Definition of ready</h2>
+  <div class="grid">
+    <div class="card"><h3 class="good">Ready means</h3><p>PantheonOS can observe a real PromptEngines deployment with persona agents, controllers, runtimes, and channels; show them on one surface; and support internal operator usage without demanding a rebuild of existing agent setups.</p></div>
+    <div class="card"><h3 class="warn">Not ready means</h3><p>The repo still treats PromptEngines as prose only, still lacks deployment bindings, or still shows mainly mock concepts without enough live observability to support daily use.</p></div>
+  </div>
+
+  <h2>Initial pilot scope</h2>
+  <table>
+    <tr><th>Tier</th><th>Ventures</th><th>Why</th></tr>
+    <tr><td>Tier 1</td><td><code>promptengines-web</code>, <code>lab-notes</code>, <code>kaizen</code>, <code>consulting</code></td><td>Best first mix of brand, publishing, product, and service operations.</td></tr>
+    <tr><td>Tier 2</td><td><code>norbu</code>, <code>bible</code>, <code>storybook-studio</code></td><td>Add once the pilot is already useful every day.</td></tr>
+    <tr><td>Tier 3</td><td><code>flow</code>, <code>video-terminal</code>, <code>flow-education</code>, <code>vajra-upaya</code></td><td>Track them in the dashboard, but do not make them first-wave runtime dependencies.</td></tr>
+  </table>
+
+  <h2>Required workstreams</h2>
+  <div class="grid">
+    <div class="card"><h3>1. Reference deployment model</h3><p>Add explicit registries for <code>runtimes</code>, <code>controllers</code>, <code>channels</code>, and <code>bindings</code>. PromptEngines must be representable as a deployment topology, not just a venture list.</p></div>
+    <div class="card"><h3>2. State engine v3</h3><p>Observe persona status, controller status, runtime status, channel summaries, and bindings. Keep the engine observational.</p></div>
+    <div class="card"><h3>3. Operating Terminal MVP</h3><p>Make the terminal useful for real daily use: persona chat panes, controller panes, runtime health, artifacts, and interventions.</p></div>
+    <div class="card"><h3>4. PromptEngines venture integration</h3><p>Make the dashboard and terminal show which PromptEngines ventures are actually participating in the pilot and at what level.</p></div>
+    <div class="card"><h3>5. Onboarding modes</h3><p>Support <strong>Connect Existing Setup</strong> first, then <strong>Start Fresh</strong>. PantheonOS must adopt, not replace, existing agent estates.</p></div>
+    <div class="card"><h3>6. Productization later</h3><p>Once the pilot works internally, package PromptEngines as the first reusable reference deployment for outside operators.</p></div>
+  </div>
+
+  <h2>Pilot gates</h2>
+  <div class="checklist">
+    <p>Before internal testing counts as real, the repo should have:</p>
+    <ul>
+      <li>a declared PromptEngines deployment topology</li>
+      <li>registries for persona agents, runtimes, controllers, channels, and bindings</li>
+      <li>a state engine that can emit partial real observation</li>
+      <li>a terminal model that distinguishes persona panes from controller panes</li>
+      <li>observe / message / control permission modes</li>
+      <li>docs for Connect Existing Setup and Start Fresh</li>
+      <li>a written acceptance checklist for the pilot</li>
+    </ul>
+  </div>
+
+  <h2>Early blockers</h2>
+  <table>
+    <tr><th>Blocker</th><th>Impact</th><th>Action</th></tr>
+    <tr><td><code>promptengines-main</code> write PAT missing</td><td>Hermetic_Demiurge cannot complete some PromptEngines plane work directly.</td><td>Human action: provide correct write token or route work through approved controller path.</td></tr>
+    <tr><td>No controller/channel/runtime registries yet</td><td>PromptEngines deployment cannot be represented cleanly.</td><td>Build the missing registry objects first.</td></tr>
+    <tr><td>State engine dependency/runtime assumptions still thin</td><td>Live observation remains fragile.</td><td>Document and harden the state engine runtime contract.</td></tr>
+  </table>
+
+  <h2>Execution order</h2>
+  <p>1. Lock the PromptEngines deployment model. 2. Add missing registry objects. 3. Expand the state engine. 4. Revise the terminal around real panes of relationship. 5. Add onboarding modes. 6. Wire Tier 1 ventures into the pilot. 7. Run the internal pilot before external packaging.</p>
+</div>
+</body>
+</html>
