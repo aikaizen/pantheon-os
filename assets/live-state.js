@@ -200,6 +200,38 @@
         </div>
       </div>
 
+      ${state.runtime_topology ? `
+        <h2>◆ Runtime Topology</h2>
+        <div class="live-grid">
+          <div class="live-cell">
+            <div class="cell-label">Hosts</div>
+            <div class="cell-value">${state.runtime_topology.summary.host_count}</div>
+          </div>
+          <div class="live-cell">
+            <div class="cell-label">Host Overseers</div>
+            <div class="cell-value">${state.runtime_topology.summary.overseer_count}</div>
+          </div>
+          <div class="live-cell">
+            <div class="cell-label">Hermes Instances</div>
+            <div class="cell-value">${state.runtime_topology.summary.hermes_instance_count}</div>
+          </div>
+          <div class="live-cell">
+            <div class="cell-label">Agent Slots</div>
+            <div class="cell-value">${state.runtime_topology.summary.active_slot_count} active / ${state.runtime_topology.summary.agent_slot_count} total</div>
+          </div>
+        </div>
+        <div class="live-agents">
+          ${state.runtime_topology.hosts.map(host => `
+            <div class="live-agent">
+              <div class="agent-dot ${(host.overseer && host.overseer.status === 'active') ? 'active' : 'unknown'}"></div>
+              <div class="agent-name">${host.label}</div>
+              <div class="agent-role">${host.overseer ? `${host.overseer.name} · host overseer` : 'No overseer registered'}</div>
+              <div class="agent-realm">${host.runtimes.map(runtime => `${runtime.name}: ${runtime.slot_summary.active}/${runtime.slot_summary.total} slots`).join(' · ')}</div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
       <h2>◆ Agents</h2>
       <div class="live-agents">
         ${state.agents.map(a => `

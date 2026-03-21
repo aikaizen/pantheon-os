@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Runtime Topology — Pantheon OS</title>
+<style>
+  :root {
+    --bg: #0a0a0c; --surface: #111114; --surface-2: #17171d; --border: #252530;
+    --text: #e0e0e6; --text-dim: #7a7a8a; --accent: #2dd4bf; --accent-2: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px; line-height: 1.7; min-height: 100vh;
+  }
+  .container { max-width: 980px; margin: 0 auto; padding: 48px 24px 80px; }
+  header {
+    border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 40px;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  }
+  header h1 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  header a { font-size: 12px; color: var(--text-dim); text-decoration: none; }
+  header a:hover { color: var(--accent); }
+  p { color: var(--text-dim); margin-bottom: 12px; }
+  strong { color: var(--text); }
+  .lede { font-size: 15px; color: var(--text); max-width: 820px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border); padding: 18px;
+  }
+  .card h2, .card h3 { color: var(--text); margin-bottom: 8px; }
+  .card h2 { font-size: 16px; }
+  .card h3 { font-size: 14px; }
+  .kicker {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .diagram {
+    margin: 24px 0 32px;
+    background: linear-gradient(180deg, #0d1016, #12161e);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+  .diagram pre {
+    white-space: pre-wrap; color: var(--text); font-size: 13px; line-height: 1.8;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--accent); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  code { color: var(--accent-2); }
+  footer {
+    border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px;
+    font-size: 11px; color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Runtime Topology</h1>
+    <a href="index.html">← Pantheon OS</a>
+  </header>
+
+  <p class="lede">PantheonOS separates <strong>named agents</strong> from the <strong>runtime substrate</strong> they occupy. The canonical rule is explicit: every Hermes instance is deployed in a single Docker container and supervised by a host-level overseer agent.</p>
+
+  <div class="diagram">
+<pre>HOST MACHINE
+└── HOST OVERSEER AGENT
+    └── manages Docker runtime(s)
+        └── HERMES INSTANCE (1 Docker container)
+            ├── slot-01  Dzambhala            active
+            ├── slot-02  Hermetic_Demiurge    active
+            ├── slot-03  open                 available
+            └── slot-04  open                 available</pre>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="kicker">Canonical terms</div>
+      <h2>Host overseer</h2>
+      <p>The overseer agent runs on the host machine, outside the persona runtimes. It supervises Docker lifecycle, routing, runtime health, and restart actions.</p>
+    </div>
+    <div class="card">
+      <div class="kicker">Canonical terms</div>
+      <h2>Hermes instance</h2>
+      <p>A Hermes instance is the orchestration runtime. It provides memory, tools, delegation, messaging, scheduling, and execution harnessing for the agents inside it.</p>
+    </div>
+    <div class="card">
+      <div class="kicker">Canonical terms</div>
+      <h2>Deployment unit</h2>
+      <p>One Hermes instance equals one Docker container. The container is the runtime boundary. Agents are tenants inside that single supervised runtime.</p>
+    </div>
+    <div class="card">
+      <div class="kicker">Canonical terms</div>
+      <h2>Agent slot</h2>
+      <p>Each Hermes instance supports up to four agent slots. A slot can be active with a named agent or left available for future occupancy.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">PromptEngines current deployment</div>
+    <table>
+      <tr><th>Layer</th><th>Current state</th></tr>
+      <tr><td>Host machines</td><td>1 local-first MacBook host</td></tr>
+      <tr><td>Host overseers</td><td>1 active host overseer agent</td></tr>
+      <tr><td>Hermes instances</td><td>1 active Hermes instance</td></tr>
+      <tr><td>Docker containers</td><td>1 container for the active Hermes instance</td></tr>
+      <tr><td>Active agents</td><td><code>dzambhala</code>, <code>hermetic-demiurge</code></td></tr>
+      <tr><td>Available slots</td><td>2 remaining slots inside the same Hermes runtime</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top: 18px;">
+    <div class="kicker">Why this matters</div>
+    <p>This model prevents a common confusion: <strong>one container per agent</strong> is not the PantheonOS default. The system is built around a supervised runtime that can host multiple named agents while remaining observable and operable as a single deployment unit.</p>
+  </div>
+
+  <footer>
+    Runtime Topology · Runtime / Portal Surface · Pantheon OS
+  </footer>
+</div>
+</body>
+</html>

@@ -1,4 +1,9 @@
 system: Pantheon OS
+runtime_model:
+  host_overseer_required: true
+  hermes_instance_deployment_unit: single-docker-container
+  max_agents_per_hermes: 4
+  topology_rule: Every Hermes instance is deployed in a single Docker container and supervised by a host-level overseer agent.
 runtimes:
   - id: promptengines-hermes-primary
     name: PromptEngines Hermes Primary
@@ -11,36 +16,44 @@ runtimes:
       id: promptengines-local-macbook
       label: PromptEngines local-first MacBook
       os: macos
+    overseer:
+      controller_id: promptengines-host-overseer
+      placement: host-machine
+      required: true
+    deployment_unit:
+      type: single-docker-container
+      container_name: promptengines-hermes-primary
+    white_label:
+      public_surface: Pantheon
+      substrate: Hermes
+      deployment_brand: PromptEngines
     access_mode: observe
     channels_supported:
       - telegram
       - cli
+    capacity:
+      max_agents: 4
+      active_agents: 2
+      available_slots: 2
+    agent_slots:
+      - slot_id: slot-01
+        status: active
+        agent_id: dzambhala
+      - slot_id: slot-02
+        status: active
+        agent_id: hermetic-demiurge
+      - slot_id: slot-03
+        status: available
+        agent_id: null
+      - slot_id: slot-04
+        status: available
+        agent_id: null
     agent_bindings:
-      - hermetic-demiurge
       - dzambhala
+      - hermetic-demiurge
     controller_bindings:
-      - promptengines-host-controller
+      - promptengines-host-overseer
     repos:
       - aikaizen/pantheon-os
       - aikaizen/promptengines-main
-    notes: Shared dockerized Hermes runtime for the PromptEngines pilot. Observe-first before broader control actions.
-
-  - id: promptengines-openclaw-lab
-    name: PromptEngines OpenClaw Lab
-    deployment: promptengines
-    kind: docker
-    runtime_system: openclaw
-    status: planned
-    lifecycle: persistent
-    host:
-      id: promptengines-local-macbook
-      label: PromptEngines local-first MacBook
-      os: macos
-    access_mode: observe
-    channels_supported:
-      - cli
-    agent_bindings: []
-    controller_bindings:
-      - promptengines-host-controller
-    repos: []
-    notes: Optional second runtime for comparative pilot testing and controller workflows.
+    notes: "Current PromptEngines runtime: one Hermes instance in one Docker container running Dzambhala and Hermetic_Demiurge."

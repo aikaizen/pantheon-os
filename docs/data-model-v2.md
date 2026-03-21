@@ -118,7 +118,7 @@ Preserves existing v1 schema and adds deployment-aware overlays.
   "panes": [
     {"id": "p1", "type": "persona_channel", "source": "registry:channels.yaml#hermetic-demiurge-telegram", "position": {"col": 0, "row": 0}},
     {"id": "p2", "type": "persona_channel", "source": "registry:channels.yaml#dzambhala-telegram", "position": {"col": 1, "row": 0}},
-    {"id": "p3", "type": "controller_terminal", "source": "registry:channels.yaml#promptengines-host-controller-cli", "position": {"col": 2, "row": 0}},
+    {"id": "p3", "type": "controller_terminal", "source": "registry:channels.yaml#promptengines-host-overseer-cli", "position": {"col": 2, "row": 0}},
     {"id": "p4", "type": "runtime_health", "source": "registry:runtimes.yaml#promptengines-hermes-primary", "position": {"col": 0, "row": 1}},
     {"id": "p5", "type": "artifact", "scope": "promptengines", "position": {"col": 1, "row": 1}},
     {"id": "p6", "type": "summary", "scope": "all", "position": {"col": 2, "row": 1}}
@@ -174,11 +174,11 @@ Preserves existing v1 schema and adds deployment-aware overlays.
 
 ```json
 {
-  "id": "promptengines-host-controller",
-  "ref": "registry:controllers.yaml#promptengines-host-controller",
-  "agent_system": "claude-code",
+  "id": "promptengines-host-overseer",
+  "ref": "registry:controllers.yaml#promptengines-host-overseer",
+  "agent_system": "hermes-operator",
   "access_level": "host",
-  "status": "planned|active|paused"
+  "status": "active|paused|failed"
 }
 ```
 
@@ -228,7 +228,7 @@ Preserves existing v1 schema and adds deployment-aware overlays.
 {
   "instance_id": "inst-runtime-001",
   "runtime_ref": "registry:runtimes.yaml#promptengines-hermes-primary",
-  "controllers": ["registry:controllers.yaml#promptengines-host-controller"],
+  "controllers": ["registry:controllers.yaml#promptengines-host-overseer"],
   "channels": [
     "registry:channels.yaml#ai-principal-cli",
     "registry:channels.yaml#dzambhala-telegram"

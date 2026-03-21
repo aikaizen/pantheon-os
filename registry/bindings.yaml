@@ -1,13 +1,15 @@
 system: Pantheon OS
 bindings:
   agent_runtime:
-    - agent_id: hermetic-demiurge
+    - agent_id: dzambhala
       runtime_id: promptengines-hermes-primary
+      slot_id: slot-01
       relationship: primary
       status: active
 
-    - agent_id: dzambhala
+    - agent_id: hermetic-demiurge
       runtime_id: promptengines-hermes-primary
+      slot_id: slot-02
       relationship: primary
       status: active
 
@@ -22,31 +24,21 @@ bindings:
       relationship: shared-supervision
       status: active
 
-    - agent_id: hermetic-demiurge
-      channel_id: hermetic-demiurge-telegram
-      relationship: dedicated
-      status: planned
-
     - agent_id: dzambhala
       channel_id: dzambhala-telegram
       relationship: dedicated
       status: active
 
-    - agent_id: promptengines-host-controller
-      channel_id: promptengines-host-controller-cli
+    - agent_id: promptengines-host-overseer
+      channel_id: promptengines-host-overseer-cli
       relationship: dedicated
-      status: planned
+      status: active
 
   runtime_controller:
     - runtime_id: promptengines-hermes-primary
-      controller_id: promptengines-host-controller
-      relationship: primary
-      status: planned
-
-    - runtime_id: promptengines-openclaw-lab
-      controller_id: promptengines-host-controller
-      relationship: primary
-      status: planned
+      controller_id: promptengines-host-overseer
+      relationship: required-host-supervision
+      status: active
 
   deployment_scope:
     - deployment_id: promptengines

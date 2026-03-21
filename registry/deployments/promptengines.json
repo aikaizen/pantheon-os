@@ -11,7 +11,27 @@
     "local_first": true,
     "dual_harness": true,
     "portal_enabled": true,
-    "observation_first": true
+    "observation_first": true,
+    "runtime_model": {
+      "host_overseer_required": true,
+      "hermes_instance_deployment_unit": "single-docker-container",
+      "max_agents_per_hermes": 4,
+      "topology_rule": "Each Hermes instance is deployed in a single Docker container and supervised by a host-level overseer agent."
+    },
+    "current_topology": {
+      "host_count": 1,
+      "overseer_count": 1,
+      "hermes_instance_count": 1,
+      "active_agents": 2,
+      "open_agent_slots": 2,
+      "active_runtime_ids": [
+        "promptengines-hermes-primary"
+      ],
+      "active_agent_ids": [
+        "dzambhala",
+        "hermetic-demiurge"
+      ]
+    }
   },
   "modes": [
     "observe",

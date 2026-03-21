@@ -76,8 +76,9 @@
   <div class="surface-block">
     <div class="surface-num">Surface 4</div>
     <h2>Runtime / Portal</h2>
-    <p>The runtime layer is the substrate beneath the visible surfaces. It includes dual harnesses,
-    portal state, supervision, telemetry, event flow, memory, and agent state transitions.</p>
+    <p>The runtime layer is the substrate beneath the visible surfaces. The canonical deployment model is:
+    one host machine with an overseer agent, one Hermes instance per Docker container, and up to four agent slots inside each Hermes runtime.
+    Portal state, supervision, telemetry, event flow, memory, and agent state transitions all sit here.</p>
   </div>
 
   <div class="note">
