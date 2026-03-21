@@ -6,6 +6,7 @@ Full readiness check for the PromptEngines PantheonOS pilot.
 import os
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import urllib.request
@@ -18,7 +19,9 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def run(cmd):
     print(f"$ {' '.join(cmd)}")
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    env = dict(os.environ)
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, env=env)
     if result.stdout:
         print(result.stdout.strip())
     if result.returncode != 0:
@@ -51,17 +54,19 @@ def smoke_serve():
 
 
 def main():
-    run([sys.executable, "tools/validate_topology.py"])
+    run([sys.executable, "-B", "tools/validate_topology.py"])
     run([
         sys.executable,
+        "-B",
         "-m",
         "unittest",
         "tests.realms.test_isolation",
         "tests.tools.test_validate_topology",
         "tests.engine.test_state_engine",
     ])
-    run([sys.executable, "tools/test_output_governor_integration.py"])
-    run([sys.executable, "engine/state_engine.py", "--output", "data/pantheon-os-state.json"])
+    run([sys.executable, "-B", "tools/test_output_governor_integration.py"])
+    with tempfile.TemporaryDirectory() as tmpdir:
+        run([sys.executable, "-B", "engine/state_engine.py", "--output", str(Path(tmpdir) / "state.json")])
     smoke_serve()
     print("PromptEngines pilot readiness checks passed.")
 
