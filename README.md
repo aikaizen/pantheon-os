@@ -49,6 +49,12 @@ Pantheon OS has four integrated surfaces, not four separate products:
 
 Pantheon OS is general. PromptEngines is the first real company using it. The repo supports both truths — the system is reusable, the deployment is real.
 
+Quick readiness check:
+
+```bash
+python3 scripts/check_promptengines_pilot.py
+```
+
 ## Related docs
 
 - `site/system-model.html` — corrected system model: persona agents, runtimes, controllers, channels, bindings, and onboarding modes

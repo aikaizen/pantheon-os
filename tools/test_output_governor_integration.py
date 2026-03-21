@@ -3,9 +3,12 @@
 Integration test for output governor module.
 """
 
-import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 
 from tools.output_governor import CappedSearchResults, CappedFileRead, TruncatedTerminal
 
