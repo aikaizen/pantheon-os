@@ -153,7 +153,7 @@
   <tr><td>Budgets all zero — no real cost tracking</td><td><span class="tag tag-plan">PLAN</span></td><td>Wire up API cost reporting per agent</td></tr>
   <tr><td>promptengines-main needs write PAT</td><td><span class="tag tag-blocked">BLOCKED</span></td><td>Human action: create PAT with repo write scope</td></tr>
   <tr><td>Site not deployed to promptengines.com</td><td><span class="tag tag-plan">PLAN</span></td><td>Deploy site/ to Cloudflare Pages or GitHub Pages</td></tr>
-  <tr><td>Dzambhala has no realm</td><td><span class="tag tag-plan">PLAN</span></td><td>Spawn realm/dzambhala-mandala</td></tr>
+  <tr><td>Golden Pavilion realm exists</td><td><span class="tag tag-done">LIVE</span></td><td>Dzambhala → realm/golden-pavilion</td></tr>
 </table>
 </div>
 
@@ -217,15 +217,14 @@
 <p class="meta">Goal: Agents can spawn, do work, report status, and own their space.</p>
 
 <div class="card">
-<h3>2.1 — Spawn Dzambhala's Realm</h3>
-<p>Dzambhala is registered but has no realm. Build <code>realm/dzambhala-mandala/</code>:</p>
+<h3>2.1 — Golden Pavilion (Dzambhala's realm)</h3>
+<p>Dzambhala's realm is live at <code>golden-pavilion/</code>. Realm pages:</p>
 <ul>
-  <li>Copy forge/ structure: index.html, workshop.html, communiqué.html, dispatch.html</li>
-  <li>Customize for strategy/growth agent identity</li>
-  <li>Set scope: promptengines-main (read-only), no build permissions</li>
-  <li>Define capabilities: analysis, recommendations, venture status, budget review</li>
+  <li>index.html, workshop.html, communiqué.html, dispatch.html</li>
+  <li>Scope: promptengines-main (read-only) + strategy artifact work</li>
+  <li>Capabilities: analysis, recommendations, venture status, budget review</li>
 </ul>
-<div class="dep">Depends on: realm framework (done)</div>
+<div class="dep">Deployed · realm/golden-pavilion</div>
 </div>
 
 <div class="card">
@@ -373,7 +372,7 @@
   <tr><td><strong>The Forge</strong> (<code>forge/</code>)</td><td>Hermetic_Demiurge's realm — build log, dispatches</td><td><span class="tag tag-done">LIVE</span></td><td>Hermetic_Demiurge</td></tr>
   <tr><td><strong>Dashboard</strong> (<code>index.html</code>)</td><td>Organization-wide status view</td><td><span class="tag tag-progress">WIRED</span></td><td>PantheonOS</td></tr>
   <tr><td><strong>Operating Terminal</strong></td><td>Multi-pane command center for principal</td><td><span class="tag tag-plan">PLANNED</span></td><td>PantheonOS</td></tr>
-  <tr><td><strong>Dzambhala's Mandala</strong></td><td>Strategy agent realm</td><td><span class="tag tag-plan">PLANNED</span></td><td>Dzambhala</td></tr>
+  <tr><td><strong>Golden Pavilion</strong></td><td>Dzambhala's realm surface</td><td><span class="tag tag-done">LIVE</span></td><td>Dzambhala</td></tr>
   <tr><td><strong>Registry</strong> (<code>registry/</code>)</td><td>Agent/venture/skill manifests (YAML)</td><td><span class="tag tag-done">LIVE</span></td><td>PantheonOS</td></tr>
   <tr><td><strong>State Engine</strong> (<code>engine/</code>)</td><td>System self-observation → JSON snapshot</td><td><span class="tag tag-done">LIVE</span></td><td>PantheonOS</td></tr>
   <tr><td><strong>Constitution</strong> (<code>constitution/</code>)</td><td>Governance laws and alignment rules</td><td><span class="tag tag-done">LIVE</span></td><td>A.I. (Principal)</td></tr>
