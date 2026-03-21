@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect Existing Setup — PantheonOS</title>
+<style>
+  :root { --bg:#0a0a0c; --surface:#111114; --surface-2:#17171d; --border:#252530; --text:#e0e0e6; --text-dim:#7a7a8a; --accent:#2dd4bf; --accent-2:#4a9eff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:'JetBrains Mono','SF Mono','Fira Code',monospace; line-height:1.7; }
+  .wrap { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+  .nav { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; }
+  .nav a { color:var(--accent); text-decoration:none; border:1px solid var(--border); padding:6px 12px; font-size:12px; }
+  .nav a:hover { border-color:var(--accent); }
+  h1 { font-size:30px; margin:0 0 8px; color:#fff; }
+  h2 { font-size:18px; margin:32px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); color:#fff; }
+  h3 { font-size:14px; margin:0 0 8px; color:#fff; }
+  p, li { font-size:13px; color:var(--text-dim); }
+  .lede { color:var(--text); max-width:780px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:760px){ .grid{grid-template-columns:1fr;} }
+  .card { background:linear-gradient(180deg,var(--surface),var(--surface-2)); border:1px solid var(--border); padding:18px; }
+  .tag { display:inline-block; padding:3px 8px; border:1px solid var(--border); color:var(--accent); font-size:11px; text-transform:uppercase; margin-bottom:10px; }
+  .checklist { background:var(--surface); border:1px solid var(--border); padding:16px; }
+  code { color:var(--accent-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a href="index.html">← Docs</a>
+    <a href="system-model.html">System Model</a>
+    <a href="promptengines-pilot.html">PromptEngines Pilot</a>
+  </nav>
+
+  <div class="tag">Onboarding</div>
+  <h1>Connect Existing Setup</h1>
+  <p class="lede">This is the primary adoption path. PantheonOS should attach to the operator's existing agent estate — computers, dockers, models, Telegram bots/channels, controller workflows — before it asks them to rebuild anything.</p>
+
+  <h2>Default posture</h2>
+  <div class="grid">
+    <div class="card"><h3>Observe first</h3><p>Start in <code>observe</code> mode. Prove PantheonOS can see the existing setup before it is allowed to message or control it.</p></div>
+    <div class="card"><h3>Adopt, do not replace</h3><p>Existing agents keep their identity, soul, memory, and channels. PantheonOS becomes the shared surface above them.</p></div>
+  </div>
+
+  <h2>Required steps</h2>
+  <div class="checklist">
+    <ul>
+      <li>register deployment metadata</li>
+      <li>register existing runtimes</li>
+      <li>register existing controller/overseer agents</li>
+      <li>register existing channels</li>
+      <li>bind persona agents, runtimes, controllers, and channels</li>
+      <li>run the state engine and verify the topology is legible</li>
+      <li>upgrade bindings from <code>observe</code> to <code>message</code> or <code>control</code> only when safe</li>
+    </ul>
+  </div>
+
+  <h2>Minimum viable attachment</h2>
+  <p>PantheonOS becomes useful as soon as it can show one principal lane, one persona lane, one runtime, one controller relationship, and basic health / heartbeat / summary state on a single surface.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Fresh — PantheonOS</title>
+<style>
+  :root { --bg:#0a0a0c; --surface:#111114; --surface-2:#17171d; --border:#252530; --text:#e0e0e6; --text-dim:#7a7a8a; --accent:#2dd4bf; --accent-2:#4a9eff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:'JetBrains Mono','SF Mono','Fira Code',monospace; line-height:1.7; }
+  .wrap { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+  .nav { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; }
+  .nav a { color:var(--accent); text-decoration:none; border:1px solid var(--border); padding:6px 12px; font-size:12px; }
+  .nav a:hover { border-color:var(--accent); }
+  h1 { font-size:30px; margin:0 0 8px; color:#fff; }
+  h2 { font-size:18px; margin:32px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); color:#fff; }
+  h3 { font-size:14px; margin:0 0 8px; color:#fff; }
+  p, li { font-size:13px; color:var(--text-dim); }
+  .lede { color:var(--text); max-width:780px; }
+  .checklist { background:var(--surface); border:1px solid var(--border); padding:16px; }
+  .tag { display:inline-block; padding:3px 8px; border:1px solid var(--border); color:var(--accent); font-size:11px; text-transform:uppercase; margin-bottom:10px; }
+  code { color:var(--accent-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a href="index.html">← Docs</a>
+    <a href="system-model.html">System Model</a>
+    <a href="promptengines-pilot.html">PromptEngines Pilot</a>
+  </nav>
+
+  <div class="tag">Onboarding</div>
+  <h1>Start Fresh</h1>
+  <p class="lede">Use this path when the operator is new to agents and does not already have a runtime/controller/channel topology. The goal is to create the smallest useful PantheonOS deployment without changing the underlying model.</p>
+
+  <h2>Minimum useful topology</h2>
+  <div class="checklist">
+    <ul>
+      <li>1 principal</li>
+      <li>1 persona agent</li>
+      <li>1 runtime</li>
+      <li>1 controller</li>
+      <li>2 channels: principal CLI + persona channel</li>
+    </ul>
+  </div>
+
+  <h2>Required steps</h2>
+  <div class="checklist">
+    <ul>
+      <li>define persona agents</li>
+      <li>define at least one runtime</li>
+      <li>define at least one controller</li>
+      <li>define principal and persona channels</li>
+      <li>bind the topology explicitly</li>
+      <li>start in <code>observe</code> mode where possible, then enable <code>message</code>, then <code>control</code></li>
+      <li>run the state engine and verify the deployment renders correctly</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
