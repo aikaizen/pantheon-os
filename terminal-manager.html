@@ -30,13 +30,12 @@
           <div class="eyebrow">Pant OS Terminal Manager</div>
           <h1>Web-native tmux for operator supervision.</h1>
           <p class="hero-lead">
-            This is the tactical surface. It should do a lot of what tmux does, but with semantic panes,
-            message channels, agent summaries, portal linkage, and intervention controls built in.
+            This is the tactical surface. It should do a lot of what tmux does, but with semantic panes for persona chats, controller terminals, runtime health, artifacts, and intervention controls built in.
           </p>
         </div>
         <aside class="hero-aside">
           <div class="hero-stat">
-            <span class="hero-stat-number">5</span>
+            <span class="hero-stat-number">6</span>
             <span class="hero-stat-label">Core pane types</span>
           </div>
           <div class="hero-stat">
@@ -77,23 +76,23 @@
           <div class="wire-pane-body">
             <div class="wire-node">
               <div class="item-meta">channels</div>
-              <strong>Telegram · Adil Islam</strong>
+              <strong>Telegram · Hermetic_Demiurge</strong>
             </div>
             <div class="wire-node">
               <div class="item-meta">channels</div>
-              <strong>WhatsApp · founder lane</strong>
+              <strong>Telegram · Dzambhala</strong>
             </div>
             <div class="wire-node">
-              <div class="item-meta">agents</div>
-              <strong>Hermetic_Demiurge · build lane</strong>
+              <div class="item-meta">controllers</div>
+              <strong>Claude Code · host controller</strong>
             </div>
             <div class="wire-node">
-              <div class="item-meta">agents</div>
-              <strong>Andy Stable 🦾 · ops lane</strong>
+              <div class="item-meta">runtimes</div>
+              <strong>Hermes docker · promptengines-hermes-primary</strong>
             </div>
             <div class="wire-node">
-              <div class="item-meta">sessions</div>
-              <strong>tmux: build-floor.1</strong>
+              <div class="item-meta">runtimes</div>
+              <strong>OpenClaw lab · planned</strong>
             </div>
           </div>
         </aside>
@@ -101,15 +100,15 @@
         <section class="wire-main-grid">
           <article class="wire-pane large">
             <div class="wire-pane-head">
-              <span>Execution Pane</span>
-              <span>Hermetic_Demiurge · tmux build-floor.1</span>
+              <span>Controller Terminal Pane</span>
+              <span>PromptEngines Host Controller · hermes-primary</span>
             </div>
             <div class="wire-pane-body">
               <div class="wire-console">
-                $ git status<br />
-                $ npm run build<br />
-                $ pytest -q<br /><br />
-                live terminal transcript / attach / detach / reconnect / scrollback / copy
+                $ docker ps<br />
+                $ docker logs hermes-primary --tail 50<br />
+                $ ./scripts/heartbeat.sh runtime:promptengines-hermes-primary healthy "runtime reachable"<br /><br />
+                host-side controller transcript / attach / detach / inspect / send test message
               </div>
             </div>
           </article>
@@ -122,27 +121,27 @@
             <div class="wire-pane-body">
               <div class="wire-note">
                 <div class="item-meta">sitrep</div>
-                Refreshing PromptEngines dashboard IA and defining the terminal-manager wireframe.
+                Registry topology added: persona agents, runtimes, controllers, channels, and bindings.
               </div>
               <div class="wire-note">
                 <div class="item-meta">current</div>
-                Editing UI contract and resolving company-surface framing.
+                State engine v0.3.0 now observes deployments, runtimes, controllers, and channels.
               </div>
               <div class="wire-note">
                 <div class="item-meta">next</div>
-                Move toward live adapter wiring and session registry implementation.
+                Next: attach real persona channels and controller consoles to the pilot surface.
               </div>
             </div>
           </article>
 
           <article class="wire-pane">
             <div class="wire-pane-head">
-              <span>Channel Pane</span>
-              <span>Telegram</span>
+              <span>Persona Channel Pane</span>
+              <span>Hermetic_Demiurge · Telegram</span>
             </div>
             <div class="wire-pane-body">
-              <div class="wire-log">User: Improve the dashboard and define the terminal manager.</div>
-              <div class="wire-log">Controller: Rework the company dashboard first, then wireframe terminal control.</div>
+              <div class="wire-log">Principal: Start building the PromptEngines pilot foundations.</div>
+              <div class="wire-log">Hermetic_Demiurge: Topology registries are in. State engine expanded.</div>
               <div class="wire-log">Unread: 0 · waiting_on_human: false</div>
             </div>
           </article>
@@ -161,13 +160,13 @@
 
           <article class="wire-pane">
             <div class="wire-pane-head">
-              <span>Observer Pane</span>
-              <span>Events</span>
+              <span>Runtime Health Pane</span>
+              <span>Hermes docker · promptengines-hermes-primary</span>
             </div>
             <div class="wire-pane-body">
-              <div class="wire-log">16:40 · high-priority handoff queued</div>
-              <div class="wire-log">16:52 · ops continuity note queued</div>
-              <div class="wire-log">17:10 · terminal wireframe updated</div>
+              <div class="wire-log">healthy · controller planned · access mode: observe</div>
+              <div class="wire-log">telegram adapter: partial</div>
+              <div class="wire-log">promptengines-main write PAT: blocked</div>
             </div>
           </article>
         </section>
@@ -179,7 +178,7 @@
           </div>
           <div class="wire-pane-body">
             <div class="wire-note">
-              <div class="item-meta">session controls</div>
+              <div class="item-meta">target controls</div>
               <div class="wire-chip-row">
                 <span class="mini-chip">pause</span>
                 <span class="mini-chip">resume</span>
@@ -188,11 +187,11 @@
               </div>
             </div>
             <div class="wire-note">
-              <div class="item-meta">operator controls</div>
+              <div class="item-meta">operator actions</div>
               <div class="wire-chip-row">
-                <span class="mini-chip">send message</span>
-                <span class="mini-chip">request summary</span>
-                <span class="mini-chip">reassign</span>
+                <span class="mini-chip">observe</span>
+                <span class="mini-chip">message</span>
+                <span class="mini-chip">control</span>
                 <span class="mini-chip">escalate</span>
               </div>
             </div>
@@ -215,11 +214,12 @@
             </div>
           </div>
           <div class="wire-list">
-            <div class="wire-node"><strong>Channel Pane</strong><br />Telegram, WhatsApp, internal threads</div>
-            <div class="wire-node"><strong>Execution Pane</strong><br />Shells, tmux sessions, logs, containers</div>
+            <div class="wire-node"><strong>Persona Channel Pane</strong><br />Telegram, WhatsApp, CLI, internal threads</div>
+            <div class="wire-node"><strong>Controller Terminal Pane</strong><br />Host-side overseer console</div>
+            <div class="wire-node"><strong>Runtime Health Pane</strong><br />Docker, models, adapters, process state</div>
             <div class="wire-node"><strong>Summary Pane</strong><br />Sitrep, current, next, blockers</div>
-            <div class="wire-node"><strong>Portal Pane</strong><br />Tasks, approvals, artifacts, checkpoints</div>
-            <div class="wire-node"><strong>Inspector Pane</strong><br />Controls, ownership, escalation, linkage</div>
+            <div class="wire-node"><strong>Artifact / Portal Pane</strong><br />Tasks, approvals, artifacts, checkpoints</div>
+            <div class="wire-node"><strong>Inspector Pane</strong><br />Observe / message / control, ownership, escalation</div>
           </div>
         </div>
 
@@ -231,7 +231,7 @@
             </div>
           </div>
           <div class="wire-list">
-            <div class="wire-node"><strong>Semantic panes</strong><br />Every pane knows which company surface, agent, and task it belongs to.</div>
+            <div class="wire-node"><strong>Semantic panes</strong><br />Every pane knows whether it is a persona conversation, a controller console, or a runtime health view.</div>
             <div class="wire-node"><strong>Saved workspaces</strong><br />Restore supervision layouts, not just shells.</div>
             <div class="wire-node"><strong>Interventions</strong><br />Pause, resume, inspect, reassign, escalate from one interface.</div>
             <div class="wire-node"><strong>Portal continuity</strong><br />Important actions land in tasks, approvals, and artifacts.</div>

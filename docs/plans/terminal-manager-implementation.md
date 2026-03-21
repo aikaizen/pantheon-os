@@ -5,26 +5,25 @@
 ### Frontend
 
 - **Framework**: React + TypeScript + Vite
-- **State**: Zustand (lightweight, fits pane-based architecture)
+- **State**: Zustand
 - **Styling**: Tailwind CSS with PromptEngines visual language (sharp, dark, minimal — no rounded SaaS bubbles)
 - **Layout**: CSS Grid for multi-pane workspaces
-- **Real-time**: SSE (Server-Sent Events) for live session streams
+- **Real-time**: SSE first, WebSocket only where truly needed
 
 ### Component Hierarchy
 
 ```
 <TerminalManager>
   <WorkspaceGrid>
-    <Pane type="channel" />
-    <Pane type="execution" />
+    <Pane type="persona_channel" />
+    <Pane type="controller_terminal" />
+    <Pane type="runtime_health" />
     <Pane type="summary" />
     <Pane type="artifact" />
-    <Pane type="portal" />
-    <Pane type="oversight" />
-    <Pane type="log" />
+    <Pane type="intervention" />
   </WorkspaceGrid>
   <ControlBar />
-  <InterventionPanel />
+  <InspectorPanel />
 </TerminalManager>
 ```
 
@@ -32,65 +31,66 @@
 
 | Service | Purpose | Status |
 |---------|---------|--------|
-| Registry API | Agent roster, capabilities, constraints | Exists (YAML files) |
+| Registry API | Persona roster, runtimes, controllers, channels, bindings | Exists as YAML/JSON, needs serving layer |
+| Channel Adapter | Telegram/CLI/other message surfaces | Needs build |
+| Runtime Bridge | Runtime health, attach/detach, logs | Needs build |
+| Controller Bridge | Host-side controller terminal attach and actions | Needs build |
 | Portal API | Task state, summaries, checkpoints | Needs build |
-| Runtime Bridge | Live session proxy (tmux, shells) | Needs build |
-| Intervention API | Pause/resume/kill/reassign actions | Needs build |
 | Artifact Store | File outputs, deliverables | Needs build |
 
 ## 2. Phased Implementation
 
 ### Phase A: Static Wireframe (1-2 days)
 
-Goal: Visual shell that matches the spec, no live data.
+Goal: Visual shell that matches the corrected system model, no live data.
 
-- Build React component skeleton for all 7 pane types
+- Build React component skeleton for 6 pane types
 - Implement CSS Grid layout with resizable panes
 - Add pane chrome (title bar, type indicator, collapse/expand)
-- Port visual language from `terminal-manager.html` to React components
-- Add workspace switcher UI (tabs or sidebar)
-- No backend — all static/mock layout
+- Port visual language from `terminal-manager.html`
+- Add workspace switcher UI
+- Use example panes for Hermetic_Demiurge, Dzambhala, host controller, and runtime health
 
 **Deliverable**: `apps/terminal-manager/` with runnable static wireframe
 
-### Phase B: Mock Data Integration (2-3 days)
+### Phase B: Topology-Aware Mock Data (2-3 days)
 
-Goal: Wire up realistic mock data to prove the pane model works.
+Goal: Prove the pane model works against real topology contracts.
 
-- Create TypeScript interfaces for all data contracts (see Section 3)
+- Create TypeScript interfaces for persona agents, runtimes, controllers, channels, bindings
 - Build Zustand stores for each pane type
-- Populate with mock data from registry and synthetic sessions
-- Add simulated event streams (setInterval with random events)
-- Implement pane-level controls (pause indicator, refresh button)
-- Test layout persistence (save/restore workspace configs to localStorage)
+- Populate mock data from `registry/agents.yaml`, `registry/runtimes.yaml`, `registry/controllers.yaml`, `registry/channels.yaml`, `registry/bindings.yaml`
+- Simulate event streams for persona, controller, and runtime updates
+- Add workspace persistence in localStorage
 
-**Deliverable**: Fully interactive wireframe with mock data
+**Deliverable**: Fully interactive wireframe with topology-aware mock data
 
-### Phase C: Live Session Bridge (1 week)
+### Phase C: Live Observation Bridge (1 week)
 
-Goal: Connect to real agent sessions.
+Goal: Connect to real persona channels, controller consoles, and runtime telemetry.
 
-- Build SSE endpoint for runtime event streams
-- Implement session attach/detach for tmux panes
-- Add portal state integration (poll or stream from portal API)
-- Wire registry API for live agent roster
-- Handle reconnection, timeouts, error states
-- Add real terminal emulation (xterm.js for execution panes)
+- Build SSE endpoint for state and event streams
+- Attach persona channel panes to real adapters (Telegram/CLI as available)
+- Attach controller terminal panes via runtime/controller bridge
+- Add runtime health streaming for container/process/model state
+- Add portal state integration
+- Handle reconnection, timeouts, and degraded adapter states
+- Use xterm.js only for panes that truly need interactive terminal behavior
 
-**Deliverable**: Live terminal manager connected to running agents
+**Deliverable**: Live terminal manager connected to running PromptEngines pilot surfaces
 
 ### Phase D: Intervention Controls (3-5 days)
 
-Goal: Make the terminal actionable, not just observable.
+Goal: Make the terminal actionable without breaking the observe-first posture.
 
-- Implement all intervention types (pause, resume, restart, kill, reassign, escalate, inspect, inject)
+- Implement permission-aware actions for `observe`, `message`, and `control`
 - Add confirmation dialogs for destructive actions
-- Wire intervention API to runtime bridge
+- Wire controller/runtimes into restart / inspect / send-test-message flows
 - Add intervention history pane
-- Implement broadcast input (send command to multiple agents)
-- Add escalation routing to ai-principal
+- Add audit trail for operator actions
+- Gate risky actions behind approval rules where required
 
-**Deliverable**: Full operator control surface
+**Deliverable**: Useful internal control surface with explicit safety boundaries
 
 ## 3. Data Contracts
 
@@ -99,152 +99,125 @@ Goal: Make the terminal actionable, not just observable.
 ```typescript
 interface Agent {
   id: string;
+  ref: string;
   name: string;
   type: 'human' | 'agent';
   role: string;
   status: 'active' | 'inactive';
-  capabilities: string[];
-  constraints: {
-    requires_approval_for: string[];
-    scope_bound: string;
-  };
-}
-```
-
-### Portal API
-
-```typescript
-interface PortalState {
-  venture: string;
-  task_id: string;
-  state: {
-    status: string;
-    current_agent: string;
-    phase: string;
-    blockers: string[];
-    checkpoints: Checkpoint[];
-  };
-  summaries: Summary[];
+  runtime_bindings: AgentRuntimeBinding[];
+  channel_bindings: AgentChannelBinding[];
 }
 
-interface Checkpoint {
+interface Runtime {
   id: string;
-  label: string;
-  at: string;
+  ref: string;
+  runtime_system: 'hermes' | 'openclaw' | string;
+  kind: 'docker' | 'process' | 'remote';
+  status: 'active' | 'planned' | 'failed';
+  access_mode: 'observe' | 'message' | 'control';
 }
 
-interface Summary {
-  level: 'brief' | 'detailed';
-  text: string;
+interface Controller {
+  id: string;
+  ref: string;
+  agent_system: string;
+  access_level: 'host' | 'runtime' | 'limited';
+  status: 'active' | 'planned' | 'paused';
+  manages: string[];
+}
+
+interface Channel {
+  id: string;
+  ref: string;
+  platform: 'telegram' | 'cli' | 'whatsapp' | string;
+  kind: string;
+  status: 'active' | 'planned' | 'offline';
+  access_mode: 'observe' | 'message' | 'control';
 }
 ```
 
-### Runtime Bridge Stream
+### Runtime Event Stream
 
 ```typescript
 type RuntimeEvent =
-  | StateChangeEvent
-  | LogEvent
-  | ExecutionEvent
-  | TelemetryEvent
+  | PersonaEvent
+  | ControllerEvent
+  | RuntimeHealthEvent
   | ArtifactEvent
   | InterventionEvent;
 
-interface StateChangeEvent {
-  type: 'state_change';
+interface PersonaEvent {
+  type: 'persona_event';
   agent_id: string;
-  from: AgentState;
-  to: AgentState;
-  reason: string;
+  channel_id: string;
+  summary: string;
   timestamp: string;
 }
 
-interface LogEvent {
-  type: 'log';
-  agent_id: string;
-  level: 'info' | 'warn' | 'error';
-  message: string;
+interface ControllerEvent {
+  type: 'controller_event';
+  controller_id: string;
+  runtime_id: string;
+  summary: string;
   timestamp: string;
 }
 
-interface ExecutionEvent {
-  type: 'execution';
-  agent_id: string;
-  stream: 'stdout' | 'stderr';
-  data: string;
+interface RuntimeHealthEvent {
+  type: 'runtime_health';
+  runtime_id: string;
+  status: string;
+  adapters: Record<string, string>;
   timestamp: string;
 }
-
-type AgentState = 'idle' | 'thinking' | 'executing' | 'waiting_on_tool'
-  | 'waiting_on_human' | 'blocked' | 'reviewing' | 'error'
-  | 'complete' | 'paused';
 ```
 
 ## 4. Pane Type Interfaces
 
-### Channel Pane
-- **Data**: Message threads from Telegram/WhatsApp/internal
-- **Key props**: `channel_type`, `agent_id`, `messages[]`
-- **Behaviors**: Scroll, reply, pin, search
+### Persona Channel Pane
+- **Data**: message thread from Telegram/CLI/other surface
+- **Key props**: `channel_id`, `agent_id`, `messages[]`
+- **Behaviors**: scroll, reply, pin, request summary
 
-### Execution Pane
-- **Data**: Live shell/tmux/docker output
-- **Key props**: `agent_id`, `session_id`, `stream_data`
-- **Behaviors**: Scroll, copy, attach/detach, send input
+### Controller Terminal Pane
+- **Data**: host-side controller session or console transcript
+- **Key props**: `controller_id`, `runtime_id`, `session_id`
+- **Behaviors**: attach, detach, send input, inspect logs
+
+### Runtime Health Pane
+- **Data**: runtime status, adapters, model config, process state
+- **Key props**: `runtime_id`, `health`, `telemetry`
+- **Behaviors**: refresh, inspect, open linked controller pane
 
 ### Summary Pane
-- **Data**: Agent state, blockers, current task
-- **Key props**: `agent_id`, `portal_state`, `heartbeat`
-- **Behaviors**: Refresh, drill-down to execution, escalate
+- **Data**: state engine output, blockers, handoffs, venture context
+- **Key props**: `scope`, `summary`, `blockers[]`
+- **Behaviors**: drill-down, filter, escalate
 
 ### Artifact Pane
-- **Data**: Files, outputs, deliverables
+- **Data**: files, outputs, deliverables
 - **Key props**: `venture`, `artifacts[]`
-- **Behaviors**: Preview, download, pin, annotate
+- **Behaviors**: preview, download, pin, annotate
 
-### Portal Pane
-- **Data**: Task state, checkpoints, handoffs
-- **Key props**: `venture`, `portal_state`
-- **Behaviors**: View checkpoints, add notes, trigger handoff
-
-### Telemetry Pane
-- **Data**: Metrics, heartbeat, resource usage
-- **Key props**: `agent_id`, `metrics`, `heartbeat`
-- **Behaviors**: Time range select, metric toggle, alert config
-
-### Oversight Pane
-- **Data**: Harness state, control actions, approval queue
-- **Key props**: `harness_state`, `pending_approvals[]`
-- **Behaviors**: Approve/reject, trigger intervention, view audit log
+### Intervention Pane
+- **Data**: allowed actions + history
+- **Key props**: `target_ref`, `access_mode`, `history[]`
+- **Behaviors**: observe/message/control actions with audit trail
 
 ## 5. Open Questions
 
-### Architecture
-1. **SSE vs WebSocket**: SSE is simpler and sufficient for one-way streams. WebSocket needed only if we need bidirectional real-time (e.g., interactive terminal). Start with SSE + REST.
-2. **Charting library**: For telemetry pane. Recharts (React-native) vs lightweight custom SVG.
-3. **Terminal emulation**: xterm.js is the standard. Needed for Phase C.
-
-### Product
-4. **Default workspace layout**: What panes are visible on first load?
-5. **Multi-session**: Can operator view multiple agent sessions simultaneously?
-6. **Permissions**: Can all operators see all agents, or role-based visibility?
-7. **Mobile**: Is there a mobile view, or desktop-only?
-
-### Technical
-8. **Portal API contract**: Does the portal API exist, or does it need to be built alongside?
-9. **Runtime bridge scope**: Just tmux, or also Docker containers, remote SSH?
-10. **State model evolution**: The 10-state model in `agent-state-model.md` — is this final?
-11. **Stream volume**: How much log data flows per agent per hour? Affects buffering strategy.
-12. **Persistence**: Are workspace layouts user-specific? Stored where?
-13. **Integration timeline**: Does the terminal manager ship before or after the portal API?
+1. Which adapters land first for the pilot: Telegram read-only, Telegram reply, or CLI bridge?
+2. What is the smallest useful controller bridge for the first PromptEngines runtime?
+3. How much interactive terminal behavior is truly needed in v1 vs read-only/log-oriented panes?
+4. Should workspaces be per-operator, per-deployment, or both?
+5. What approval model applies to controller actions that touch runtimes or secrets?
 
 ## References
 
-- `terminal-manager.html` — existing wireframe
-- `docs/workstreams/terminal-manager-mvp.md` — workstream definition
-- `docs/operating-terminal-spec.md` — terminal spec
-- `docs/pane-system.md` — pane type definitions
-- `docs/portal-model.md` — portal data model
-- `docs/agent-state-model.md` — agent state definitions
+- `terminal-manager.html` — wireframe
+- `site/operating-terminal.html` — definitional doc
 - `docs/data-model-v2.md` — cross-surface data model
-- `registry/agents.yaml` — agent roster
+- `registry/agents.yaml` — persona roster
+- `registry/runtimes.yaml` — runtime topology
+- `registry/controllers.yaml` — controller topology
+- `registry/channels.yaml` — channel topology
+- `registry/bindings.yaml` — topology bindings
