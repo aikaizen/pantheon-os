@@ -38,6 +38,8 @@
     "read_only_repos": true
   },
   "runtime": {
+    "realm": "golden-pavilion",
+    "realm_path": "pantheon-os/golden-pavilion/",
     "channels": ["telegram"],
     "telegram_bot": "@Dzambhala_daka_bot",
     "hermes_home": "~/.hermes-dzambhala",

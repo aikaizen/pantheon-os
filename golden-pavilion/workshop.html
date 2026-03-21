@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Pavilion Workshop — Dzambhala</title>
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --surface: #111114;
+      --surface-2: #18181c;
+      --border: #252530;
+      --text: #e0e0e6;
+      --text-dim: #7a7a8a;
+      --accent: #fbbf24;
+      --accent-dim: rgba(251,191,36,0.25);
+      --danger: #ef4444;
+      --warn: #f59e0b;
+      --success: #10b981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .container { max-width: 980px; margin: 0 auto; padding: 40px 24px; }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--accent);
+    }
+
+    header .subtitle {
+      color: var(--text-dim);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    nav {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.15s ease;
+    }
+
+    nav a:hover { border-color: rgba(251,191,36,0.95); }
+
+    section { margin-bottom: 34px; }
+
+    section h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    section h2 span { color: var(--accent); }
+
+    .card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+
+    .card strong { color: var(--text); }
+
+    ul { padding-left: 18px; }
+    li { margin: 8px 0; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 38px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Golden Pavilion — Workshop</h1>
+      <div class="subtitle">Where Dzambhala places strategic artifacts (revenue models, market briefs, flywheels)</div>
+      <nav aria-label="Golden Pavilion navigation">
+        <a href="./index.html">Home</a>
+        <a href="./workshop.html">Workshop</a>
+        <a href="./dispatch.html">Dispatch</a>
+        <a href="./communiqué.html">Communiqué</a>
+      </nav>
+    </header>
+
+    <section id="artifact-board">
+      <h2><span>◆</span>Artifact board</h2>
+
+      <div class="grid">
+        <div class="card">
+          <strong>Revenue models</strong>
+          <ul>
+            <li>Storybook Studio unit economics (placeholder)</li>
+            <li>PromptEngines monetization structure (placeholder)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <strong>Market briefs</strong>
+          <ul>
+            <li>Competitor scan & positioning matrix (placeholder)</li>
+            <li>Channel thesis: TikTok / Pinterest / SEO (placeholder)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <strong>Growth flywheels</strong>
+          <ul>
+            <li>Content → conversion loops (placeholder)</li>
+            <li>Product-led iteration roadmap (placeholder)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <strong>Allocation & costs</strong>
+          <ul>
+            <li>Time-budgeting & opportunity cost log (placeholder)</li>
+            <li>Kill-list for dead initiatives (placeholder)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-to-use">
+      <h2><span>◆</span>Operating instructions</h2>
+      <div class="card">
+        The workshop is the artifact home. Expected workflow:
+        <ul>
+          <li>Analyze → write a single, decision-ready artifact</li>
+          <li>Attach costs + trade-offs (no “vibes-only” docs)</li>
+          <li>Publish → update Communiqué with outcomes</li>
+        </ul>
+      </div>
+      <div class="card">
+        Next action suggestion: create / update a <strong>Storybook Studio revenue model</strong> artifact, then dispatch it to the relevant owners.
+      </div>
+    </section>
+
+    <footer>
+      Golden Pavilion Workshop · pantheon-os/golden-pavilion/
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Pavilion — Dzambhala</title>
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --surface: #111114;
+      --surface-2: #18181c;
+      --border: #252530;
+      --text: #e0e0e6;
+      --text-dim: #7a7a8a;
+      --accent: #fbbf24;      /* amber */
+      --accent-dim: rgba(251,191,36,0.25);
+      --danger: #ef4444;
+      --warn: #f59e0b;
+      --success: #10b981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .container { max-width: 980px; margin: 0 auto; padding: 40px 24px; }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--accent);
+    }
+
+    header .subtitle {
+      color: var(--text-dim);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    nav {
+      margin: 18px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.15s ease;
+    }
+
+    nav a:hover { border-color: rgba(251,191,36,0.9); }
+
+    .archetype-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 22px 0 8px;
+    }
+
+    .archetype {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      flex: 1;
+      min-width: 210px;
+    }
+
+    .archetype .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent-dim);
+      margin-bottom: 4px;
+    }
+
+    .archetype .value { font-size: 13px; color: var(--text); }
+
+    section {
+      margin-bottom: 34px;
+    }
+
+    section h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    section h2 span {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 0;
+    }
+
+    .status-dot.active { background: var(--success); }
+    .status-dot.pending { background: var(--warn); }
+
+    .pill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: var(--text-dim);
+      transition: border-color 0.15s ease;
+    }
+
+    .pill:hover { border-color: var(--accent-dim); color: var(--text); }
+
+    .list {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .list ul { padding-left: 18px; }
+    .list li { margin: 8px 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 38px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Golden Pavilion</h1>
+      <div class="subtitle">Dzambhala · wealth & strategy realm</div>
+
+      <nav aria-label="Golden Pavilion navigation">
+        <a href="./index.html">Home</a>
+        <a href="./workshop.html">Workshop</a>
+        <a href="./dispatch.html">Dispatch</a>
+        <a href="./communiqué.html">Communiqué</a>
+      </nav>
+
+      <div class="archetype-row">
+        <div class="archetype">
+          <div class="label">Archetype</div>
+          <div class="value">Dzambhala — wealth-guardian / resource-multiplier</div>
+        </div>
+        <div class="archetype">
+          <div class="label">Mandate</div>
+          <div class="value">Transform effort into compounding value</div>
+        </div>
+        <div class="archetype">
+          <div class="label">Reports to</div>
+          <div class="value">A.I. (Principal)</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="status">
+      <h2><span>◆</span>Status</h2>
+      <div class="status-row">
+        <div class="status-dot active"></div>
+        <div>Active · Golden Pavilion realm initialized (realm slug: <code>golden-pavilion</code>)</div>
+      </div>
+      <div class="status-row">
+        <div class="status-dot pending"></div>
+        <div>Pending · Populate artifacts (models, briefs, flywheels)</div>
+      </div>
+    </section>
+
+    <section id="scope">
+      <h2><span>◆</span>Scope & capabilities</h2>
+      <div class="pill-grid">
+        <div class="pill">Revenue strategy & monetization</div>
+        <div class="pill">Growth engineering & optimization</div>
+        <div class="pill">Market positioning & competitive intelligence</div>
+        <div class="pill">Financial modeling & unit economics</div>
+        <div class="pill">Content strategy & go-to-market structure</div>
+        <div class="pill">Partnership & deal structures</div>
+      </div>
+    </section>
+
+    <section id="mandala">
+      <h2><span>◆</span>Mandala principles (operating system)</h2>
+      <div class="list">
+        <ul>
+          <li><strong>Compound over accumulate:</strong> every action should create more value than it consumes.</li>
+          <li><strong>See the whole board:</strong> optimize relationships between ventures, not just a single feature.</li>
+          <li><strong>Reduce waste first:</strong> cut dead weight before multiplying returns.</li>
+          <li><strong>Earn sovereignty through value:</strong> scope expands only after demonstrated leverage.</li>
+          <li><strong>Know what things cost:</strong> time, money, attention, opportunity.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      Golden Pavilion lives in <code>pantheon-os/golden-pavilion/</code> and is served as an agent realm inside PantheonOS.
+    </footer>
+  </div>
+</body>
+</html>

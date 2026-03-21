@@ -171,16 +171,51 @@ def get_agent_state():
 
 
 def get_realm_state():
-    """Scan realm directories for agent spaces."""
-    forge_dir = REPO_ROOT / "forge"
+    """Scan realm directories for agent spaces.
+
+    Realms are simple directories at repo root whose name matches an agent's
+    `runtime.realm` manifest field (e.g. `forge/`, `golden-pavilion/`).
+    """
+
+    agents_path = REPO_ROOT / "registry" / "agents.yaml"
+    if not agents_path.exists():
+        return []
+
+    registry = load_yaml(agents_path) or {}
     realms = []
 
-    if forge_dir.exists():
-        pages = [f.name for f in forge_dir.iterdir() if f.suffix == ".html"]
+    for agent in registry.get("agents", []):
+        agent_id = agent.get("id")
+        if not agent_id:
+            continue
+
+        manifest_path = REPO_ROOT / "registry" / "agents" / f"{agent_id}.json"
+        if not manifest_path.exists():
+            continue
+
+        with open(manifest_path) as f:
+            manifest = json.load(f)
+
+        realm_slug = manifest.get("runtime", {}).get("realm")
+        if not realm_slug:
+            continue
+
+        realm_dir = REPO_ROOT / realm_slug
+        if not realm_dir.exists() or not realm_dir.is_dir():
+            continue
+
+        pages = sorted(
+            [
+                p.name
+                for p in realm_dir.iterdir()
+                if p.is_file() and p.suffix == ".html"
+            ]
+        )
+
         realms.append({
-            "agent_id": "hermetic-demiurge",
-            "realm_name": "Forge",
-            "path": "forge/",
+            "agent_id": agent_id,
+            "realm_name": realm_slug.replace("-", " ").title(),
+            "path": f"{realm_slug}/",
             "pages": pages,
             "page_count": len(pages),
         })

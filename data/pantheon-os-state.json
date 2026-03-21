@@ -1,19 +1,19 @@
 {
   "meta": {
     "system_name": "Pantheon OS",
-    "generated_at": "2026-03-18T19:40:01.807876+00:00",
+    "generated_at": "2026-03-21T17:12:25.238517+00:00",
     "engine_version": "0.2.0",
     "source": "engine/state_engine.py"
   },
   "summary": {
     "agent_count": 3,
     "active_agent_count": 3,
-    "realm_count": 1,
+    "realm_count": 2,
     "venture_count": 11,
     "active_venture_count": 6,
     "skill_count": 6,
-    "stale_heartbeat_count": 0,
-    "current_branch": "docs/reframe-pantheon-os-v1",
+    "stale_heartbeat_count": 1,
+    "current_branch": "main",
     "working_tree_clean": false,
     "remote_synced": true,
     "budget": {
@@ -22,66 +22,21 @@
       "spent": 0,
       "forecast": 0
     },
-    "last_updated": "2026-03-18T19:40:01.807865+00:00"
+    "last_updated": "2026-03-21T17:12:25.238505+00:00"
   },
   "git": {
-    "branch": "docs/reframe-pantheon-os-v1",
+    "branch": "main",
     "last_commit": {
-      "hash": "7e6b159",
-      "message": "feat: Full development plan \u2014 4-phase roadmap with surface map, success metrics, and technical decisions",
-      "date": "2026-03-18 17:48:23 +0000",
+      "hash": "fe06eb4",
+      "message": "Merge docs/reframe-pantheon-os-v1 into main",
+      "date": "2026-03-21 00:53:13 +0000",
       "author": "aikaizen"
     },
     "recent_commits": [
       {
-        "hash": "7e6b159",
-        "message": "feat: Full development plan \u2014 4-phase roadmap with surface map, success metrics, and technical decisions",
-        "date": "2026-03-18 17:48:23 +0000"
-      },
-      {
-        "hash": "75cdd49",
-        "message": "feat: PantheonOS documentation site \u2014 definitional docs as HTML webpages",
-        "date": "2026-03-17 04:14:39 +0000"
-      },
-      {
-        "hash": "d42c3ee",
-        "message": "chore: update Forge build log and dispatch with operationalization",
-        "date": "2026-03-16 20:50:53 +0000"
-      },
-      {
-        "hash": "03af2db",
-        "message": "feat: operationalize \u2014 state engine, live dashboard, realm framework",
-        "date": "2026-03-16 20:48:30 +0000"
-      },
-      {
-        "hash": "46175b0",
-        "message": "feat: establish the Forge \u2014 Hermetic_Demiurge's personal abode",
-        "date": "2026-03-16 19:33:39 +0000"
-      },
-      {
-        "hash": "2ffa1ca",
-        "message": "reframe: README rewrite, data model v2, terminal manager plan, registry expansion",
-        "date": "2026-03-16 17:30:53 +0000"
-      },
-      {
-        "hash": "a019da3",
-        "message": "Remove skill ownership \u2014 all skills are shared across the pantheon",
-        "date": "2026-03-15 11:32:30 -0500"
-      },
-      {
-        "hash": "03c04d2",
-        "message": "Remove undeployed agents (Thoth, Prometheus, Golem) and fabricated data",
-        "date": "2026-03-15 11:15:56 -0500"
-      },
-      {
-        "hash": "0ebe4dc",
-        "message": "Fix Dzambhala budget to $0 \u2014 no allocated budget yet",
-        "date": "2026-03-15 11:08:42 -0500"
-      },
-      {
-        "hash": "19c3e50",
-        "message": "Add Dzambhala to the pantheon and introduce skill-self-improvement",
-        "date": "2026-03-15 09:26:33 -0500"
+        "hash": "fe06eb4",
+        "message": "Merge docs/reframe-pantheon-os-v1 into main",
+        "date": "2026-03-21 00:53:13 +0000"
       }
     ],
     "working_tree_clean": false,
@@ -139,10 +94,10 @@
         "auto_commit": false
       },
       "heartbeat": {
-        "status": "healthy",
+        "status": "critical",
         "last_seen": "2026-03-18T19:40:01Z",
         "interval_seconds": 3600,
-        "computed_status": "healthy"
+        "computed_status": "critical"
       },
       "realm": "forge"
     },
@@ -180,7 +135,7 @@
         "interval_seconds": 3600,
         "computed_status": "unknown"
       },
-      "realm": null
+      "realm": "golden-pavilion"
     }
   ],
   "realms": [
@@ -189,9 +144,21 @@
       "realm_name": "Forge",
       "path": "forge/",
       "pages": [
-        "index.html",
-        "dispatch.html",
         "communiqu\u00e9.html",
+        "dispatch.html",
+        "index.html",
+        "workshop.html"
+      ],
+      "page_count": 4
+    },
+    {
+      "agent_id": "dzambhala",
+      "realm_name": "Golden Pavilion",
+      "path": "golden-pavilion/",
+      "pages": [
+        "communiqu\u00e9.html",
+        "dispatch.html",
+        "index.html",
         "workshop.html"
       ],
       "page_count": 4
@@ -471,12 +438,12 @@
   ],
   "workstreams": [
     {
-      "file": "terminal-manager-mvp.md",
-      "title": "Workstream B \u2014 Terminal Manager MVP"
-    },
-    {
       "file": "promptengines-dashboard-mvp.md",
       "title": "Workstream A \u2014 PromptEngines Dashboard MVP"
+    },
+    {
+      "file": "terminal-manager-mvp.md",
+      "title": "Workstream B \u2014 Terminal Manager MVP"
     }
   ]
 }
