@@ -1,57 +1,62 @@
 #!/usr/bin/env python3
 """
-Pantheon OS State Engine v0.2.0
+Pantheon OS State Engine v0.3.0
 
-Reads actual system state from registry, git, and realm files.
-Generates data/pantheon-os-state.json for the dashboard to consume.
+Reads actual system state from registry, git, deployment topology, and realm files.
+Generates data/pantheon-os-state.json for the dashboard and operating terminal.
 
 Usage:
-    python3 engine/state_engine.py [--output path/to/state.json]
+    python3 engine/state_engine.py
+    python3 engine/state_engine.py --output data/pantheon-os-state.json
 
-The engine observes:
-- Registry: agent roster, capabilities, heartbeats, ventures, budgets, approvals, skills
-- Git: recent commits, branch state, file changes
-- Realms: agent forge/realm pages and status
-- Docs: workstream status, open plans
+Dependencies:
+    pip install -r requirements.txt
 """
 
+import argparse
 import json
-import os
 import subprocess
-import sys
-import yaml
 from datetime import datetime, timezone
 from pathlib import Path
+
+import yaml
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT = REPO_ROOT / "data" / "pantheon-os-state.json"
 
 
-def run_git(*args):
-    """Run a git command in the repo root."""
+def run_git(*args, check=True):
     result = subprocess.run(
         ["git"] + list(args),
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
     )
+    if check and result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or result.stdout.strip())
     return result.stdout.strip()
 
 
 def load_yaml(path):
-    """Load a YAML file."""
+    if not path.exists():
+        return None
     with open(path) as f:
         return yaml.safe_load(f)
 
 
+def load_json(path):
+    if not path.exists():
+        return None
+    with open(path) as f:
+        return json.load(f)
+
+
 def get_git_state():
-    """Read git repository state."""
     branch = run_git("rev-parse", "--abbrev-ref", "HEAD")
     last_commit = run_git("log", "-1", "--format=%H|%s|%ai|%an")
     commit_hash, commit_msg, commit_date, commit_author = last_commit.split("|", 3)
 
-    # Recent commits (last 10)
     log_raw = run_git("log", "-10", "--format=%H|%s|%ai")
     recent_commits = []
     for line in log_raw.splitlines():
@@ -63,15 +68,14 @@ def get_git_state():
                 "date": date,
             })
 
-    # Check for uncommitted changes
     status = run_git("status", "--porcelain")
     clean = len(status) == 0
 
-    # Remote sync check
-    run_git("fetch", "origin")
-    remote_sha = run_git("rev-parse", f"origin/{branch}" if branch != "HEAD" else "origin/main")
-    local_sha = run_git("rev-parse", "HEAD")
-    synced = remote_sha == local_sha
+    run_git("fetch", "origin", check=False)
+    remote_ref = f"origin/{branch}" if branch and branch != "HEAD" else "origin/main"
+    remote_sha = run_git("rev-parse", remote_ref, check=False)
+    local_sha = run_git("rev-parse", "HEAD", check=False)
+    synced = bool(remote_sha and local_sha and remote_sha == local_sha)
 
     return {
         "branch": branch,
@@ -88,7 +92,6 @@ def get_git_state():
 
 
 def check_heartbeat_staleness(hb):
-    """Determine if a heartbeat is stale based on interval and last_seen."""
     last_seen = hb.get("last_seen")
     interval = hb.get("interval_seconds", 3600)
 
@@ -99,58 +102,101 @@ def check_heartbeat_staleness(hb):
         last_dt = datetime.fromisoformat(last_seen.replace("Z", "+00:00"))
         now = datetime.now(timezone.utc)
         elapsed = (now - last_dt).total_seconds()
-
         if elapsed > 24 * 3600:
             return "critical"
-        elif elapsed > 5 * interval:
+        if elapsed > 5 * interval:
             return "critical"
-        elif elapsed > 2 * interval:
+        if elapsed > 2 * interval:
             return "stale"
-        else:
-            return "healthy"
+        return "healthy"
     except (ValueError, TypeError):
         return "unknown"
 
 
-def get_agent_state():
-    """Read agent roster and heartbeats from registry."""
-    agents_path = REPO_ROOT / "registry" / "agents.yaml"
+def heartbeat_ref(entry):
+    if entry.get("object_ref"):
+        return entry["object_ref"]
+    if entry.get("agent_id"):
+        return f"registry:agents.yaml#{entry['agent_id']}"
+    if entry.get("runtime_id"):
+        return f"registry:runtimes.yaml#{entry['runtime_id']}"
+    if entry.get("controller_id"):
+        return f"registry:controllers.yaml#{entry['controller_id']}"
+    return None
+
+
+def get_heartbeats_map():
     heartbeats_path = REPO_ROOT / "registry" / "heartbeats.yaml"
-
-    registry = load_yaml(agents_path)
     heartbeats_data = load_yaml(heartbeats_path) or {}
-    heartbeats_list = heartbeats_data.get("heartbeats", [])
-
-    # Index heartbeats by agent_id
     hb_map = {}
-    for hb in heartbeats_list:
-        if hb and "agent_id" in hb:
-            hb_map[hb["agent_id"]] = hb
+    for hb in heartbeats_data.get("heartbeats", []):
+        if not hb:
+            continue
+        ref = heartbeat_ref(hb)
+        if ref:
+            hb_map[ref] = hb
+    return hb_map
 
+
+def effective_heartbeat(hb):
+    computed_status = check_heartbeat_staleness(hb)
+    recorded_status = hb.get("status", "unknown")
+    status_order = {"healthy": 0, "stale": 1, "critical": 2, "unknown": -1}
+    if status_order.get(computed_status, -1) > status_order.get(recorded_status, -1):
+        status = computed_status
+    else:
+        status = recorded_status or computed_status
+    return {
+        "status": status,
+        "last_seen": hb.get("last_seen"),
+        "interval_seconds": hb.get("interval_seconds"),
+        "computed_status": computed_status,
+        "summary": hb.get("last_summary"),
+    }
+
+
+def load_bindings():
+    bindings_path = REPO_ROOT / "registry" / "bindings.yaml"
+    return load_yaml(bindings_path) or {"bindings": {}}
+
+
+def build_binding_indexes(bindings_doc):
+    bindings = bindings_doc.get("bindings", {})
+    indexes = {
+        "agent_runtime": {},
+        "agent_channel": {},
+        "runtime_controller": {},
+    }
+
+    for item in bindings.get("agent_runtime", []):
+        indexes["agent_runtime"].setdefault(item.get("agent_id"), []).append(item)
+
+    for item in bindings.get("agent_channel", []):
+        indexes["agent_channel"].setdefault(item.get("agent_id"), []).append(item)
+
+    for item in bindings.get("runtime_controller", []):
+        indexes["runtime_controller"].setdefault(item.get("runtime_id"), []).append(item)
+
+    return indexes
+
+
+def get_agent_state(binding_indexes, hb_map):
+    agents_path = REPO_ROOT / "registry" / "agents.yaml"
+    registry = load_yaml(agents_path) or {}
     agents = []
+
     for agent in registry.get("agents", []):
         agent_id = agent["id"]
-        hb = hb_map.get(agent_id, {})
-
-        # Read per-agent manifest for more detail
+        ref = f"registry:agents.yaml#{agent_id}"
         manifest_path = REPO_ROOT / "registry" / "agents" / f"{agent_id}.json"
-        manifest = {}
-        if manifest_path.exists():
-            with open(manifest_path) as f:
-                manifest = json.load(f)
-
-        # Compute live heartbeat status
-        computed_status = check_heartbeat_staleness(hb)
-        recorded_status = hb.get("status", "unknown")
-        # Use computed if it's worse than recorded
-        status_order = {"healthy": 0, "stale": 1, "critical": 2, "unknown": -1}
-        if status_order.get(computed_status, -1) > status_order.get(recorded_status, -1):
-            effective_status = computed_status
-        else:
-            effective_status = recorded_status or computed_status
+        manifest = load_json(manifest_path) or {}
+        hb = hb_map.get(ref, {})
+        runtime_bindings = binding_indexes["agent_runtime"].get(agent_id, [])
+        channel_bindings = binding_indexes["agent_channel"].get(agent_id, [])
 
         agents.append({
             "id": agent_id,
+            "ref": ref,
             "name": agent.get("name"),
             "type": agent.get("type"),
             "role": agent.get("role"),
@@ -158,20 +204,16 @@ def get_agent_state():
             "monthly_budget": agent.get("monthly_budget", 0),
             "capabilities": manifest.get("capabilities", []),
             "constraints": manifest.get("constraints", {}),
-            "heartbeat": {
-                "status": effective_status,
-                "last_seen": hb.get("last_seen"),
-                "interval_seconds": hb.get("interval_seconds"),
-                "computed_status": computed_status,
-            },
+            "heartbeat": effective_heartbeat(hb),
             "realm": manifest.get("runtime", {}).get("realm"),
+            "runtime_bindings": runtime_bindings,
+            "channel_bindings": channel_bindings,
         })
 
     return agents
 
 
 def get_realm_state():
-    """Scan realm directories for agent spaces."""
     forge_dir = REPO_ROOT / "forge"
     realms = []
 
@@ -189,75 +231,125 @@ def get_realm_state():
 
 
 def get_workstream_state():
-    """Read active workstreams from docs."""
     ws_dir = REPO_ROOT / "docs" / "workstreams"
     workstreams = []
-
     if ws_dir.exists():
         for f in ws_dir.iterdir():
             if f.suffix == ".md" and f.name != "README.md":
                 content = f.read_text()
-                # Extract title from first heading
                 title = f.stem
                 for line in content.splitlines():
                     if line.startswith("# "):
                         title = line[2:].strip()
                         break
-                workstreams.append({
-                    "file": f.name,
-                    "title": title,
-                })
-
+                workstreams.append({"file": f.name, "title": title})
     return workstreams
 
 
 def get_venture_state():
-    """Read ventures from registry."""
     ventures_path = REPO_ROOT / "registry" / "ventures.yaml"
-    if not ventures_path.exists():
-        return []
     data = load_yaml(ventures_path) or {}
     return data.get("ventures", [])
 
 
 def get_budget_state():
-    """Read budget data from registry."""
     budgets_path = REPO_ROOT / "registry" / "budgets.yaml"
-    if not budgets_path.exists():
-        return {}
     return load_yaml(budgets_path) or {}
 
 
 def get_approval_state():
-    """Read approval gates from registry."""
     approvals_path = REPO_ROOT / "registry" / "approvals.yaml"
-    if not approvals_path.exists():
-        return []
     data = load_yaml(approvals_path) or {}
     return data.get("approvals", [])
 
 
 def get_skill_state():
-    """Read skill registry."""
     skills_path = REPO_ROOT / "registry" / "skills.yaml"
-    if not skills_path.exists():
-        return []
     data = load_yaml(skills_path) or {}
     return data.get("skills", [])
 
 
-def get_system_summary(agents, git_state, realms, ventures, budgets, skills):
-    """Generate high-level system summary."""
-    active_agents = [a for a in agents if a["status"] == "active"]
-    stale_heartbeats = [a for a in agents if a["heartbeat"]["status"] in ("stale", "critical")]
+def get_runtime_state(binding_indexes, hb_map):
+    runtimes_path = REPO_ROOT / "registry" / "runtimes.yaml"
+    data = load_yaml(runtimes_path) or {}
+    runtimes = []
+    for runtime in data.get("runtimes", []):
+        runtime_id = runtime["id"]
+        ref = f"registry:runtimes.yaml#{runtime_id}"
+        controller_bindings = binding_indexes["runtime_controller"].get(runtime_id, [])
+        hb = hb_map.get(ref, {})
+        runtimes.append({
+            **runtime,
+            "ref": ref,
+            "controller_bindings": controller_bindings,
+            "heartbeat": effective_heartbeat(hb),
+        })
+    return runtimes
+
+
+def get_controller_state(hb_map):
+    controllers_path = REPO_ROOT / "registry" / "controllers.yaml"
+    data = load_yaml(controllers_path) or {}
+    controllers = []
+    for controller in data.get("controllers", []):
+        controller_id = controller["id"]
+        ref = f"registry:controllers.yaml#{controller_id}"
+        hb = hb_map.get(ref, {})
+        controllers.append({
+            **controller,
+            "ref": ref,
+            "heartbeat": effective_heartbeat(hb),
+        })
+    return controllers
+
+
+def get_channel_state():
+    channels_path = REPO_ROOT / "registry" / "channels.yaml"
+    data = load_yaml(channels_path) or {}
+    channels = []
+    for channel in data.get("channels", []):
+        channels.append({
+            **channel,
+            "ref": f"registry:channels.yaml#{channel['id']}",
+        })
+    return channels
+
+
+def get_deployment_state():
+    deployments_dir = REPO_ROOT / "registry" / "deployments"
+    deployments = []
+    if not deployments_dir.exists():
+        return deployments
+    for path in sorted(deployments_dir.glob("*.json")):
+        deployment = load_json(path)
+        if deployment:
+            deployments.append(deployment)
+    return deployments
+
+
+def get_system_summary(agents, runtimes, controllers, channels, git_state, realms, ventures, budgets, skills, deployments):
+    active_agents = [a for a in agents if a.get("status") == "active"]
+    active_runtimes = [r for r in runtimes if r.get("status") == "active"]
+    active_controllers = [c for c in controllers if c.get("status") == "active"]
+    active_channels = [c for c in channels if c.get("status") == "active"]
     active_ventures = [v for v in ventures if v.get("status") == "active"]
 
+    stale_heartbeats = []
+    for collection in (agents, runtimes, controllers):
+        stale_heartbeats.extend([item for item in collection if item.get("heartbeat", {}).get("status") in ("stale", "critical")])
+
     budget_total = budgets.get("company", {})
-    agents_budget = budgets.get("agents", [])
 
     return {
         "agent_count": len(agents),
         "active_agent_count": len(active_agents),
+        "runtime_count": len(runtimes),
+        "active_runtime_count": len(active_runtimes),
+        "controller_count": len(controllers),
+        "active_controller_count": len(active_controllers),
+        "channel_count": len(channels),
+        "active_channel_count": len(active_channels),
+        "deployment_count": len(deployments),
         "realm_count": len(realms),
         "venture_count": len(ventures),
         "active_venture_count": len(active_ventures),
@@ -276,20 +368,45 @@ def get_system_summary(agents, git_state, realms, ventures, budgets, skills):
     }
 
 
-def main():
-    output_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_OUTPUT
+def parse_args():
+    parser = argparse.ArgumentParser(description="Generate Pantheon OS state snapshot")
+    parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Path to write the state snapshot JSON")
+    return parser.parse_args()
 
-    print(f"Pantheon OS State Engine v0.2.0")
+
+def main():
+    args = parse_args()
+    output_path = Path(args.output)
+
+    print("Pantheon OS State Engine v0.3.0")
     print(f"Repo: {REPO_ROOT}")
     print(f"Output: {output_path}")
     print()
 
-    # Gather state from all sources
     print("Reading git state...")
     git_state = get_git_state()
 
+    print("Reading bindings...")
+    bindings_doc = load_bindings()
+    binding_indexes = build_binding_indexes(bindings_doc)
+
+    print("Reading heartbeats...")
+    hb_map = get_heartbeats_map()
+
     print("Reading agent registry...")
-    agents = get_agent_state()
+    agents = get_agent_state(binding_indexes, hb_map)
+
+    print("Reading runtimes...")
+    runtimes = get_runtime_state(binding_indexes, hb_map)
+
+    print("Reading controllers...")
+    controllers = get_controller_state(hb_map)
+
+    print("Reading channels...")
+    channels = get_channel_state()
+
+    print("Reading deployments...")
+    deployments = get_deployment_state()
 
     print("Scanning realms...")
     realms = get_realm_state()
@@ -310,19 +427,23 @@ def main():
     skills = get_skill_state()
 
     print("Generating summary...")
-    summary = get_system_summary(agents, git_state, realms, ventures, budgets, skills)
+    summary = get_system_summary(agents, runtimes, controllers, channels, git_state, realms, ventures, budgets, skills, deployments)
 
-    # Assemble state document
     state = {
         "meta": {
             "system_name": "Pantheon OS",
             "generated_at": datetime.now(timezone.utc).isoformat(),
-            "engine_version": "0.2.0",
+            "engine_version": "0.3.0",
             "source": "engine/state_engine.py",
         },
         "summary": summary,
         "git": git_state,
+        "deployments": deployments,
         "agents": agents,
+        "runtimes": runtimes,
+        "controllers": controllers,
+        "channels": channels,
+        "bindings": bindings_doc.get("bindings", {}),
         "realms": realms,
         "ventures": ventures,
         "budgets": budgets,
@@ -331,7 +452,6 @@ def main():
         "workstreams": workstreams,
     }
 
-    # Write output
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:
         json.dump(state, f, indent=2)
@@ -339,11 +459,13 @@ def main():
     print()
     print(f"State written to {output_path}")
     print(f"  Agents: {len(agents)}")
+    print(f"  Runtimes: {len(runtimes)}")
+    print(f"  Controllers: {len(controllers)}")
+    print(f"  Channels: {len(channels)}")
+    print(f"  Deployments: {len(deployments)}")
     print(f"  Realms: {len(realms)}")
     print(f"  Ventures: {len(ventures)}")
     print(f"  Skills: {len(skills)}")
-    print(f"  Approvals: {len(approvals)}")
-    print(f"  Workstreams: {len(workstreams)}")
     print(f"  Branch: {git_state['branch']}")
     print(f"  Clean: {git_state['working_tree_clean']}")
     print(f"  Synced: {git_state['remote_synced']}")
