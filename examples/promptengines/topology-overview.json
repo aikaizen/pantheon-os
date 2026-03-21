@@ -1,0 +1,27 @@
+{
+  "deployment": "promptengines",
+  "primary_onboarding_path": "connect-existing-setup",
+  "tiers": {
+    "tier_1": ["promptengines-web", "lab-notes", "kaizen", "consulting"],
+    "tier_2": ["norbu", "bible", "storybook-studio"],
+    "tier_3": ["flow", "video-terminal", "flow-education", "vajra-upaya"]
+  },
+  "persona_agents": [
+    "ai-principal",
+    "hermetic-demiurge",
+    "dzambhala"
+  ],
+  "runtimes": [
+    "promptengines-hermes-primary",
+    "promptengines-openclaw-lab"
+  ],
+  "controllers": [
+    "promptengines-host-controller"
+  ],
+  "channels": [
+    "ai-principal-cli",
+    "hermetic-demiurge-telegram",
+    "dzambhala-telegram",
+    "promptengines-host-controller-cli"
+  ]
+}

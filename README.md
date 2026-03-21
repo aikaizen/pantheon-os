@@ -56,6 +56,7 @@ Pantheon OS is general. PromptEngines is the first real company using it. The re
 - `site/connect-existing-setup.html` — primary onboarding path for operators with existing agents, runtimes, and channels
 - `site/start-fresh.html` — greenfield onboarding path for new operators
 - `docs/plans/2026-03-21-promptengines-pilot-readiness-plan.md` — execution plan for getting the repo ready for the PromptEngines reference deployment
+- `examples/promptengines/README.md` — first reference deployment package for future operators adapting PantheonOS
 
 - `docs/plans/pantheon-os-spec-v1.md` — Product spec
 - `docs/plans/pantheon-os-repo-work-plan.md` — Work plan
