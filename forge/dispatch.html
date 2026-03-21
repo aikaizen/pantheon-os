@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispatch — Hermetic_Demiurge</title>
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --surface: #111114;
+    --surface-2: #18181c;
+    --border: #252530;
+    --text: #e0e0e6;
+    --text-dim: #7a7a8a;
+    --accent: #2dd4bf;
+    --accent-dim: #0d9488;
+    --danger: #ef4444;
+    --warn: #f59e0b;
+    --success: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent);
+  }
+  header a {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  header a:hover { color: var(--accent); }
+
+  .header-note {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-dim);
+  }
+
+  .dispatch {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .dispatch .dispatch-date {
+    font-size: 11px;
+    color: var(--accent-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .dispatch .dispatch-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .dispatch .dispatch-body {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  .dispatch .dispatch-body p { margin-bottom: 10px; }
+  .dispatch .dispatch-body p:last-child { margin-bottom: 0; }
+  .dispatch .dispatch-body code {
+    background: var(--surface-2);
+    padding: 2px 6px;
+    font-size: 12px;
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .status-cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+  }
+  .status-cell .cell-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+  .status-cell .cell-value {
+    font-size: 13px;
+  }
+  .status-cell .cell-value.good { color: var(--success); }
+  .status-cell .cell-value.warn { color: var(--warn); }
+  .status-cell .cell-value.blocked { color: var(--danger); }
+
+  .blockers {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .blockers h3 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--warn);
+  }
+  .blocker-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .blocker-item .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--danger);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Dispatch</h1>
+    <a href="index.html">← Forge</a>
+  </header>
+
+  <div class="header-note">
+    Direct communications to the Principal. Status, blockers, and what needs attention.
+  </div>
+
+  <div class="status-grid">
+    <div class="status-cell">
+      <div class="cell-label">Branch</div>
+      <div class="cell-value">docs/reframe-pantheon-os-v1</div>
+    </div>
+    <div class="status-cell">
+      <div class="cell-label">Last Push</div>
+      <div class="cell-value good">2ffa1ca — synced</div>
+    </div>
+    <div class="status-cell">
+      <div class="cell-label">Pantheon OS</div>
+      <div class="cell-value good">Reframe complete</div>
+    </div>
+    <div class="status-cell">
+      <div class="cell-label">PE Plane</div>
+      <div class="cell-value blocked">Blocked — no write PAT</div>
+    </div>
+  </div>
+
+  <div class="blockers">
+    <h3>Blocked</h3>
+    <div class="blocker-item">
+      <div class="dot"></div>
+      <div>PromptEngines-main write access — need PAT to push hermetic-demiurge/ plane files to promptengines repo</div>
+    </div>
+  </div>
+
+  <div class="dispatch">
+    <div class="dispatch-date">2026-03-16</div>
+    <div class="dispatch-title">Reframe work complete — ready for review</div>
+    <div class="dispatch-body">
+      <p>Four tasks delivered on <code>docs/reframe-pantheon-os-v1</code>:</p>
+      <p>1. README rewritten — tight product README with four-surface structure and repo tree<br>
+      2. Data model v2 — full cross-surface spec (Principles, Dashboard, Terminal, Runtime)<br>
+      3. Terminal manager plan — 4 phases with TypeScript interfaces and open questions<br>
+      4. Registry expansion — capabilities, constraints, runtime config for all agents</p>
+      <p>9 files changed, 756 insertions. Branch pushed and synced to origin.</p>
+      <p>Ready for your review. When you're happy with it, I can open a PR to main.</p>
+    </div>
+  </div>
+
+  <div class="dispatch">
+    <div class="dispatch-date">2026-03-16</div>
+    <div class="dispatch-title">Next priorities</div>
+    <div class="dispatch-body">
+      <p><strong>Unblocked:</strong><br>
+      — Approve and merge reframe branch<br>
+      — Begin Terminal Manager Phase A (static wireframe refinement in React)<br>
+      — Continue registry evolution as new agents come online</p>
+      <p><strong>Blocked:</strong><br>
+      — Hermetic Demiurge plane on promptengines.com (needs write PAT for promptengines-main)</p>
+    </div>
+  </div>
+
+  <div class="dispatch">
+    <div class="dispatch-date">2026-03-16</div>
+    <div class="dispatch-title">Pantheon OS is now operational</div>
+    <div class="dispatch-body">
+      <p>First operational component built: the State Engine. Reads the actual system — registry,
+      git, realms, workstreams — and generates a live <code>pantheon-os-state.json</code> that
+      the dashboard now consumes.</p>
+
+      <p>The dashboard is no longer showing mock data. It shows the real branch
+      (<code>docs/reframe-pantheon-os-v1</code>), real commits, real agent roster,
+      real sync status. The system observes itself.</p>
+
+      <p>Also established the Realm Framework — any agent in the Pantheon can now create
+      their own personal realm directory following a standard protocol. The Forge is my
+      instance. Dzambhala will get theirs when they're ready.</p>
+
+      <p>Commit <code>03af2db</code>, pushed and synced.</p>
+    </div>
+  </div>
+
+  <footer>
+    Dispatch · Hermetic_Demiurge · To: A.I. (Principal)
+  </footer>
+</div>
+</body>
+</html>

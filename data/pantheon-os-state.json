@@ -1,0 +1,482 @@
+{
+  "meta": {
+    "system_name": "Pantheon OS",
+    "generated_at": "2026-03-18T19:40:01.807876+00:00",
+    "engine_version": "0.2.0",
+    "source": "engine/state_engine.py"
+  },
+  "summary": {
+    "agent_count": 3,
+    "active_agent_count": 3,
+    "realm_count": 1,
+    "venture_count": 11,
+    "active_venture_count": 6,
+    "skill_count": 6,
+    "stale_heartbeat_count": 0,
+    "current_branch": "docs/reframe-pantheon-os-v1",
+    "working_tree_clean": false,
+    "remote_synced": true,
+    "budget": {
+      "period": "2026-03",
+      "allocated": 0,
+      "spent": 0,
+      "forecast": 0
+    },
+    "last_updated": "2026-03-18T19:40:01.807865+00:00"
+  },
+  "git": {
+    "branch": "docs/reframe-pantheon-os-v1",
+    "last_commit": {
+      "hash": "7e6b159",
+      "message": "feat: Full development plan \u2014 4-phase roadmap with surface map, success metrics, and technical decisions",
+      "date": "2026-03-18 17:48:23 +0000",
+      "author": "aikaizen"
+    },
+    "recent_commits": [
+      {
+        "hash": "7e6b159",
+        "message": "feat: Full development plan \u2014 4-phase roadmap with surface map, success metrics, and technical decisions",
+        "date": "2026-03-18 17:48:23 +0000"
+      },
+      {
+        "hash": "75cdd49",
+        "message": "feat: PantheonOS documentation site \u2014 definitional docs as HTML webpages",
+        "date": "2026-03-17 04:14:39 +0000"
+      },
+      {
+        "hash": "d42c3ee",
+        "message": "chore: update Forge build log and dispatch with operationalization",
+        "date": "2026-03-16 20:50:53 +0000"
+      },
+      {
+        "hash": "03af2db",
+        "message": "feat: operationalize \u2014 state engine, live dashboard, realm framework",
+        "date": "2026-03-16 20:48:30 +0000"
+      },
+      {
+        "hash": "46175b0",
+        "message": "feat: establish the Forge \u2014 Hermetic_Demiurge's personal abode",
+        "date": "2026-03-16 19:33:39 +0000"
+      },
+      {
+        "hash": "2ffa1ca",
+        "message": "reframe: README rewrite, data model v2, terminal manager plan, registry expansion",
+        "date": "2026-03-16 17:30:53 +0000"
+      },
+      {
+        "hash": "a019da3",
+        "message": "Remove skill ownership \u2014 all skills are shared across the pantheon",
+        "date": "2026-03-15 11:32:30 -0500"
+      },
+      {
+        "hash": "03c04d2",
+        "message": "Remove undeployed agents (Thoth, Prometheus, Golem) and fabricated data",
+        "date": "2026-03-15 11:15:56 -0500"
+      },
+      {
+        "hash": "0ebe4dc",
+        "message": "Fix Dzambhala budget to $0 \u2014 no allocated budget yet",
+        "date": "2026-03-15 11:08:42 -0500"
+      },
+      {
+        "hash": "19c3e50",
+        "message": "Add Dzambhala to the pantheon and introduce skill-self-improvement",
+        "date": "2026-03-15 09:26:33 -0500"
+      }
+    ],
+    "working_tree_clean": false,
+    "remote_synced": true
+  },
+  "agents": [
+    {
+      "id": "ai-principal",
+      "name": "A.I.",
+      "type": "human",
+      "role": "Principal direction and final approval",
+      "status": "active",
+      "monthly_budget": 0,
+      "capabilities": [
+        "final_approval",
+        "portfolio_direction",
+        "budget_authority",
+        "agent_spawning",
+        "constitutional_amendment"
+      ],
+      "constraints": [],
+      "heartbeat": {
+        "status": "unknown",
+        "last_seen": null,
+        "interval_seconds": null,
+        "computed_status": "unknown"
+      },
+      "realm": null
+    },
+    {
+      "id": "hermetic-demiurge",
+      "name": "Hermetic_Demiurge",
+      "type": "agent",
+      "role": "Builder, hardening, and shipping",
+      "status": "active",
+      "monthly_budget": 900,
+      "capabilities": [
+        "full_stack_development",
+        "infrastructure_automation",
+        "cross_repo_implementation",
+        "security_hardening",
+        "ci_cd_pipelines",
+        "subagent_spawning",
+        "terminal_execution",
+        "git_operations"
+      ],
+      "constraints": {
+        "requires_approval_for": [
+          "production_deploy",
+          "budget_escalation",
+          "external_api_keys"
+        ],
+        "scope_bound": "pantheon-os",
+        "max_subagents": 3,
+        "auto_commit": false
+      },
+      "heartbeat": {
+        "status": "healthy",
+        "last_seen": "2026-03-18T19:40:01Z",
+        "interval_seconds": 3600,
+        "computed_status": "healthy"
+      },
+      "realm": "forge"
+    },
+    {
+      "id": "dzambhala",
+      "name": "Dzambhala",
+      "type": "agent",
+      "role": "Strategy, growth engineering, and resource multiplication",
+      "status": "active",
+      "monthly_budget": 0,
+      "capabilities": [
+        "business_strategy",
+        "growth_engineering",
+        "market_analysis",
+        "financial_modeling",
+        "content_strategy",
+        "product_positioning",
+        "competitive_intelligence",
+        "web_research",
+        "document_synthesis"
+      ],
+      "constraints": {
+        "requires_approval_for": [
+          "spend_commitment",
+          "external_communication",
+          "partnership_agreements"
+        ],
+        "scope_bound": "promptengines",
+        "max_subagents": 2,
+        "read_only_repos": true
+      },
+      "heartbeat": {
+        "status": "unknown",
+        "last_seen": null,
+        "interval_seconds": 3600,
+        "computed_status": "unknown"
+      },
+      "realm": null
+    }
+  ],
+  "realms": [
+    {
+      "agent_id": "hermetic-demiurge",
+      "realm_name": "Forge",
+      "path": "forge/",
+      "pages": [
+        "index.html",
+        "dispatch.html",
+        "communiqu\u00e9.html",
+        "workshop.html"
+      ],
+      "page_count": 4
+    }
+  ],
+  "ventures": [
+    {
+      "id": "promptengines-web",
+      "name": "PromptEngines.com",
+      "stage": "product",
+      "status": "active",
+      "health": "strong",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "promptengines.com",
+      "repo": "aikaizen/promptengines-main",
+      "next_action": "Decide the public/private split for Pantheon OS before any public deployment."
+    },
+    {
+      "id": "lab-notes",
+      "name": "Lab Notes",
+      "stage": "product",
+      "status": "active",
+      "health": "steady",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "lab.promptengines.com",
+      "repo": "aikaizen/promptengines-main",
+      "next_action": "Route build-stream synthesis into a repeatable publishing loop."
+    },
+    {
+      "id": "kaizen",
+      "name": "Kaizen",
+      "stage": "product",
+      "status": "active",
+      "health": "strong",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "kaizen.promptengines.com",
+      "repo": "aikaizen/kaizen",
+      "next_action": "Tighten telemetry and growth review."
+    },
+    {
+      "id": "storybook-studio",
+      "name": "Storybook Studio",
+      "stage": "product",
+      "status": "pre-launch",
+      "health": "building",
+      "owner": "Hermetic_Demiurge",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "storybookstudio.promptengines.com",
+      "repo": "aikaizen/storybookstudio",
+      "next_action": "Stabilize print-ready flow and publishing approvals."
+    },
+    {
+      "id": "flow",
+      "name": "Flow",
+      "stage": "experiment",
+      "status": "mixed-signal",
+      "health": "mixed",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "flow.promptengines.com",
+      "repo": "aikaizen/flow",
+      "next_action": "Reconcile status drift across sources."
+    },
+    {
+      "id": "video-terminal",
+      "name": "Video Terminal",
+      "stage": "experiment",
+      "status": "alpha",
+      "health": "emerging",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "videoterminal.promptengines.com",
+      "repo": "aikaizen/videoterminal",
+      "next_action": "Define the smallest shippable control surface."
+    },
+    {
+      "id": "norbu",
+      "name": "Norbu",
+      "stage": "product",
+      "status": "active",
+      "health": "steady",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "norbu.promptengines.com",
+      "repo": "aikaizen/norbu",
+      "next_action": "Install a recurring content and product heartbeat."
+    },
+    {
+      "id": "bible",
+      "name": "Bible",
+      "stage": "product",
+      "status": "active",
+      "health": "steady",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "bible.promptengines.com",
+      "repo": "aikaizen/bible",
+      "next_action": "Add governance checks before broader publishing."
+    },
+    {
+      "id": "consulting",
+      "name": "Consulting",
+      "stage": "service",
+      "status": "active",
+      "health": "strong",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "consulting.promptengines.com",
+      "repo": "aikaizen/consulting",
+      "next_action": "Install account-brief and client approval workflows."
+    },
+    {
+      "id": "flow-education",
+      "name": "Flow Education",
+      "stage": "prototype",
+      "status": "active-prototype",
+      "health": "emerging",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "prototype",
+      "repo": "aikaizen/promptengines-main",
+      "next_action": "Convert prototype lessons into a venture roadmap."
+    },
+    {
+      "id": "vajra-upaya",
+      "name": "Vajra-Upaya",
+      "stage": "prototype",
+      "status": "framing",
+      "health": "emerging",
+      "owner": "A.I.",
+      "operators": [
+        "Hermetic_Demiurge"
+      ],
+      "domain": "prototype",
+      "repo": "aikaizen/promptengines-main",
+      "next_action": "Frame the precision tool-fitting offer before public positioning."
+    }
+  ],
+  "budgets": {
+    "budget_period": "2026-03",
+    "currency": "USD",
+    "company": {
+      "allocated": 0,
+      "spent": 0,
+      "forecast": 0
+    },
+    "agents": [
+      {
+        "name": "Hermetic_Demiurge",
+        "allocated": 0,
+        "spent": 0,
+        "forecast": 0
+      },
+      {
+        "name": "Dzambhala",
+        "allocated": 0,
+        "spent": 0,
+        "forecast": 0
+      },
+      {
+        "name": "A.I.",
+        "allocated": 0,
+        "spent": 0,
+        "forecast": 0
+      }
+    ]
+  },
+  "approvals": [
+    {
+      "id": "ap-branding",
+      "title": "Adopt Pantheon OS as the canonical internal system name",
+      "risk": "medium",
+      "approver": "A.I.",
+      "status": "approved"
+    },
+    {
+      "id": "ap-public-deploy",
+      "title": "Approve any hosted or public-facing Pantheon OS deployment",
+      "risk": "high",
+      "approver": "A.I.",
+      "status": "pending"
+    },
+    {
+      "id": "ap-agent-wake-cycles",
+      "title": "Approve budgeted recurring wake cycles for operators and maintenance agents",
+      "risk": "medium",
+      "approver": "A.I.",
+      "status": "in_review"
+    },
+    {
+      "id": "ap-budget-caps",
+      "title": "Approve initial monthly runtime caps per agent and venture",
+      "risk": "medium",
+      "approver": "A.I.",
+      "status": "pending"
+    }
+  ],
+  "skills": [
+    {
+      "id": "weekly-operating-review",
+      "category": "company-os",
+      "owner": "shared",
+      "version": "0.1.0",
+      "status": "drafted",
+      "review_cadence": "weekly",
+      "venture_scope": "all"
+    },
+    {
+      "id": "venture-status-refresh",
+      "category": "company-os",
+      "owner": "shared",
+      "version": "0.1.0",
+      "status": "drafted",
+      "review_cadence": "every 2 weeks",
+      "venture_scope": "all ventures"
+    },
+    {
+      "id": "decision-gate-review",
+      "category": "company-os",
+      "owner": "shared",
+      "version": "0.1.0",
+      "status": "drafted",
+      "review_cadence": "monthly",
+      "venture_scope": "all"
+    },
+    {
+      "id": "goal-tree-planning",
+      "category": "company-os",
+      "owner": "shared",
+      "version": "0.1.0",
+      "status": "drafted",
+      "review_cadence": "monthly",
+      "venture_scope": "company + venture + project"
+    },
+    {
+      "id": "build-stream-synthesis",
+      "category": "company-os",
+      "owner": "shared",
+      "version": "0.1.0",
+      "status": "drafted",
+      "review_cadence": "daily",
+      "venture_scope": "portfolio"
+    },
+    {
+      "id": "skill-self-improvement",
+      "category": "company-os",
+      "owner": "shared",
+      "version": "0.1.0",
+      "status": "drafted",
+      "review_cadence": "weekly",
+      "venture_scope": "company",
+      "notes": "Cognee cycle \u2014 observe, inspect, amend, evaluate across the shared skill pool"
+    }
+  ],
+  "workstreams": [
+    {
+      "file": "terminal-manager-mvp.md",
+      "title": "Workstream B \u2014 Terminal Manager MVP"
+    },
+    {
+      "file": "promptengines-dashboard-mvp.md",
+      "title": "Workstream A \u2014 PromptEngines Dashboard MVP"
+    }
+  ]
+}

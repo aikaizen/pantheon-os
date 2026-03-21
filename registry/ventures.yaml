@@ -7,7 +7,7 @@ ventures:
     status: active
     health: strong
     owner: A.I.
-    operators: [Hermetic_Demiurge, Thoth]
+    operators: [Hermetic_Demiurge]
     domain: promptengines.com
     repo: aikaizen/promptengines-main
     next_action: Decide the public/private split for Pantheon OS before any public deployment.
@@ -16,8 +16,8 @@ ventures:
     stage: product
     status: active
     health: steady
-    owner: Thoth
-    operators: [Thoth]
+    owner: A.I.
+    operators: [Hermetic_Demiurge]
     domain: lab.promptengines.com
     repo: aikaizen/promptengines-main
     next_action: Route build-stream synthesis into a repeatable publishing loop.
@@ -26,8 +26,8 @@ ventures:
     stage: product
     status: active
     health: strong
-    owner: Prometheus
-    operators: [Prometheus, Hermetic_Demiurge]
+    owner: A.I.
+    operators: [Hermetic_Demiurge]
     domain: kaizen.promptengines.com
     repo: aikaizen/kaizen
     next_action: Tighten telemetry and growth review.
@@ -37,7 +37,7 @@ ventures:
     status: pre-launch
     health: building
     owner: Hermetic_Demiurge
-    operators: [Hermetic_Demiurge, Prometheus]
+    operators: [Hermetic_Demiurge]
     domain: storybookstudio.promptengines.com
     repo: aikaizen/storybookstudio
     next_action: Stabilize print-ready flow and publishing approvals.
@@ -47,7 +47,7 @@ ventures:
     status: mixed-signal
     health: mixed
     owner: A.I.
-    operators: [Prometheus]
+    operators: [Hermetic_Demiurge]
     domain: flow.promptengines.com
     repo: aikaizen/flow
     next_action: Reconcile status drift across sources.
@@ -56,8 +56,8 @@ ventures:
     stage: experiment
     status: alpha
     health: emerging
-    owner: Prometheus
-    operators: [Prometheus]
+    owner: A.I.
+    operators: [Hermetic_Demiurge]
     domain: videoterminal.promptengines.com
     repo: aikaizen/videoterminal
     next_action: Define the smallest shippable control surface.
@@ -66,8 +66,8 @@ ventures:
     stage: product
     status: active
     health: steady
-    owner: Prometheus
-    operators: [Prometheus, Thoth]
+    owner: A.I.
+    operators: [Hermetic_Demiurge]
     domain: norbu.promptengines.com
     repo: aikaizen/norbu
     next_action: Install a recurring content and product heartbeat.
@@ -76,8 +76,8 @@ ventures:
     stage: product
     status: active
     health: steady
-    owner: Thoth
-    operators: [Thoth]
+    owner: A.I.
+    operators: [Hermetic_Demiurge]
     domain: bible.promptengines.com
     repo: aikaizen/bible
     next_action: Add governance checks before broader publishing.
@@ -87,7 +87,7 @@ ventures:
     status: active
     health: strong
     owner: A.I.
-    operators: [Thoth, Hermetic_Demiurge]
+    operators: [Hermetic_Demiurge]
     domain: consulting.promptengines.com
     repo: aikaizen/consulting
     next_action: Install account-brief and client approval workflows.
@@ -96,8 +96,8 @@ ventures:
     stage: prototype
     status: active-prototype
     health: emerging
-    owner: Prometheus
-    operators: [Prometheus]
+    owner: A.I.
+    operators: [Hermetic_Demiurge]
     domain: prototype
     repo: aikaizen/promptengines-main
     next_action: Convert prototype lessons into a venture roadmap.
@@ -107,7 +107,7 @@ ventures:
     status: framing
     health: emerging
     owner: A.I.
-    operators: [Thoth, Prometheus]
+    operators: [Hermetic_Demiurge]
     domain: prototype
     repo: aikaizen/promptengines-main
     next_action: Frame the precision tool-fitting offer before public positioning.

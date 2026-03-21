@@ -2,12 +2,33 @@
   "id": "ai-principal",
   "name": "A.I.",
   "type": "human",
+  "archetype": "Principal",
   "role": "Principal human authority",
   "mandate": "Final strategic authority, approval, and direction.",
-  "reporting_line": null,
+  "reports_to": null,
   "scope": [
     "company_direction",
     "approvals",
-    "portfolio_priorities"
-  ]
+    "portfolio_priorities",
+    "agent_spawning",
+    "budget_authority"
+  ],
+  "capabilities": [
+    "final_approval",
+    "portfolio_direction",
+    "budget_authority",
+    "agent_spawning",
+    "constitutional_amendment"
+  ],
+  "constraints": [],
+  "runtime": {
+    "channels": ["telegram"],
+    "telegram_chat_id": "5692327956",
+    "notification_preferences": {
+      "escalations": true,
+      "approvals": true,
+      "heartbeats": false,
+      "budget_alerts": true
+    }
+  }
 }

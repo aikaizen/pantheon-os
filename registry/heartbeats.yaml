@@ -1,2 +1,11 @@
-
-heartbeats: []
+heartbeats:
+- agent_id: hermetic-demiurge
+  interval_seconds: 3600
+  last_seen: '2026-03-18T19:40:01Z'
+  last_summary: Phase 1 build started - state engine v0.2.0
+  status: healthy
+- agent_id: dzambhala
+  interval_seconds: 3600
+  last_seen: null
+  last_summary: null
+  status: unknown

@@ -16,6 +16,38 @@
     "competitive_intelligence",
     "partnership_development"
   ],
-  "telegram_bot": "@Dzambhala_daka_bot",
-  "hermes_home": "~/.hermes-dzambhala"
+  "capabilities": [
+    "business_strategy",
+    "growth_engineering",
+    "market_analysis",
+    "financial_modeling",
+    "content_strategy",
+    "product_positioning",
+    "competitive_intelligence",
+    "web_research",
+    "document_synthesis"
+  ],
+  "constraints": {
+    "requires_approval_for": [
+      "spend_commitment",
+      "external_communication",
+      "partnership_agreements"
+    ],
+    "scope_bound": "promptengines",
+    "max_subagents": 2,
+    "read_only_repos": true
+  },
+  "runtime": {
+    "channels": ["telegram"],
+    "telegram_bot": "@Dzambhala_daka_bot",
+    "hermes_home": "~/.hermes-dzambhala",
+    "repos": [
+      "aikaizen/promptengines-main"
+    ],
+    "skills": [
+      "duckduckgo-search",
+      "web-extract",
+      "company-os"
+    ]
+  }
 }
