@@ -1,0 +1,25 @@
+system: Pantheon OS
+controllers:
+  - id: promptengines-host-controller
+    name: PromptEngines Host Controller
+    type: controller
+    deployment: promptengines
+    status: planned
+    host_id: promptengines-local-macbook
+    agent_system: claude-code
+    access_level: host
+    controls:
+      - docker_runtime_management
+      - runtime_debugging
+      - model_configuration
+      - channel_testing
+      - tool_installation
+      - log_inspection
+    manages:
+      - promptengines-hermes-primary
+      - promptengines-openclaw-lab
+    approval_required_for:
+      - destructive_restart
+      - production_model_swap
+      - secret_changes
+    notes: Overseer/controller agent that operates outside persona chats and manages the underlying runtime.

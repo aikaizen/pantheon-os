@@ -1,0 +1,54 @@
+system: Pantheon OS
+channels:
+  - id: ai-principal-cli
+    name: Principal CLI
+    kind: cli_session
+    platform: local
+    deployment: promptengines
+    status: active
+    access_mode: control
+    participants:
+      - ai-principal
+    notes: Direct CLI operating surface used by the principal.
+
+  - id: hermetic-demiurge-telegram
+    name: Hermetic_Demiurge Telegram
+    kind: telegram_chat
+    platform: telegram
+    deployment: promptengines
+    status: planned
+    access_mode: message
+    participants:
+      - ai-principal
+      - hermetic-demiurge
+    endpoint:
+      bot: null
+      chat_id: null
+    notes: Dedicated or shared Telegram lane for Hermetic_Demiurge during pilot onboarding.
+
+  - id: dzambhala-telegram
+    name: Dzambhala Telegram
+    kind: telegram_chat
+    platform: telegram
+    deployment: promptengines
+    status: active
+    access_mode: message
+    participants:
+      - ai-principal
+      - dzambhala
+    endpoint:
+      bot: '@Dzambhala_daka_bot'
+      chat_id: null
+    notes: Existing dedicated Telegram surface for Dzambhala.
+
+  - id: promptengines-host-controller-cli
+    name: Host Controller CLI
+    kind: cli_session
+    platform: local
+    deployment: promptengines
+    status: planned
+    access_mode: control
+    participants:
+      - ai-principal
+      - promptengines-host-controller
+    notes: Host-side controller session for maintaining dockerized agent runtimes.

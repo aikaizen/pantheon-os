@@ -2,6 +2,8 @@
 
 Cross-surface data model covering all four Pantheon OS surfaces. Extends the dashboard-only v1 model (`data/pantheon-os.json`).
 
+PantheonOS is an observational and intervention surface over sovereign persona agents, their channels, their runtimes, and the controller agents that maintain those runtimes. The model below keeps those object types explicit instead of flattening everything into a single agent list.
+
 ## Principles Layer
 
 ### Organization
@@ -28,8 +30,8 @@ Defines who can approve what, per domain.
 {
   "domain": "production_deploy",
   "chain": [
-    {"agent": "hermetic-demiurge", "action": "propose"},
-    {"agent": "ai-principal", "action": "approve", "threshold": "required"}
+    {"agent": "registry:agents.yaml#hermetic-demiurge", "action": "propose"},
+    {"agent": "registry:agents.yaml#ai-principal", "action": "approve", "threshold": "required"}
   ],
   "escalation_timeout_seconds": 86400
 }
@@ -47,23 +49,35 @@ Defines who can approve what, per domain.
 }
 ```
 
+### Deployment Descriptor
+
+```json
+{
+  "deployment_id": "promptengines",
+  "deployment_ref": "registry:deployments/promptengines.json",
+  "modes": ["observe", "message", "control"],
+  "pilot_scope": {
+    "tier_1": ["promptengines-web", "lab-notes", "kaizen", "consulting"]
+  }
+}
+```
+
 ## Dashboard Layer
 
-Preserves existing v1 schema. Key entities:
+Preserves existing v1 schema and adds deployment-aware overlays.
 
 ### Venture
 
 ```json
 {
-  "id": "pantheon-os",
-  "name": "Pantheon OS",
-  "type": "product|prototype|experiment|internal",
-  "status": "active|paused|archived",
-  "owner": "registry:agents.yaml#hermetic-demiurge",
-  "budget": {"monthly": 900, "currency": "USD"},
-  "health": "green|yellow|red",
-  "goals": ["goal-001"],
-  "repos": ["aikaizen/pantheon-os"]
+  "id": "promptengines-web",
+  "name": "PromptEngines.com",
+  "stage": "product",
+  "status": "active",
+  "owner": "registry:agents.yaml#ai-principal",
+  "operators": ["registry:agents.yaml#hermetic-demiurge"],
+  "repo": "aikaizen/promptengines-main",
+  "deployment": "promptengines"
 }
 ```
 
@@ -72,13 +86,9 @@ Preserves existing v1 schema. Key entities:
 ```json
 {
   "id": "goal-001",
-  "venture": "pantheon-os",
-  "title": "Ship Terminal Manager MVP",
+  "venture": "promptengines-web",
+  "title": "Run internal PantheonOS pilot over PromptEngines deployment",
   "status": "in_progress",
-  "milestones": [
-    {"id": "m1", "title": "Wireframe", "done": true},
-    {"id": "m2", "title": "Mock data integration", "done": false}
-  ],
   "owner": "registry:agents.yaml#hermetic-demiurge",
   "due": "2026-04-01"
 }
@@ -92,10 +102,7 @@ Preserves existing v1 schema. Key entities:
   "type": "budget_escalation|deploy|external_comm",
   "requester": "registry:agents.yaml#hermetic-demiurge",
   "approver": "registry:agents.yaml#ai-principal",
-  "status": "pending|approved|rejected",
-  "payload": {"amount": 500, "reason": "Lambda GPU hours"},
-  "created_at": "2026-03-16T12:00:00Z",
-  "decided_at": null
+  "status": "pending|approved|rejected"
 }
 ```
 
@@ -107,18 +114,14 @@ Preserves existing v1 schema. Key entities:
 {
   "id": "ws-main",
   "name": "Primary Control Room",
-  "layout": {
-    "type": "grid",
-    "columns": 3,
-    "rows": 2
-  },
+  "layout": {"type": "grid", "columns": 3, "rows": 2},
   "panes": [
-    {"id": "p1", "type": "channel", "source": "telegram", "position": {"col": 0, "row": 0}},
-    {"id": "p2", "type": "execution", "agent": "hermetic-demiurge", "position": {"col": 1, "row": 0}},
-    {"id": "p3", "type": "summary", "scope": "all", "position": {"col": 2, "row": 0}},
-    {"id": "p4", "type": "portal", "venture": "pantheon-os", "position": {"col": 0, "row": 1}},
-    {"id": "p5", "type": "oversight", "position": {"col": 1, "row": 1}},
-    {"id": "p6", "type": "log", "position": {"col": 2, "row": 1}}
+    {"id": "p1", "type": "persona_channel", "source": "registry:channels.yaml#hermetic-demiurge-telegram", "position": {"col": 0, "row": 0}},
+    {"id": "p2", "type": "persona_channel", "source": "registry:channels.yaml#dzambhala-telegram", "position": {"col": 1, "row": 0}},
+    {"id": "p3", "type": "controller_terminal", "source": "registry:channels.yaml#promptengines-host-controller-cli", "position": {"col": 2, "row": 0}},
+    {"id": "p4", "type": "runtime_health", "source": "registry:runtimes.yaml#promptengines-hermes-primary", "position": {"col": 0, "row": 1}},
+    {"id": "p5", "type": "artifact", "scope": "promptengines", "position": {"col": 1, "row": 1}},
+    {"id": "p6", "type": "summary", "scope": "all", "position": {"col": 2, "row": 1}}
   ]
 }
 ```
@@ -127,13 +130,13 @@ Preserves existing v1 schema. Key entities:
 
 | Type | Data Source | Purpose |
 |------|-----------|---------|
-| channel | Telegram/WhatsApp/internal | Message threads per agent |
-| execution | Runtime bridge | Shell, tmux, docker console |
-| summary | Portal | Agent state and blockers |
-| artifact | Artifact store | Files, outputs, deliverables |
-| portal | Portal | Task state, checkpoints, handoffs |
-| telemetry | Runtime | Metrics, heartbeat, resource usage |
-| oversight | Outer harness | Harness state, control actions |
+| `persona_channel` | `channels.yaml` | Conversation with a sovereign persona agent |
+| `controller_terminal` | `channels.yaml` / runtime bridge | Host-side controller console |
+| `runtime_health` | `runtimes.yaml` + telemetry | Runtime health, model config, container/process state |
+| `summary` | State engine | Cross-pane state and blockers |
+| `artifact` | Artifact store | Files, outputs, deliverables |
+| `portal` | Portal state | Task state, checkpoints, handoffs |
+| `intervention` | Registry + runtime | Human/operator control actions |
 
 ### Intervention
 
@@ -141,58 +144,96 @@ Preserves existing v1 schema. Key entities:
 {
   "id": "int-001",
   "type": "pause|resume|restart|kill|reassign|escalate|inspect|inject",
-  "target_agent": "hermetic-demiurge",
+  "target": {
+    "object_type": "persona|controller|runtime",
+    "ref": "registry:runtimes.yaml#promptengines-hermes-primary"
+  },
   "operator": "registry:agents.yaml#ai-principal",
-  "reason": "Budget threshold exceeded",
-  "executed_at": "2026-03-16T14:30:00Z",
+  "reason": "Runtime unhealthy",
   "result": "success|failed|pending"
 }
 ```
 
 ## Runtime / Portal Layer
 
+### Runtime
+
+```json
+{
+  "id": "promptengines-hermes-primary",
+  "ref": "registry:runtimes.yaml#promptengines-hermes-primary",
+  "runtime_system": "hermes",
+  "kind": "docker",
+  "status": "active|planned|failed",
+  "host": {"id": "promptengines-local-macbook", "os": "macos"},
+  "access_mode": "observe|message|control"
+}
+```
+
+### Controller
+
+```json
+{
+  "id": "promptengines-host-controller",
+  "ref": "registry:controllers.yaml#promptengines-host-controller",
+  "agent_system": "claude-code",
+  "access_level": "host",
+  "status": "planned|active|paused"
+}
+```
+
+### Channel
+
+```json
+{
+  "id": "dzambhala-telegram",
+  "ref": "registry:channels.yaml#dzambhala-telegram",
+  "platform": "telegram",
+  "kind": "telegram_chat",
+  "status": "active",
+  "access_mode": "message"
+}
+```
+
+### Binding
+
+```json
+{
+  "binding_type": "agent_runtime|agent_channel|runtime_controller",
+  "source_ref": "registry:agents.yaml#hermetic-demiurge",
+  "target_ref": "registry:runtimes.yaml#promptengines-hermes-primary",
+  "relationship": "primary",
+  "status": "active|planned"
+}
+```
+
 ### Portal State
 
 ```json
 {
-  "venture": "pantheon-os",
+  "venture": "promptengines-web",
   "task_id": "task-172",
   "state": {
     "status": "in_progress",
     "current_agent": "registry:agents.yaml#hermetic-demiurge",
-    "phase": "implementation",
     "blockers": [],
-    "checkpoints": [
-      {"id": "cp1", "label": "README rewritten", "at": "2026-03-16T13:00:00Z"}
-    ],
-    "handoff_notes": "Registry expansion next"
-  },
-  "summaries": [
-    {"level": "brief", "text": "Rewriting PantheonOS README and registry"},
-    {"level": "detailed", "text": "..."}
-  ]
+    "handoff_notes": "Define runtime/channel bindings next"
+  }
 }
 ```
 
-### Agent Runtime Instance
+### Runtime Instance
 
 ```json
 {
-  "instance_id": "inst-hd-042",
-  "agent_id": "registry:agents.yaml#hermetic-demiurge",
-  "state": "running|idle|paused|waiting|error|terminated",
-  "started_at": "2026-03-16T12:24:00Z",
-  "session": {
-    "harness": "hermes",
-    "channel": "telegram",
-    "chat_id": "5692327956"
-  },
-  "resource_usage": {
-    "api_calls": 47,
-    "cost_usd": 2.31,
-    "tokens_in": 125000,
-    "tokens_out": 48000
-  }
+  "instance_id": "inst-runtime-001",
+  "runtime_ref": "registry:runtimes.yaml#promptengines-hermes-primary",
+  "controllers": ["registry:controllers.yaml#promptengines-host-controller"],
+  "channels": [
+    "registry:channels.yaml#ai-principal-cli",
+    "registry:channels.yaml#dzambhala-telegram"
+  ],
+  "resource_usage": {"api_calls": 47, "cost_usd": 2.31}
 }
 ```
 
@@ -202,14 +243,9 @@ Preserves existing v1 schema. Key entities:
 {
   "event_id": "evt-8891",
   "type": "state_change|log|artifact|approval|heartbeat",
-  "source": "runtime:hermetic-demiurge",
+  "source_ref": "registry:runtimes.yaml#promptengines-hermes-primary",
   "timestamp": "2026-03-16T14:45:00Z",
-  "payload": {
-    "agent": "hermetic-demiurge",
-    "from_state": "executing",
-    "to_state": "waiting_on_human",
-    "reason": "Needs approval for production deploy"
-  }
+  "payload": {"summary": "Controller attached to runtime"}
 }
 ```
 
@@ -217,36 +253,34 @@ Preserves existing v1 schema. Key entities:
 
 ```json
 {
-  "agent_id": "registry:agents.yaml#hermetic-demiurge",
+  "object_type": "persona|controller|runtime",
+  "object_ref": "registry:agents.yaml#hermetic-demiurge",
   "timestamp": "2026-03-16T15:00:00Z",
   "interval_seconds": 3600,
-  "status": "healthy|stale|critical",
-  "summary": "Completed README rewrite, working on registry",
-  "metrics": {
-    "tasks_active": 1,
-    "tasks_queued": 3,
-    "uptime_seconds": 9600
-  }
+  "status": "healthy|stale|critical|unknown",
+  "summary": "Completed registry expansion"
 }
 ```
 
 ## Cross-Surface References
 
-All agent references use `registry:agents.yaml#<id>` format. This keeps identity centralized in the registry while allowing all surfaces to reference agents by stable ID.
+Use explicit registry references for each object type:
+- Persona agent → `registry:agents.yaml#<id>`
+- Runtime → `registry:runtimes.yaml#<id>`
+- Controller → `registry:controllers.yaml#<id>`
+- Channel → `registry:channels.yaml#<id>`
+- Binding → `registry:bindings.yaml#<binding-type>/<index-or-id>` or embedded references in state output
 
-- Venture → agent ownership via `owner` field
-- Approval → agent requesters/approvers via `requester`/`approver`
-- Portal state → current agent via `current_agent`
-- Runtime instance → agent identity via `agent_id`
-- Heartbeat → agent liveness via `agent_id`
+This keeps identity centralized while allowing each surface to refer to the same underlying topology.
 
 ## v1 → v2 Migration
 
 The existing `data/pantheon-os.json` is v1 (dashboard-only). v2 is additive:
 
-- `meta`, `summary`, `guidance`, `agents[]`, `ventures[]` — preserved as-is
-- `goals[]`, `kpis[]` — new additions to dashboard
-- `workspaces[]`, `interventions[]` — new terminal layer
-- `portal_states[]`, `runtime_instances[]`, `events[]`, `heartbeats[]` — new runtime layer
+- `meta`, `summary`, `agents[]`, `ventures[]` — preserved
+- `goals[]`, `kpis[]`, `deployments[]` — expanded dashboard layer
+- `workspaces[]`, `interventions[]` — expanded terminal layer
+- `runtimes[]`, `controllers[]`, `channels[]`, `bindings[]` — deployment topology layer
+- `portal_states[]`, `runtime_instances[]`, `events[]`, `heartbeats[]` — runtime/portal layer
 
-No breaking changes to v1 consumers. New surfaces are opt-in.
+No breaking changes to v1 consumers. New surfaces and topology objects are opt-in.
